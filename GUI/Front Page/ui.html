@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="ui.css">
+    <script src="ui.js"></script>
+</head>
+  <body>
+    <div class="center-image">
+      <img src="C:\Users\jenic\OneDrive - The University of Akron\Senior Seminar-DESKTOP-45FUCBN\SentimentoLogo.png" alt="Your Image">
+
+    <div id="homepage">
+        <div id="logo"></div>
+        <button id="login-button" onclick="showLogin()">Log In</button>
+        <button id="create-account-button" onclick="showCreateAccount()">Create An Account</button>
+      </div>
+      
+      <div id="login" style="display: none;">
+        <form>
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password">
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+      
+      <div id="create-account" style="display: none;">
+        <form>
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password">
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+    </div>    
+  </body>
+</html>
