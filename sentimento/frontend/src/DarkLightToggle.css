@@ -1,0 +1,89 @@
+/* 
+    DarkLightToggle.css includes any styles specific to the DarkLightToggle react component
+*/
+
+.DarkLight {
+    /* This will move the component to the right of the page. */
+    margin-left: 1000px;
+
+    /* Sets the position of the container to relative, which allows the absolute positioning of its child elements. */
+    position: relative;
+
+    /* dimensioning the component */
+    width: 60px;
+    height: 34px;
+}
+
+.DarkLight input {
+    /* selecting the 'input box' child of the component, and making it invisible */
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggler {
+    /* allows positioning relative to the parent (label) */
+    position: absolute;
+
+    /* on mouse over, a cursor pointer appears */
+    cursor: pointer;
+
+    /* aligning the toggler with its parent container */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    /* span is the light grey of 'light mode' which is default */
+    background-color: #d3d7de;
+
+    /* changes to the toggler properties take this much time */
+    transition: .5s;
+}
+
+.toggler:before {
+    /* :before creates a pseudo-element that is the first child of the selected element. */
+    
+    /* allows positioning relative to the toggler */
+    position: absolute;
+    
+    /* content is an empty string making it invisible */
+    content: "";
+    
+    /* dimensioning */
+    height: 26px;
+    width: 26px;
+    
+    /* sets the left/bottom edge of the "before" pseudo-element x pixels away from the left/bottom edge of the toggler */
+    left: 4px;
+    bottom: 4px;
+    
+    /* color of toggler when it is unchecked */
+    background-color: #e2e5e9; 
+
+    /* changes to the toggler take this long */
+    transition: .5s;
+}
+
+input:checked + .toggler {
+    /* color of the span when it is checked for dark mode */
+    background-color: #21252c;
+}
+
+input:checked + .toggler:before {
+    /* translate the toggler x pixels to the right */
+    transform: translateX(26px);
+
+    /* color of the toggler when its is checked */
+    background-color: #282D35;
+}
+
+.toggler.round {
+    /* rounding of span */
+    border-radius: 15px;
+}
+
+.toggler.round:before {
+    /* toggler rounding relative to its parent */
+    border-radius: 50%;
+}

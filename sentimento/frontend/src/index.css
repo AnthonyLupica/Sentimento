@@ -1,0 +1,15 @@
+/* 
+    index.css includes any styles specific to not one react component in particular (more general) 
+*/
+
+body {
+    margin: 0px;
+}
+.bodyDark {
+    background-color: #21252c;
+}
+
+.bodyLight {
+    background-color: #d3d7de;
+} 
+
