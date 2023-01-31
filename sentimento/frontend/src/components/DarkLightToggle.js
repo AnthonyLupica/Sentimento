@@ -31,8 +31,8 @@ export default function DarkLightToggle() {
 
     return (
         <label className="DarkLight">
-          <input type="checkbox" onClick={toggler} />
-          <span className="toggler round"></span>
+            <input type="checkbox" onClick={toggler} />
+            <span className="toggler round"></span>
         </label>
-    )
-}
+    );
+};

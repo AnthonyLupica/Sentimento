@@ -5,11 +5,16 @@
 body {
     margin: 0px;
 }
+
 .bodyDark {
+    /* A dark background color, and a light text color */
     background-color: #21252c;
+    color: #d3d7de;
 }
 
 .bodyLight {
+    /* A light background color, and a dark text color */
     background-color: #d3d7de;
+    color: #21252c;
 } 
 
