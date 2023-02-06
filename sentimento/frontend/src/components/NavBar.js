@@ -9,6 +9,6 @@ export default function NavBar() {
             <img src={logo} alt="Sentimento" className="sentimento--logo" />
             <DarkLightToggle />
         </nav>
-    )
-}
+    );
+};
  
