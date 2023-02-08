@@ -1,0 +1,21 @@
+﻿/* 
+    JournalEntry.css includes any styles specific to the JournalEntry react component
+*/
+
+.JournalBox {
+    width: 500px;
+    height: 150px;
+    border-radius: 15px;
+}
+
+.TimeAndDate {
+    display: flex;
+    justify-content: space-between;
+}
+
+.JournalContainer {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}

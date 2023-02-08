@@ -25,8 +25,6 @@ export default function DarkLightToggle() {
         // switch class names for theme switch 
         document.body.className = "body" + theme;
         document.getElementById("nav").className = "nav" + theme;
-
-
     }, [theme]);
 
     return (
