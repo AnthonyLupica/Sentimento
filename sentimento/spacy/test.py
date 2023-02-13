@@ -8,8 +8,133 @@ import spacy
 import pandas as pd
 nlp = spacy.load("en_textcat_goemotions")
 
-# analysis = nlp.analyze_pipes(pretty=True)
+"""
+This function waterDown() serves the dubious purpose of watering down the information provided by GoEmotions
+GoEmotions computes a distribution across 28 feeling words, but we want only 5.
+"""
+def waterDown(dict):
 
-doc = nlp("Today was a pretty good day. I slept well, woke up and painted which was fulfilling. I cleaned up the apartment, freaked out about spending my time well for a little while, got over it and went to class. I was sure to get some good food in my body first. It was two taco bell quesadillas. I am kind of upset that I eat so much taco bell, but I'm doing the best I can. Classes were good. I got a lot of work done. That made me feel pretty good and productive. I was upset with my group members after class because they took forever to get our meeting started and I wanted to go to yoga. But once we got the ball rolling, we got a decent bit done and I still made it to yoga. Meanwhile, Brian invited me on a date only to be wishy washy about it once I agreed. That is frustrating because he's probably afraid of disappointing me and doesn't want to take me on a lame date, but inevitably, any date is less lame than no date. But I got over it, picked up some groceries, made us a nice meal, we watched his favorite movie and it did feel very special. I didn't make a move on him or anything either. I am proud of myself for that.")
-table = pd.DataFrame.from_dict(doc.cats, orient='index')
+    # Our values
+    joy = 0
+    sadness = 0
+    anger = 0
+    fear = 0
+    disgust = 0
+
+    # For each of GoEmotion's words, we distribute its value amongst the appropriate members of the 5 cardinal emotions
+
+    # admiration
+    joy += dict["admiration"]
+
+    # amusement
+    disgust += 0.3 * dict["amusement"]
+    joy += 0.7 * dict["amusement"]
+
+    # anger
+    anger += dict["anger"]
+
+    # annoyance
+    anger += dict["annoyance"]
+
+    # approval
+    joy += dict["approval"]
+
+    # caring
+    joy += dict["caring"]
+
+    # confusion
+    fear += 0.7 * dict["confusion"]
+    anger += 0.3 * dict["confusion"]
+
+    # curiosity
+    fear += 0.3 * dict["curiosity"]
+    joy += 0.7 * dict["curiosity"]
+
+    # desire
+    joy += dict["desire"]
+
+    # disappointment
+    sadness += dict["disappointment"]
+
+    # disapproval
+    sadness += 0.6 * dict["disapproval"]
+    anger += 0.4 * dict["disapproval"]
+
+    # disgust
+    disgust += dict["disgust"]
+
+    # embarrassment
+    fear += 0.8 * dict["embarrassment"]
+    sadness += 0.2 * dict["embarrassment"]
+
+    # excitement
+    joy += 0.8 * dict["excitement"]
+    fear += 0.2 * dict["excitement"]
+
+    # fear
+    fear += dict["fear"]
+
+    # gratitude
+    joy += dict["gratitude"]
+
+    # grief
+    sadness += 0.8 * dict["grief"]
+    anger += 0.2 * dict["grief"]
+
+    # joy
+    joy += dict["joy"]
+
+    # love
+    joy += dict["love"]
+
+    # nervousness
+    fear += dict["nervousness"]
+
+    # optimism
+    joy += dict["optimism"]
+
+    # pride
+    joy += dict["pride"]
+
+    # realization
+    joy += dict["realization"]
+
+    # relief
+    joy += dict["relief"]
+
+    # remorse
+    sadness += dict["remorse"]
+
+    # sadness
+    sadness += dict["sadness"]
+    
+    # surprise
+    fear += dict["surprise"]
+
+    # neutral
+        # disregard the neutral score
+
+    # Normalize the values
+    sum = joy + sadness + anger + fear + disgust
+    joy = joy / sum
+    sadness = sadness / sum
+    anger = anger / sum
+    fear = fear / sum
+    disgust = disgust / sum
+
+    
+    # Put values in a dictionary
+    newDict = {
+        "joy": joy,
+        "sadness": sadness,
+        "anger": anger,
+        "fear": fear,
+        "disgust": disgust
+    }
+
+    return newDict
+
+# @CHANGE: put sample journal entries in a folder ignored by git, reference journals by accessing file from that folder
+doc = nlp("")
+table = pd.DataFrame.from_dict(waterDown(doc.cats), orient='index')
 print(table)
