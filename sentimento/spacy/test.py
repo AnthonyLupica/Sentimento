@@ -2,10 +2,16 @@
     test.py
 
     testing file for lots of spaCy-related things
+
+    Run this script with a command like
+        "python test.py file.txt"
+    Where file.txt is a journal entry you want to analyze
 """
 
 import spacy
 import pandas as pd
+import sys
+
 nlp = spacy.load("en_textcat_goemotions")
 
 """
@@ -134,7 +140,12 @@ def waterDown(dict):
 
     return newDict
 
-# @CHANGE: put sample journal entries in a folder ignored by git, reference journals by accessing file from that folder
-doc = nlp("")
+f = open(sys.argv[1], 'r')
+journal = f.read()
+f.close()
+
+print(journal)
+
+doc = nlp(journal)
 table = pd.DataFrame.from_dict(waterDown(doc.cats), orient='index')
 print(table)
