@@ -4,8 +4,9 @@
     testing file for lots of spaCy-related things
 
     Run this script with a command like
-        "python test.py file.txt"
+        "python test.py file.txt True"
     Where file.txt is a journal entry you want to analyze
+    the second arg being boolean determining if you want watered down results or not
 """
 
 import spacy
@@ -147,5 +148,9 @@ f.close()
 print(journal)
 
 doc = nlp(journal)
-table = pd.DataFrame.from_dict(waterDown(doc.cats), orient='index')
+if sys.argv[2] == "True":
+    table = pd.DataFrame.from_dict(waterDown(doc.cats), orient='index')
+else:
+    table = pd.DataFrame.from_dict(doc.cats, orient='index')
+
 print(table)
