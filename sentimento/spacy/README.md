@@ -5,7 +5,8 @@ inside the spacy directory,
 run `python3 -m venv env`
 
 then to activate the virtual environment
-`source env/bin/activate`
+  linux   - `source env/bin/activate`
+  windows - `./env/Scripts/activate
 
 then to install dependencies
 `pip install -r requirements.txt`
