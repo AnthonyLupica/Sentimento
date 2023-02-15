@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/sentimento/FileContentIndex
+/.vs/sentimento/v17
+/.vs
+/sentimento/spacy/my_python_env/bin
+/sentimento/spacy/my_python_env
