@@ -28,7 +28,7 @@ export default function DarkLightToggle() {
 
         // loop through the collection of elements returned by document.getElementsByClassName("Emotion--display") 
         // and set the backgroundColor style property based on the theme value.
-        const emotionDisplay = document.getElementsByClassName("Emotion--display");
+        const emotionDisplay = document.getElementsByClassName("Emotion--Display");
 
         for (let i = 0; i < emotionDisplay.length; ++i) {
             if (theme === 'Light') {

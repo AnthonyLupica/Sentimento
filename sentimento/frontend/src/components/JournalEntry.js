@@ -28,9 +28,11 @@ export default function JournalEntry(props) {
         <div className="JournalBox" style={{ backgroundColor: boxColor }}>
             <div className="Headerbox">
                 <h3 className="Journal--Header">{props.title}</h3>
-                <div className="Emotion--display" style={{ color: boxColor }}>{props.mood}</div>
+                <div className="Emotion--Display" style={{ color: boxColor }}>
+                    <p className="Emotion--Text">{props.mood}</p>
+                </div>
             </div>
-            <p  className="Journal--Text">{props.entry}</p>
+            <p className="Journal--Text">{props.entry}</p>
             <div className="TimeAndDateBox">
                 <p className="TimeAndDate">{props.time}</p>
                 <p className="TimeAndDate">{props.date}</p>

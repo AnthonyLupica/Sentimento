@@ -5,11 +5,12 @@
 /* style all navs directly, as we will only have one */
 nav {
     /* negative left and right margins to offset the padding on the body */
-    margin-left: -10px;
-    margin-right: -10px;
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-top: -10px;
 
     /* margin from the navbar to the start of journal entries */
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 
     /* property for rounded corners of navbar */
     border-radius: 25px;

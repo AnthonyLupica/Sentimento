@@ -37,24 +37,41 @@
     /* items (just two in this case) are evenly distributed */
     justify-content: space-between;
 
+    /* the title and emotion box are centered with eachother */
+    align-items: center;
+
     /* margin to match all other content within JournalBox */
     margin-left: 10px;
     margin-right: 10px;
 }
 
 /* a div which displays the mood on each journal entry */
-.Emotion--display {
+.Emotion--Display {
     /* round the edges of a journal entry */
     border-radius: 15px;
     
-    /* default background color */
+    /* padding between div and contained text */
+    padding: 6px;
+    
+    /* default background color (before dark mode switch) */
     background-color: #e2e5e9;
+}
+
+/* The actual <p> parented by Emotion--Display */
+.Emotion--Text {
+    /* no margin between the text and the container */
+    margin: 0px;
+
+    /* same text font and style as the header */
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
 }
 
 /* the header of each journal entry */
 .Journal--Header {
     /* auto capitalize each word of the header */
     text-transform: capitalize;
+    
     /* 
        first try to load the "Courier New" font, and if it's not available, 
        to fall back to the "Courier" font, and finally to any monospace font available 
