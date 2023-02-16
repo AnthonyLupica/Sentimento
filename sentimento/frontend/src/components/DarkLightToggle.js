@@ -22,15 +22,28 @@ export default function DarkLightToggle() {
     // useEffect hook to switch classNames and make decisions according to theme state
     useEffect(() => {
 
-        // switch class names for theme switch 
+        // switch any class names for the theme switch 
         document.body.className = "body" + theme;
         document.getElementById("nav").className = "nav" + theme;
+
+        // loop through the collection of elements returned by document.getElementsByClassName("Emotion--display") 
+        // and set the backgroundColor style property based on the theme value.
+        const emotionDisplay = document.getElementsByClassName("Emotion--display");
+
+        for (let i = 0; i < emotionDisplay.length; ++i) {
+            if (theme === 'Light') {
+                emotionDisplay[i].style.backgroundColor = '#e2e5e9'; // set the background color for Light theme
+            } else {
+                emotionDisplay[i].style.backgroundColor = '#282D35'; // set the background color for Dark theme
+            }
+        }
+
     }, [theme]);
 
     return (
         <label className="DarkLight">
             <input type="checkbox" onClick={toggler} />
-            <span className="toggler round"></span>
+            <span className="toggler"></span>
         </label>
     );
 };

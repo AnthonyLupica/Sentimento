@@ -2,12 +2,11 @@ import React from 'react';
 import '../JournalEntry.css';
 
 export default function JournalEntry(props) {
-
     let boxColor;
 
     switch (props.mood) {
         case 'Joyful':
-            boxColor = 'LightYellow';
+            boxColor = 'Orange';
             break;
         case 'Sad':
             boxColor = 'LightSkyBlue';
@@ -27,11 +26,14 @@ export default function JournalEntry(props) {
 
     return (
         <div className="JournalBox" style={{ backgroundColor: boxColor }}>
-            <h3>{props.title}</h3>
-            <p>{props.entry}</p>
-            <div className="TimeAndDate">
-                <p>Time: {props.time}</p>
-                <p>Date: {props.date}</p>
+            <div className="Headerbox">
+                <h3 className="Journal--Header">{props.title}</h3>
+                <div className="Emotion--display" style={{ color: boxColor }}>{props.mood}</div>
+            </div>
+            <p  className="Journal--Text">{props.entry}</p>
+            <div className="TimeAndDateBox">
+                <p className="TimeAndDate">{props.time}</p>
+                <p className="TimeAndDate">{props.date}</p>
             </div>
         </div>    
     );
