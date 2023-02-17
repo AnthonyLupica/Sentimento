@@ -1,5 +1,5 @@
 import React from "react";
-import logo from '../assets/placeholder.png'; // Tell Webpack this JS file uses this image
+import logo from '../assets/placeholder.png'; 
 import DarkLightToggle from "./DarkLightToggle";
 import '../NavBar.css';
 

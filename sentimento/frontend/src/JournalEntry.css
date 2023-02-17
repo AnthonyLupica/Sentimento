@@ -2,20 +2,112 @@
     JournalEntry.css includes any styles specific to the JournalEntry react component
 */
 
+/* div containing all journal entry components */
+.JournalContainer {
+    /* defined as a flex container */
+    display: flex;
+    
+    /* flex items will wrap. AKA, not try to fit all in one row */
+    flex-wrap: wrap;
+    
+    /* gap between rows */
+    row-gap: 15px;
+
+    /* gap between columns */
+    column-gap: 2%;
+}
+
+/* div for a singular journal entry, parented by .JournalContainer */
 .JournalBox {
-    width: 500px;
-    height: 150px;
+    /* 
+        specify that each child should take up some % width of the flex container.
+        this must add to 100%, in conjunction with column-gap
+    */
+    flex-basis: 49%;
+
+    /* round the edges of a journal entry */
     border-radius: 15px;
 }
 
-.TimeAndDate {
+/* container for a journal title and the emotion box */
+.Headerbox {
+    /* defined as a flex container */
     display: flex;
+
+    /* items (just two in this case) are evenly distributed */
     justify-content: space-between;
+
+    /* the title and emotion box are centered with eachother */
+    align-items: center;
+
+    /* margin to match all other content within JournalBox */
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
-.JournalContainer {
-    justify-content: center;
+/* a div which displays the mood on each journal entry */
+.Emotion--Display {
+    /* round the edges of a journal entry */
+    border-radius: 15px;
+    
+    /* padding between div and contained text */
+    padding: 6px;
+    
+    /* default background color (before dark mode switch) */
+    background-color: #e2e5e9;
+}
+
+/* The actual <p> parented by Emotion--Display */
+.Emotion--Text {
+    /* no margin between the text and the container */
+    margin: 0px;
+
+    /* same text font and style as the header */
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
+
+/* the header of each journal entry */
+.Journal--Header {
+    /* auto capitalize each word of the header */
+    text-transform: capitalize;
+    
+    /* 
+       first try to load the "Courier New" font, and if it's not available, 
+       to fall back to the "Courier" font, and finally to any monospace font available 
+    */
+    font-family: 'Courier New', Courier, monospace;
+    /* the header should be bold */
+    font-weight: bold;
+}
+
+/* the body text of each journal entry */
+.Journal--Text {
+    /* same text font as the header */
+    font-family: 'Courier New', Courier, monospace;
+    
+    /* the text area should be italic */
+    font-style: italic;
+
+    /* and same margin */
+    margin: 10px;
+}
+
+/* div containing text for a time of submission and a date of submission */
+.TimeAndDateBox {
+    /* defined as a flex container */
     display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
+    /* items (just two in this case) are evenly distributed */
+    justify-content: space-between;
+    /* margin to match all other content within JournalBox */
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+/* style for the actual text of the time and date */
+.TimeAndDate {
+    /* same text font as the header */
+    font-family: 'Courier New', Courier, monospace;
+    /* a smaller font size for the time and date */
+    font-size: 75%;
 }
