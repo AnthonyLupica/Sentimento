@@ -7,3 +7,5 @@
 /.vs
 /sentimento/spacy/my_python_env/bin
 /sentimento/spacy/my_python_env
+/sentimento/frontend/package-lock.json
+/sentimento/frontend/package.json
