@@ -1,5 +1,5 @@
 import React from 'react';
-import '../JournalEntry.css';
+import '../styles/JournalEntry.css';
 
 export default function JournalEntry(props) {
     let boxColor;

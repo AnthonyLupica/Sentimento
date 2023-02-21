@@ -1,5 +1,5 @@
 ﻿import React, { useState, useEffect } from 'react';
-import '../DarkLightToggle.css';
+import '../styles/DarkLightToggle.css';
 
 export default function DarkLightToggle() {
 

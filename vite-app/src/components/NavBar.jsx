@@ -1,7 +1,7 @@
 import React from "react";
 import logo from '../assets/placeholder.png'; 
 import DarkLightToggle from "./DarkLightToggle";
-import '../NavBar.css';
+import '../styles/NavBar.css';
 
 export default function NavBar() {
     return (

@@ -7,7 +7,7 @@
 import React from "react";
 import NavBar from "./components/NavBar";
 import JournalEntry from "./components/JournalEntry";
-import './JournalEntry.css';
+import './styles/JournalEntry.css';
 
 export default function App() {
 
