@@ -2,44 +2,55 @@
     JournalEntry.css includes any styles specific to the JournalEntry react component
 */
 
-/* div containing all journal entry components */
-.JournalContainer {
+
+/* 
+    parents all flex box containers for journal entries (one for left and right verticals).
+    This should also be extensible in the event we wanted more than two columns of journals.
+    This would involve simply defining more containers to be parented by this div
+*/
+.JournalContainerContainer {
     /* defined as a flex container */
     display: flex;
-    
-    /* flex items will wrap. AKA, not try to fit all in one row */
-    flex-wrap: wrap;
-    
-    /* gap between rows */
-    row-gap: 15px;
-
-    /* gap between columns */
+    /* a small gap between each vertical section */
     column-gap: 2%;
 }
 
-/* div for a singular journal entry, parented by .JournalContainer */
-.JournalBox {
+/* flex box containers for all journal entry components */
+.JournalContainerLeft,
+.JournalContainerRight {
+    /* defined as a flex container */
+    display: flex;
     /* 
-        specify that each child should take up some % width of the flex container.
-        this must add to 100%, in conjunction with column-gap
+        As there are only two items within the container, 
+        we can specify that they take up all available room 
+        (taking into account the column-gap) and that they may not 
+        grow or shrink along the flex axis)
     */
     flex-basis: 49%;
+    flex-shrink: 0;
+    flex-grow: 0;
+    /* items which these boxes parent are flexed along the vertical axis */
+    flex-direction: column;
+    /* gap between journal entries */
+    row-gap: 25px;
+}
 
+/* div for a singular journal entry, parented by a .JournalContainer */
+.JournalBox {
     /* round the edges of a journal entry */
     border-radius: 15px;
+    /* height of auto allows the div to grow dynamically with the length of an entry */
+    height: auto;
 }
 
 /* container for a journal title and the emotion box */
 .Headerbox {
     /* defined as a flex container */
     display: flex;
-
     /* items (just two in this case) are evenly distributed */
     justify-content: space-between;
-
     /* the title and emotion box are centered with eachother */
     align-items: center;
-
     /* margin to match all other content within JournalBox */
     margin-left: 10px;
     margin-right: 10px;
@@ -49,10 +60,8 @@
 .Emotion--Display {
     /* round the edges of a journal entry */
     border-radius: 15px;
-    
     /* padding between div and contained text */
     padding: 6px;
-    
     /* default background color (before dark mode switch) */
     background-color: #e2e5e9;
 }
@@ -61,7 +70,6 @@
 .Emotion--Text {
     /* no margin between the text and the container */
     margin: 0px;
-
     /* same text font and style as the header */
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
@@ -71,7 +79,6 @@
 .Journal--Header {
     /* auto capitalize each word of the header */
     text-transform: capitalize;
-    
     /* 
        first try to load the "Courier New" font, and if it's not available, 
        to fall back to the "Courier" font, and finally to any monospace font available 
@@ -85,10 +92,8 @@
 .Journal--Text {
     /* same text font as the header */
     font-family: 'Courier New', Courier, monospace;
-    
     /* the text area should be italic */
     font-style: italic;
-
     /* and same margin */
     margin: 10px;
 }

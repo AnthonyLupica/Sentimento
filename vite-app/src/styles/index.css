@@ -6,10 +6,8 @@
 body {
     /* the body has no margin */
     margin: 0px;
-
     /* but does have padding for its children */
-    padding: 20px;
-    
+    padding: 30px;
     /* text color for the body */
     color: white;
 }
@@ -24,5 +22,4 @@ body {
 .bodyLight {
     /* A light background color */
     background-color: #d3d7de;
-} 
-
+}
