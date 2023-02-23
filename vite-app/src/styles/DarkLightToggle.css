@@ -2,6 +2,7 @@
     DarkLightToggle.css includes any styles specific to the DarkLightToggle react component
 */
 
+/* container for the component */
 .DarkLight {
     /* This will move the component to the right of the page. */
     margin-left: 1000px;
@@ -14,6 +15,7 @@
     height: 34px;
 }
 
+/* input checkbox child of the container */
 .DarkLight input {
     /* selecting the 'input box' child of the component, and making it invisible */
     opacity: 0;
@@ -21,12 +23,16 @@
     height: 0;
 }
 
+/* styles the span element, which will act as the toggle switch */
 .toggler {
     /* allows positioning relative to the parent (label) */
     position: absolute;
 
     /* on mouse over, a cursor pointer appears */
     cursor: pointer;
+
+    /* rounding of span */
+    border-radius: 15px;
 
     /* aligning the toggler with its parent container */
     top: 0;
@@ -41,6 +47,7 @@
     transition: .5s;
 }
 
+/* styles a pseudo-element of the span element that will act as the toggle switch knob */
 .toggler:before {
     /* :before creates a pseudo-element that is the first child of the selected element. */
     
@@ -53,6 +60,9 @@
     /* dimensioning */
     height: 26px;
     width: 26px;
+
+    /* toggler knob rounding relative to its parent */
+    border-radius: 50%;
     
     /* sets the left/bottom edge of the "before" pseudo-element x pixels away from the left/bottom edge of the toggler */
     left: 4px;
@@ -65,25 +75,17 @@
     transition: .5s;
 }
 
+/* styles the span element when the input checkbox is checked */
 input:checked + .toggler {
     /* color of the span when it is checked for dark mode */
     background-color: #21252c;
 }
 
+/* styles the toggler knob when the input checkbox is checked */
 input:checked + .toggler:before {
     /* translate the toggler x pixels to the right */
     transform: translateX(26px);
 
     /* color of the toggler when its is checked */
     background-color: #282D35;
-}
-
-.toggler.round {
-    /* rounding of span */
-    border-radius: 15px;
-}
-
-.toggler.round:before {
-    /* toggler rounding relative to its parent */
-    border-radius: 50%;
 }

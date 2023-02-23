@@ -1,0 +1,27 @@
+/* 
+    index.css includes any styles specific to not one react component in particular (more general) 
+*/
+
+/* styles for the body content of the page */
+body {
+    /* the body has no margin */
+    margin: 0px;
+
+    /* but does have padding for its children */
+    padding: 30px;
+
+    /* text color for the body */
+    color: white;
+}
+
+/* body styles in dark mode */
+.bodyDark {
+    /* A dark background color */
+    background-color: #21252c;
+}
+
+/* body styles in light mode */
+.bodyLight {
+    /* A light background color */
+    background-color: #d3d7de;
+}

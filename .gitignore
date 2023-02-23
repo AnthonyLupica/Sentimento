@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/FileContentIndex
+/.vs/v17
+/.vs
+/spacy/my_python_env/bin
+/spacy/my_python_env
+/frontend/package-lock.json
+/frontend/package.json
+/frontend/.vs
+/node_modules
