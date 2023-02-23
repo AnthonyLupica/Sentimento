@@ -8,14 +8,19 @@ nav {
     margin-left: -25px;
     margin-right: -25px;
     margin-top: -25px;
+
     /* margin from the navbar to the start of journal entries */
     margin-bottom: 25px;
+
     /* property for rounded corners of navbar */
     border-radius: 25px;
+
     /* defines navbar as a flexbox container for all children */
     display: flex;
+
     /* flex items are centered along the horizontal */
     align-items: center;
+
     /* height of the navbar */
     height: 60px;
 }
@@ -36,6 +41,7 @@ nav {
 .sentimento--logo {
     /* scaled to 200% of the container height. Intuitively makes no sense but looks right */
     height: 200%;
+
     /* margin from the left of the navbar */
     margin-left: 5px;
 }

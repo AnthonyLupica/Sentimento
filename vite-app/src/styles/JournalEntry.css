@@ -2,15 +2,21 @@
     JournalEntry.css includes any styles specific to the JournalEntry react component
 */
 
+/* define any common variables here for use globally in this file */
+:root {
+    /* common margin for elements in the journal box */
+    --margin: 10px;
+}
 
 /* 
-    parents all flex box containers for journal entries (one for left and right verticals).
-    This should also be extensible in the event we wanted more than two columns of journals.
+    parents all flex box containers for journal entries.
+    This should be extensible in the event we wanted to add more columns of journals.
     This would involve simply defining more containers to be parented by this div
 */
 .JournalContainerContainer {
     /* defined as a flex container */
     display: flex;
+
     /* a small gap between each vertical section */
     column-gap: 2%;
 }
@@ -20,17 +26,19 @@
 .JournalContainerRight {
     /* defined as a flex container */
     display: flex;
+    
     /* 
-        As there are only two items within the container, 
-        we can specify that they take up all available room 
+        specify that they take up all available room 
         (taking into account the column-gap) and that they may not 
         grow or shrink along the flex axis)
     */
     flex-basis: 49%;
     flex-shrink: 0;
     flex-grow: 0;
+    
     /* items which these boxes parent are flexed along the vertical axis */
     flex-direction: column;
+    
     /* gap between journal entries */
     row-gap: 25px;
 }
@@ -39,37 +47,50 @@
 .JournalBox {
     /* round the edges of a journal entry */
     border-radius: 15px;
+   
     /* height of auto allows the div to grow dynamically with the length of an entry */
     height: auto;
+}
+
+/* effects for a journal box on hover */
+.JournalBox:hover .Journal--Text, .JournalBox:hover .Journal--Header {
+    /* [horizontal offset] [vertical offset] [blur radius] */
+    text-shadow: 0.30px 0.30px 1px;
 }
 
 /* container for a journal title and the emotion box */
 .Headerbox {
     /* defined as a flex container */
     display: flex;
-    /* items (just two in this case) are evenly distributed */
+    
+    /* items are evenly distributed */
     justify-content: space-between;
+    
     /* the title and emotion box are centered with eachother */
-    align-items: center;
+    align-items: center; 
+    
     /* margin to match all other content within JournalBox */
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: var(--margin);
+    margin-right: var(--margin);
 }
 
-/* a div which displays the mood on each journal entry */
+/* a div which contains the mood of each journal entry */
 .Emotion--Display {
     /* round the edges of a journal entry */
     border-radius: 15px;
+    
     /* padding between div and contained text */
     padding: 6px;
-    /* default background color (before dark mode switch) */
+   
+    /* default background color */
     background-color: #e2e5e9;
 }
 
-/* The actual <p> parented by Emotion--Display */
+/* The text parented by Emotion--Display */
 .Emotion--Text {
     /* no margin between the text and the container */
     margin: 0px;
+    
     /* same text font and style as the header */
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
@@ -79,11 +100,13 @@
 .Journal--Header {
     /* auto capitalize each word of the header */
     text-transform: capitalize;
+    
     /* 
        first try to load the "Courier New" font, and if it's not available, 
        to fall back to the "Courier" font, and finally to any monospace font available 
     */
     font-family: 'Courier New', Courier, monospace;
+    
     /* the header should be bold */
     font-weight: bold;
 }
@@ -92,27 +115,32 @@
 .Journal--Text {
     /* same text font as the header */
     font-family: 'Courier New', Courier, monospace;
+    
     /* the text area should be italic */
     font-style: italic;
-    /* and same margin */
-    margin: 10px;
+    
+    /* margin to match all other content within JournalBox */
+    margin: var(--margin);
 }
 
 /* div containing text for a time of submission and a date of submission */
 .TimeAndDateBox {
     /* defined as a flex container */
     display: flex;
-    /* items (just two in this case) are evenly distributed */
+    
+    /* items are evenly distributed */
     justify-content: space-between;
+   
     /* margin to match all other content within JournalBox */
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: var(--margin);
+    margin-right: var(--margin);
 }
 
 /* style for the actual text of the time and date */
 .TimeAndDate {
     /* same text font as the header */
     font-family: 'Courier New', Courier, monospace;
+    
     /* a smaller font size for the time and date */
     font-size: 75%;
 }

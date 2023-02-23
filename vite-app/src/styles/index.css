@@ -6,8 +6,10 @@
 body {
     /* the body has no margin */
     margin: 0px;
+
     /* but does have padding for its children */
     padding: 30px;
+
     /* text color for the body */
     color: white;
 }
