@@ -3,6 +3,11 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
+[[source]]
+name = "pytorch"
+url = "https://download.pytorch.org/whl/"
+verify_ssl = true
+
 [packages]
 # Spacy reqs
 blis = "==0.7.9"
@@ -47,7 +52,7 @@ spacy-transformers = "==1.0.6"
 srsly = "==2.4.5"
 thinc = "==8.0.17"
 tokenizers = "==0.10.3"
-torch = "==1.13.1"
+torch = {index = "pytorch",version = "==1.13.1"}
 tqdm = "==4.64.1"
 transformers = "==4.9.2"
 typer = "==0.4.2"
@@ -63,6 +68,3 @@ Werkzeug = "==2.2.2"
 zipp = "==3.12.1"
 
 [dev-packages]
-
-[requires]
-python_version = "3.10"
