@@ -6,9 +6,9 @@ export default function DarkLightToggle() {
     /*
        theme = holds current state
        toggleTheme = function to change current state
-       useState(false) = passes in initial state for theme of 'Light'
+       useState() = passes in initial state for theme
     */
-    const [theme, toggleTheme] = useState('Light');
+    const [theme, toggleTheme] = useState('Dark');
 
     // toggler gets called on button click, and simply switches the theme
     const toggler = () => {

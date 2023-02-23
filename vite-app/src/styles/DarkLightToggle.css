@@ -40,8 +40,8 @@
     right: 0;
     bottom: 0;
 
-    /* span is the light grey of 'light mode' which is default */
-    background-color: #d3d7de;
+    /* default color of span; unchecked */
+    background-color: #21252c;
 
     /* changes to the toggler properties take this much time */
     transition: .5s;
@@ -69,7 +69,7 @@
     bottom: 4px;
     
     /* color of toggler when it is unchecked */
-    background-color: #e2e5e9; 
+    background-color: #282D35;
 
     /* changes to the toggler take this long */
     transition: .5s;
@@ -77,8 +77,8 @@
 
 /* styles the span element when the input checkbox is checked */
 input:checked + .toggler {
-    /* color of the span when it is checked for dark mode */
-    background-color: #21252c;
+    /* color of the span when it is checked */
+    background-color: #d3d7de;
 }
 
 /* styles the toggler knob when the input checkbox is checked */
@@ -87,5 +87,5 @@ input:checked + .toggler:before {
     transform: translateX(26px);
 
     /* color of the toggler when its is checked */
-    background-color: #282D35;
+    background-color: #e2e5e9; 
 }
