@@ -11,7 +11,7 @@ To get started with this project, follow these steps:
 
 1. Clone this repository to your local machine.
 2. Install the necessary dependencies by running npm install.
-3. Start the development server by running npm run dev -- --port [port_num]
+3. Start the development server by running npm run dev -- --port [port_num] --open 
 4. Open your browser and navigate to http://localhost:[port_num] to view the app.
 
 ## Testing
