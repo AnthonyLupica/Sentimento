@@ -4,6 +4,8 @@ import DarkLightToggle from "./DarkLightToggle";
 import '../styles/NavBar.css';
 
 export default function NavBar() {
+
+    console.log("NavBar component rendered");
     return (
         <nav id="nav" className="navDark">
             <img src={logo} alt="Sentimento" className="sentimento--logo" />

@@ -11,39 +11,34 @@ import './styles/JournalEntry.css';
 
 export default function App() {
 
+    console.log("App component rendered");
     return (
-        <div className="TheContainerAboveAll">
+        <>
             <NavBar />
 
             <div className="JournalContainerContainer">
+
+                {/* Journals for the left vertical */}
                 <div className="JournalContainerLeft">
-                    <JournalEntry mood="Default" title="A test for flex box" entry="This is a test for the flex box" time="8:00pm" date="February 17 2023" />
-                    <JournalEntry
-                        mood="Sad"
-                        title="Long Entry"
-                        entry="This is a longer entry to test the capabilities of the journal box to expand. The intended behavior is for a journal entry to 
-                               be able to grow, independent of its neighboring entries. Eventually, the hope is to have to seperate flexboxes in charge of rendering entries
-                               to either half of the screen. This way, it may be easier to allow entries to be how ever long they need to be, without infringing on others.
-                               Sentimento: A reinvented journal. Entries will be scanned and highlighted for emotive words, such as happy/sad/ etc upon submission. These will be split 
-                               into percentages that comprise a mood for the day. Using RGB for each 5 emotions, a color for the day will be created. This can be tracked for the week, month, 
-                               year, etc. and can help users track their moods/emotions/feelings through that time."
-                        time="7:00pm"
-                        date="February 15 2023"
-                    />
-                </div>
-                <div className="JournalContainerRight">
-                    <JournalEntry mood="Joyful" title="Notes on my Day" entry="It was a great day at the amusement park!" time="6:00pm" date="1/31/23" />
                     <JournalEntry
                         mood="Fearful"
-                        title="Not sure what comes next"
-                        entry="Every day I stare further into the abyss. What's it all mean? Making this journal entry longer to illustrate the dynamic sizing of the flex boxes!!!!!!!!!!!!!!!!!!!!!! Yay it woooorrrrrrrrrrrrrrrrrrrrkssssssssssss"
-                        time="2:00am"
-                        date="1/31/23"
+                        title="Progress on Sentimento"
+                        entry="Progress is happening, but i'm hoping we'll have enough to get everything working in time"
+                        time="7:00pm" date="1/31/23"
                     />
-                    <JournalEntry mood="Angry" title="How could they do this to me" entry="No way! there's no way I can let them kick me out of the gang!" time="7:00pm" date="1/31/23" />
+                </div>
+
+                {/* Journals for the right vertical */}
+                <div className="JournalContainerRight">
+                    <JournalEntry
+                        mood="Joyful"
+                        title="Long Entry"
+                        entry="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                        time="8:00pm" date="2/24/23"
+                    />
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 
