@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+﻿import React from 'react';
 import '../styles/DarkLightToggle.css';
 
 export default function DarkLightToggle() {
@@ -6,9 +6,9 @@ export default function DarkLightToggle() {
     /*
        theme = holds current state
        toggleTheme = function to change current state
-       useState(false) = passes in initial state for theme of 'Light'
+       useState() = passes in initial state for theme
     */
-    const [theme, toggleTheme] = useState('Light');
+    const [theme, toggleTheme] = React.useState('Dark');
 
     // toggler gets called on button click, and simply switches the theme
     const toggler = () => {
@@ -20,7 +20,7 @@ export default function DarkLightToggle() {
     };
 
     // useEffect hook to switch classNames and make decisions according to theme state
-    useEffect(() => {
+    React.useEffect(() => {
 
         // switch any class names for the theme switch 
         document.body.className = "body" + theme;
@@ -40,6 +40,7 @@ export default function DarkLightToggle() {
 
     }, [theme]);
 
+    console.log("DarkLightToggle component rendered");
     return (
         <label className="DarkLight">
             <input type="checkbox" onClick={toggler} />

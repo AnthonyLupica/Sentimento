@@ -39,9 +39,54 @@ nav {
 
 /* styles for the sentimento logo */
 .sentimento--logo {
-    /* scaled to 200% of the container height. Intuitively makes no sense but looks right */
-    height: 200%;
+    /* dimensioning */
+    height: auto;
+    width: 250px;
 
     /* margin from the left of the navbar */
-    margin-left: 5px;
+    margin-left: 20px;
+    margin-right: -15px;
 }
+
+/* cursor element for the sentimento logo */
+#cursor {
+    /* dimensioning of cursor */
+    width: 1.5px;
+    height: 100%;
+
+    /* positioning the cursor */
+    margin-top: 20px;
+
+    /* the cursor is black */
+    background-color: black;
+
+    /* animation */
+    animation-name: cursor-blink;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+/* animation defined for the cursor */
+@keyframes cursor-blink {
+    /* the cursor is invisible */
+    0% {
+        opacity: 0;
+    }
+
+    /* the cursor blinks */
+    50% {
+        opacity: 1;
+    }
+
+    /* the cursor is invisible */
+    100% {
+        opacity: 0;
+    }
+}
+
+
+
+
+
+
+

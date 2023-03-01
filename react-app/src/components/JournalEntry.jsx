@@ -24,6 +24,7 @@ export default function JournalEntry(props) {
             boxColor = 'DarkGray';
     }
 
+    console.log("JournalEntry component rendered");
     return (
         <div className="JournalBox" style={{ backgroundColor: boxColor }}>
             <div className="Headerbox">
