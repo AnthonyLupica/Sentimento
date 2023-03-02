@@ -8,24 +8,17 @@ import React from "react";
 import NavBar from "./components/NavBar";
 import JournalEntry from "./components/JournalEntry";
 import DummyData from "./JournalData";
-import axios from 'axios';
 
 export default function App() {
 
     // existing journal entry data in state
     const [data, setData] = React.useState([]);
 
-    //React.useEffect(() => {
-    //    // Fetch data from dummy API
-    //    console.log("Fetching data from API...");
-
-    //    setData(DummyData);
-    //}, []);
-
     React.useEffect(() => {
-        axios.get('')
-            .then(response => setData(response.data))
-            .catch(error => console.log(error));
+        // Fetch data from dummy API
+        console.log("Fetching data from API...");
+
+        setData(DummyData);
     }, []);
 
     // initialize two arrays by copying elements into them, conditional on even or odd indexes
