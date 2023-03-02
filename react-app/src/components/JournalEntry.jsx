@@ -2,29 +2,9 @@ import React from 'react';
 import '../styles/JournalEntry.css';
 
 export default function JournalEntry(props) {
-    let boxColor;
+    // locally store the mood-associated color from the given prop value
+    let boxColor = props.color;
 
-    switch (props.mood) {
-        case 'Joyful':
-            boxColor = 'Orange';
-            break;
-        case 'Sad':
-            boxColor = 'LightSkyBlue';
-            break;
-        case 'Angry':
-            boxColor = 'Maroon';
-            break;
-        case 'Fearful':
-            boxColor = 'Plum';
-            break;
-        case 'Disgusted':
-            boxColor = 'DarkOliveGreen';
-            break;
-        default:
-            boxColor = 'DarkGray';
-    }
-
-    console.log("JournalEntry component rendered");
     return (
         <div className="JournalBox" style={{ backgroundColor: boxColor }}>
             <div className="Headerbox">

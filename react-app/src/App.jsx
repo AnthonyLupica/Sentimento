@@ -7,11 +7,31 @@
 import React from "react";
 import NavBar from "./components/NavBar";
 import JournalEntry from "./components/JournalEntry";
-import './styles/JournalEntry.css';
+import DummyData from "./JournalData";
+import axios from 'axios';
 
 export default function App() {
 
-    console.log("App component rendered");
+    // existing journal entry data in state
+    const [data, setData] = React.useState([]);
+
+    //React.useEffect(() => {
+    //    // Fetch data from dummy API
+    //    console.log("Fetching data from API...");
+
+    //    setData(DummyData);
+    //}, []);
+
+    React.useEffect(() => {
+        axios.get('')
+            .then(response => setData(response.data))
+            .catch(error => console.log(error));
+    }, []);
+
+    // initialize two arrays by copying elements into them, conditional on even or odd indexes
+    const leftEntries = data.filter((_entry, index) => index % 2 === 0);
+    const rightEntries = data.filter((_entry, index) => index % 2 !== 0);
+
     return (
         <>
             <NavBar />
@@ -20,22 +40,36 @@ export default function App() {
 
                 {/* Journals for the left vertical */}
                 <div className="JournalContainerLeft">
-                    <JournalEntry
-                        mood="Fearful"
-                        title="Progress on Sentimento"
-                        entry="Progress is happening, but i'm hoping we'll have enough to get everything working in time"
-                        time="7:00pm" date="1/31/23"
-                    />
+
+                    {/* For every element in the array, which is itself an object, render a JournalEntry */}
+                    {leftEntries.map((entry) => (
+                        <JournalEntry
+                            title={entry.title}
+                            entry={entry.entry}
+                            key={entry.id}
+                            mood={entry.mood}
+                            color={entry.color}
+                            date={entry.date}
+                            time={entry.time}
+                        />
+                    ))}  
                 </div>
 
                 {/* Journals for the right vertical */}
                 <div className="JournalContainerRight">
-                    <JournalEntry
-                        mood="Joyful"
-                        title="Long Entry"
-                        entry="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                        time="8:00pm" date="2/24/23"
-                    />
+
+                    {/* For every element in the array, which is itself an object, render a JournalEntry */}
+                    {rightEntries.map((entry) => (
+                        <JournalEntry
+                            title={entry.title}
+                            entry={entry.entry}
+                            key={entry.id}
+                            mood={entry.mood}
+                            color={entry.color}
+                            date={entry.date}
+                            time={entry.time}
+                        />
+                    ))}  
                 </div>
             </div>
         </>

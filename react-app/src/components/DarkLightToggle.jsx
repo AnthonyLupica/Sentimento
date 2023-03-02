@@ -40,7 +40,6 @@ export default function DarkLightToggle() {
 
     }, [theme]);
 
-    console.log("DarkLightToggle component rendered");
     return (
         <label className="DarkLight">
             <input type="checkbox" onClick={toggler} />
