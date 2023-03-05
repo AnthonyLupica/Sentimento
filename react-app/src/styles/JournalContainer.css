@@ -1,0 +1,40 @@
+/* 
+    JournalContainer.css includes styles for the JournalContainer react component
+*/
+
+/* 
+    parents all flex box containers for journal entries.
+    This should be extensible in the event we wanted to add more columns of journals.
+    This would involve simply defining more containers to be parented by this div
+*/
+.JournalContainer {
+    /* defined as a flex container */
+    display: flex;
+
+    /* a small gap between each vertical section */
+    column-gap: 2%;
+}
+
+/* flex box containers for all journal entry components */
+.JournalsLeft,
+.JournalsRight {
+    /* defined as a flex container */
+    display: flex;
+    
+    /* 
+        specify that they take up all available room 
+        (taking into account the column-gap) and that they may not 
+        grow or shrink along the flex axis)
+    */
+    flex-basis: 49%;
+    flex-shrink: 0;
+    flex-grow: 0;
+    
+    /* items which these boxes parent are flexed along the vertical axis */
+    flex-direction: column;
+    
+    /* gap between journal entries */
+    row-gap: 25px;
+    
+    background-color: red;
+}

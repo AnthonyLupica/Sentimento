@@ -1,0 +1,103 @@
+﻿/* 
+    Journal.css includes styles for the Journal react component
+*/
+
+/* declare any frequently reused styles here */ 
+:root {
+   --font: 'Courier New', Courier, monospace;
+}
+
+/* div for a singular journal entry */
+.JournalBox {
+    /* round the edges of a journal entry */
+    border-radius: 15px;
+   
+    /* height of auto allows the div to grow dynamically with the length of an entry */
+    height: auto;
+
+    /* some standard padding for all children of the div */
+    padding: 20px;
+}
+
+/* setting text colors based on className of immediate parent */
+.JournalBox > p, .Header > small, .Footer > small {
+    color: seashell;
+}
+
+/* container for a journal title and the emotion box */
+.Header {
+    /* defined as a flex container */
+    display: flex;
+    
+    /* items are evenly distributed */
+    justify-content: space-between;
+    
+    /* the title and emotion box are centered with eachother */
+    align-items: center; 
+}
+
+/* the title of each journal entry */
+.Journal--Title {
+    /* auto capitalize each word of the header */
+    text-transform: capitalize;
+    
+    /* 
+       first try to load the "Courier New" font, and if it's not available, 
+       to fall back to the "Courier" font, and finally to any monospace font available 
+    */
+    font-family: var(--font);
+
+    /* font size is x times the default size */
+    font-size: 1.2em;
+    
+    /* the title is bold */
+    font-weight: bold;
+}
+
+/* a div which contains the mood of each journal entry */
+.Emotion--Display {
+    /* round the edges of a journal entry */
+    border-radius: 10px;
+    
+    /* padding between div and contained text */
+    padding: 5px;
+   
+    /* default background color */
+    background-color: black;
+}
+
+/* The text parented by Emotion--Display */
+.Emotion--Text {
+    /* same text font and style as the title */
+    font-family: var(--font);
+    font-weight: bold;
+}
+
+/* the body text of each journal entry */
+.Journal--Text {
+    /* same text font as the header  */
+    font-family: var(--font);
+    
+    /* the text is italic */
+    font-style: italic;
+   
+    /* if the text is larger than the div, break to next line */
+    word-break: break-word;
+}
+
+/* div containing date of submission and delete icon */
+.Footer {
+    /* defined as a flex container */
+    display: flex;
+    
+    /* items are evenly distributed */
+    justify-content: space-between;
+
+    align-items: center; 
+}
+
+/* style for the actual text of the date */
+.DateAndTime {
+    /* same text font as the header */
+    font-family: var(--font);
+}
