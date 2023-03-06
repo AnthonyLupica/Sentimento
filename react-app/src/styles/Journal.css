@@ -1,0 +1,106 @@
+﻿/* 
+    Journal.css includes styles for the Journal react component
+*/
+
+/* declare any frequently reused styles here */ 
+:root {
+   --font: 'Courier New', Courier, monospace;
+   --text-color: seashell;
+}
+
+/* div for a singular journal entry */
+.JournalBox {
+    /* flex box with direction column that evenly spaces flex items */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    /* round the edges of a journal entry */
+    border-radius: 15px;
+   
+    /* height of auto allows the div to grow dynamically with the length of an entry */
+    height: auto;
+
+    /* some standard padding for all children of the div */
+    padding: 20px;
+
+     /* 
+       first try to load the "Courier New" font, and if it's not available, 
+       to fall back to the "Courier" font, and finally to any monospace font available 
+    */
+    
+    /* a font for all text in a journal box */
+    font-family: var(--font);
+}
+
+/* container for a journal title and the emotion box */
+.Header {
+    /* defined as a flex container */
+    display: flex;
+    
+    /* items are evenly distributed */
+    justify-content: space-between;
+    
+    /* the title and emotion box are centered with eachother */
+    align-items: center; 
+
+    /* font size is x times the default size */
+    font-size: 1.5em;
+    
+    /* the title is bold */
+    font-weight: bold;
+
+    /* auto capitalize each word of the header */
+    text-transform: capitalize;
+}
+
+/* the title of each journal entry */
+.Journal--Title {
+    /* necessary because the title color is different from the mood color */
+    color: var(--text-color);
+}
+
+/* a div which contains the mood of each journal entry */
+.Emotion--Display {
+    /* round the edges of a journal entry */
+    border-radius: 10px;
+    
+    /* padding between div and contained text */
+    padding: 5px;
+   
+    /* default background color */
+    background-color: black;
+}
+
+/* the body text of each journal entry */
+.Journal--Text {
+    /* the text is italic */
+    font-style: italic;
+   
+    /* if the text is larger than the div, break to next line */
+    word-break: break-word;
+    
+    /* preserve newline breaks in the text */
+    white-space: pre-line;
+    
+    /* set text color */
+    color: var(--text-color);
+}
+
+/* div containing footer text and an icon */
+.Footer {
+    /* defined as a flex container */
+    display: flex;
+    
+    /* items are evenly distributed */
+    justify-content: space-between;
+
+    /* the date and icon are centered with eachother */
+    align-items: center; 
+}
+
+/* styles on any text in the footer */
+.Footer--Text {
+    /* set text color */
+    color: var(--text-color);
+}
