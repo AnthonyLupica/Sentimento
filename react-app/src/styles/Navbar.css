@@ -1,0 +1,66 @@
+/* 
+    NavBar.css includes any styles specific to the Navbar component  
+*/
+
+/* declare any frequently reused styles here */ 
+:root {
+    --create-background-color: rgb(20, 20, 20);
+}
+
+/* style all navs directly, as we will only have one */
+nav {
+    /* 3 values: [top] [right/left] [bottom] */
+    margin: -42.5px -25px 20px;
+
+    padding: 20px;
+
+    /* property for rounded corners of navbar */
+    border-radius: 25px;
+
+    /* defines navbar as a flexbox container for all children */
+    display: flex;
+
+    /* children are evenly distributed */
+    justify-content: space-between;
+
+    /* flex items are centered along the horizontal */
+    align-items: center;
+
+    /* height of the navbar */
+    height: 30px;
+
+    /* background color is lighter than body color */
+    background-color: rgb(20, 20, 20);
+}
+
+/* styles for the sentimento logo */
+.sentimento--logo {
+    /* dimensioning */
+    height: auto;
+    width: 250px;
+}
+
+/* styles for the button in a CreateJournal component for submmitting the new entry */
+.Create--Button {
+    /* match background color to the background color of the parent div */
+    background-color: var(--create-background-color);
+    
+    /* scale up the size of the button */
+    font-size: 200%;
+
+    /* color of the create button */
+    color: var(--text-color);
+    
+    /* remove the border of the button */
+    border: none;
+}
+
+/* applies to the button when it is hovered over by the user */
+.Create--Button:hover {
+    /* transorm it to get slightly bigger */
+    transform: scale(1.2);
+
+    /* and add a cursor pointer to indicate it is clickable */
+    cursor: pointer;
+}
+

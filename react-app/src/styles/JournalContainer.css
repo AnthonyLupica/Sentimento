@@ -1,0 +1,58 @@
+/* 
+    JournalContainer.css includes styles for the JournalContainer react component
+*/
+
+/* selects all direct children of .Container--Blur element except those that have the class name .Overlay */
+.Container--Blur > *:not(.Overlay) {
+    filter: blur(15px);
+}
+
+.Overlay {
+    /*  element will be positioned relative to the viewport */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    /* set a width relative to viewport*/
+    width: 80%;
+
+    /* overlays the div on top of the body content */
+    z-index: 1;
+}
+
+/* 
+    parents all flex box containers for journal entries.
+    This should be extensible in the event we wanted to add more columns of journals.
+    This would involve simply defining more containers to be parented by this div
+*/
+.JournalContainer {
+    /* defined as a flex container */
+    display: flex;
+
+    /* a small gap between each vertical section */
+    column-gap: 2%;
+}
+
+/* flex box containers for all journal entry components */
+.JournalsLeft,
+.JournalsRight {
+    /* defined as a flex container */
+    display: flex;
+    
+    /* 
+        specify that they take up all available room 
+        (taking into account the column-gap) and that they may not 
+        grow or shrink along the flex axis)
+    */
+    flex-basis: 49%;
+    max-width: 49%;
+    flex-shrink: 0;
+    flex-grow: 0;
+    
+    /* items which these boxes parent are flexed along the vertical axis */
+    flex-direction: column;
+    
+    /* gap between journal entries */
+    row-gap: 25px;
+}

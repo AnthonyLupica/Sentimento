@@ -1,0 +1,74 @@
+/* 
+    CreateJournal.css includes styles for the CreateJournal component.
+    The styles for this componenet are a superset of the styles for a Journal component.
+*/
+
+/* declare any frequently reused styles here */ 
+:root {
+    --save-background-color: dimgrey;
+}
+
+/* Containing div of a new journal. This has both classNames 'JournalBox' and NewJournalBox' */
+.JournalBox.NewJournalBox {
+    background-color: var(--save-background-color);
+}
+
+/* the text areas within a CreateJournal component are for a title and text */
+textarea {
+    /* textareas are not resizable from there default initial values */ 
+    resize: none;
+    
+    /* remove standard border of a text area */
+    border: none;
+
+    /* match background color to the background color of the parent div */
+    background-color: var(--save-background-color);
+
+    /* inherit defined font and text color */
+    color: var(--text-color);
+    font-family: var(--font);
+    
+    /* font size is x times the default size */
+    font-size: 1.1em;
+}
+
+.Header textarea {
+    /* the title is bold */
+    font-weight: bold;
+
+    /* giving some spacing between title and text entry fields */
+    margin-bottom: 20px;
+}
+
+/* selects the placeholder property of a textarea */
+textarea::placeholder {
+    color: var(--text-color);
+}
+
+/* selects textareas that are focused by the user (selected) */
+textarea:focus {
+    /* when a user clicks into a textarea, there should be no outline */
+    outline: none;
+}
+
+/* styles for the button in a CreateJournal component for submmitting the new entry */
+.Save--Button {
+    /* match background color to the background color of the parent div */
+    background-color: var(--save-background-color);
+    
+    /* scale up the size of the button */
+    font-size: 200%;
+
+    /* remove the border of the button */
+    border: none;
+}
+
+/* applies to the button when it is hovered over by the user */
+.Save--Button:hover {
+    /* transorm it to get slightly bigger */
+    transform: scale(1.2);
+
+    /* and add a cursor pointer to indicate it is clickable */
+    cursor: pointer;
+}
+

@@ -1,0 +1,18 @@
+/* 
+    App.css includes styles pertaining to the body content of the app
+*/
+
+/* styles for the body content of the page */
+body {
+    /* padding for all visible content */
+    padding: 45px;
+
+    /* text color for the body */
+    background-color: black;
+}
+
+.Container {
+    /* content is automatically centered within the container */
+    margin-right: auto; 
+    margin-left: auto;
+}

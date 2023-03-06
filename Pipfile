@@ -60,11 +60,14 @@ typing-extensions = "==4.4.0"
 urllib3 = "==1.26.14"
 wasabi = "==0.10.1"
 
+
 # Backend Requirements
 Flask = "==2.2.2"
 importlib-metadata = "==6.0.0"
 itsdangerous = "==2.1.2"
 Werkzeug = "==2.2.2"
 zipp = "==3.12.1"
+flask-restful = "*"
+flask-cors = "*"
 
 [dev-packages]
