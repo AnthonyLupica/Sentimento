@@ -12,12 +12,19 @@ class HelloApiHandler(Resource):
     my_array = [
         {
             'id': 1,
-            'mood': "Fearful",
             'title': "Progress on Sentimento",
-            'entry': "Progress is happening, but i'm hoping we'll have enough to get everything working in time",
-            'time': "7:00pm",
-            'date': "1/31/23",
-            'color': "purple"
+            'mood': "Fearful",
+            'text': "Progress is happening, but i'm hoping we'll have enough to get everything working in time",
+            'dateAndTime': "1/31/23 | 7:00PM",
+            'color': "salmon"
+        },
+        {
+            'id': 2,
+            'title': "Success",
+            'mood': "Joyous",
+            'text': "I cannot believe this came from the backend! We are so excited",
+            'dateAndTime': "1/31/23 | 7:00PM",
+            'color': "gold"
         }
     ]
     return jsonify(my_array)

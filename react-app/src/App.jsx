@@ -16,7 +16,15 @@ export default function App() {
     /* STATE */
 
     // state for the journal entries array lives here at the top-most level
-    const [journals, setJournals] = React.useState(JournalData);
+    const [journals, setJournals] = React.useState([]);
+
+    React.useEffect(() => {
+        fetch('http://localhost:5000/flask/hello')
+           .then(res => res.json())
+           .then(data => setJournals(data))
+    }, [])
+
+    console.log(JSON.stringify(journals, null, 2));
 
     // state for determining if a CreateJournal component should render
     const [showCreateJournal, setShowCreateJournal] = React.useState(false);
