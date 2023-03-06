@@ -31,7 +31,8 @@ export default function CreateJournal(props) {
         "Share your insights...",
         "How have you been feeling?",
         "Let's hear your thoughts...",
-        "What's new in your world?"
+        "What's new in your world?",
+        "What's the tea, girl?"
       ];
 
     // choose a random pleasantry from placeholderTexts to display as placeholder text

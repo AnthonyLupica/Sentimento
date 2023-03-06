@@ -3,8 +3,8 @@
 */
 
 /* component imports */
-import { nanoid } from 'nanoid'; // nanoid is a library that generates random unique ids
 import React from 'react';
+import { nanoid } from 'nanoid'; // nanoid is a library that generates random unique ids
 import JournalContainer from './components/JournalContainer';
 import Navbar from './components/Navbar';
 import JournalData from './JournalData';
@@ -21,11 +21,13 @@ export default function App() {
     // state for determining if a CreateJournal component should render
     const [showCreateJournal, setShowCreateJournal] = React.useState(false);
 
+    /* END STATE */
+
     // handler that will be passed down to the CreateJournal component, giving it the ability to affect state in App
-    // params: title, and text from CreateJournal component state (submitted when user clicks the save entry button)
+    // params: title, and text from CreateJournal component (submitted when user clicks the save entry button)
     function handleCreateJournal(title, text) {
         /*  A journal has the following fields 
-            id: nanoid(),
+            id: nanoid()
             title: 
             mood: 
             color: 
@@ -69,6 +71,7 @@ export default function App() {
         })
     }
 
+    // toggler for the showCreateJournal state 
     function handleShowCreateJournal() {
         setShowCreateJournal(prevShowCreateJournal => !prevShowCreateJournal)
     }

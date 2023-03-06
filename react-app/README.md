@@ -18,4 +18,4 @@ To get started with this project, follow these steps:
 To run tests, run npm test. This will run all tests in the project using Jest and React Testing Library.
 
 ## Deployment
-To build a production-ready version of the app, run npm run build. The optimized assets will be output to the dist directory. You can then deploy this directory to your hosting provider of choice.rt number] --open
+To build a production-ready version of the app, run npm run build. The optimized assets will be output to the dist directory. You can then deploy this directory to your hosting provider of choice
