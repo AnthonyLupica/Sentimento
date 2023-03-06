@@ -27,6 +27,7 @@
         grow or shrink along the flex axis)
     */
     flex-basis: 49%;
+    max-width: 49%;
     flex-shrink: 0;
     flex-grow: 0;
     
@@ -35,6 +36,4 @@
     
     /* gap between journal entries */
     row-gap: 25px;
-    
-    background-color: red;
 }

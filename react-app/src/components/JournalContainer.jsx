@@ -52,7 +52,9 @@ export default function JournalContainer(props) {
                     />
                 ))}  
 
-                <CreateJournal handleCreateJournal={props.handleCreateJournal}/>
+                {/* CreateJournal is conditionally rendered based on the boolean state "showCreateJournal" */}
+                {/* pass in the event handler for a new journal entry */}
+                {props.showCreateJournal && <CreateJournal handleCreateJournal={props.handleCreateJournal} handleShowCreateJournal={props.handleShowCreateJournal}/>}
 
             </div>
 

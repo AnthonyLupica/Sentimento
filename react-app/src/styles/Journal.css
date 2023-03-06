@@ -5,10 +5,16 @@
 /* declare any frequently reused styles here */ 
 :root {
    --font: 'Courier New', Courier, monospace;
+   --text-color: seashell;
 }
 
 /* div for a singular journal entry */
 .JournalBox {
+    /* flex box with direction column that evenly spaces flex items */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
     /* round the edges of a journal entry */
     border-radius: 15px;
    
@@ -17,11 +23,14 @@
 
     /* some standard padding for all children of the div */
     padding: 20px;
-}
 
-/* setting text colors based on className of immediate parent */
-.JournalBox > p, .Header > small, .Footer > small {
-    color: seashell;
+     /* 
+       first try to load the "Courier New" font, and if it's not available, 
+       to fall back to the "Courier" font, and finally to any monospace font available 
+    */
+    
+    /* a font for all text in a journal box */
+    font-family: var(--font);
 }
 
 /* container for a journal title and the emotion box */
@@ -34,24 +43,21 @@
     
     /* the title and emotion box are centered with eachother */
     align-items: center; 
+
+    /* font size is x times the default size */
+    font-size: 1.5em;
+    
+    /* the title is bold */
+    font-weight: bold;
+
+    /* auto capitalize each word of the header */
+    text-transform: capitalize;
 }
 
 /* the title of each journal entry */
 .Journal--Title {
-    /* auto capitalize each word of the header */
-    text-transform: capitalize;
-    
-    /* 
-       first try to load the "Courier New" font, and if it's not available, 
-       to fall back to the "Courier" font, and finally to any monospace font available 
-    */
-    font-family: var(--font);
-
-    /* font size is x times the default size */
-    font-size: 1.2em;
-    
-    /* the title is bold */
-    font-weight: bold;
+    /* necessary because the title color is different from the mood color */
+    color: var(--text-color);
 }
 
 /* a div which contains the mood of each journal entry */
@@ -66,26 +72,22 @@
     background-color: black;
 }
 
-/* The text parented by Emotion--Display */
-.Emotion--Text {
-    /* same text font and style as the title */
-    font-family: var(--font);
-    font-weight: bold;
-}
-
 /* the body text of each journal entry */
 .Journal--Text {
-    /* same text font as the header  */
-    font-family: var(--font);
-    
     /* the text is italic */
     font-style: italic;
    
     /* if the text is larger than the div, break to next line */
     word-break: break-word;
+    
+    /* preserve newline breaks in the text */
+    white-space: pre-line;
+    
+    /* set text color */
+    color: var(--text-color);
 }
 
-/* div containing date of submission and delete icon */
+/* div containing footer text and an icon */
 .Footer {
     /* defined as a flex container */
     display: flex;
@@ -93,11 +95,12 @@
     /* items are evenly distributed */
     justify-content: space-between;
 
+    /* the date and icon are centered with eachother */
     align-items: center; 
 }
 
-/* style for the actual text of the date */
-.DateAndTime {
-    /* same text font as the header */
-    font-family: var(--font);
+/* styles on any text in the footer */
+.Footer--Text {
+    /* set text color */
+    color: var(--text-color);
 }

@@ -18,7 +18,7 @@ export default function Journal(props) {
             <div className="Header">
                 <small className="Journal--Title"> {props.title} </small>
                 <div className="Emotion--Display" style={{ color: props.color }}>
-                    <small className="Emotion--Text"> {props.mood} </small>
+                    <small> {props.mood} </small>
                 </div>
             </div>
 
@@ -27,7 +27,7 @@ export default function Journal(props) {
 
             {/* containing div for date of submission and delete icon */}
             <div className="Footer">
-                <small className="DateAndTime"> {props.dateAndTime} </small>
+                <small className="Footer--Text"> {props.dateAndTime} </small>
                 <MdDelete /> 
             </div>
 

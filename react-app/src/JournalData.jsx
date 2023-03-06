@@ -11,14 +11,14 @@ const data = [
         title: "Progress on Sentimento",
         mood: "Fearful",
         color: "purple",
-        text: "Progress is happening, but i'm hoping we'll have enough to get everything working in timevhlvbhjvhjvhjvhjvhjkvhjkvhjvkhjvhjkvvhhjvjhvhjvhjkvhjkvhjvhjkvhjkvkhjvnjkdafnvkjbdjkfbvjklabdfjklvbajkldbfvjklbajkldfbvjklabdlkjsfvbadfv",
+        text: "I am robert lupica",
         dateAndTime: "1/31/23"
     },
     {
         id: nanoid(),
         title: "Progress",
         mood: "Astounded",
-        color: "yellow",
+        color: "orange",
         text: "Progress is happening",
         dateAndTime: "1/31/23"
     },
@@ -34,7 +34,7 @@ const data = [
         id: nanoid(),
         title: "Progress",
         mood: "Fearful",
-        color: "pink",
+        color: "blue",
         text: "Progress is happening",
         dateAndTime: "1/31/23"
     }

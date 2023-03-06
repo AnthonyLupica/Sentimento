@@ -4,10 +4,7 @@
 
 /* styles for the body content of the page */
 body {
-    /* the body has no margin */
-    margin: 0px;
-
-    /* but does have padding */
+    /* padding for all visible content */
     padding: 45px;
 
     /* text color for the body */
@@ -15,7 +12,7 @@ body {
 }
 
 .Container {
+    /* content is automatically centered within the container */
     margin-right: auto; 
     margin-left: auto;
 }
-
