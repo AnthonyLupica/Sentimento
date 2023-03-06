@@ -6,6 +6,7 @@ from flask import Flask, send_from_directory, jsonify
 from flask_restful import Api, Resource, reqparse
 from flask_cors import CORS #comment this on deployment
 
+# More API-related stuff I'm learning about
 class HelloApiHandler(Resource):
   def get(self):
     my_array = [
@@ -53,10 +54,17 @@ CORS(app) #comment this on deployment
 api = Api(app)
 api.add_resource(HelloApiHandler, '/flask/hello')
 
+# The default page haha
 @app.route('/')
 def index():
     return "<h1>Hello World!</h1>"
 
+# So this uses api stuff that I still don't understand well yet so I'm gonna test without it for now
 @app.route("/", defaults={'path':''})
 def serve(path):
     return send_from_directory(app.static_folder,'index.html')
+
+# This route will eventually be associated with the frontend journal writing page
+@app.route('/submit')
+def journal_entry():
+    return "Gonna make a template..."
