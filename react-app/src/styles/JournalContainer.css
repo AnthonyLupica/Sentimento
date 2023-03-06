@@ -2,6 +2,25 @@
     JournalContainer.css includes styles for the JournalContainer react component
 */
 
+/* selects all direct children of .Container--Blur element except those that have the class name .Overlay */
+.Container--Blur > *:not(.Overlay) {
+    filter: blur(15px);
+}
+
+.Overlay {
+    /*  element will be positioned relative to the viewport */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    /* set a width relative to viewport*/
+    width: 80%;
+
+    /* overlays the div on top of the body content */
+    z-index: 1;
+}
+
 /* 
     parents all flex box containers for journal entries.
     This should be extensible in the event we wanted to add more columns of journals.

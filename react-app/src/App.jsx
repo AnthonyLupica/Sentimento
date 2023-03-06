@@ -74,14 +74,12 @@ export default function App() {
     }
     
     return (
-        <div className="Container">
-
+        <>
             <Navbar showCreateJournal={showCreateJournal} handleShowCreateJournal={handleShowCreateJournal}/>
 
             {/* pass in journal data state, and showCreateJournal as props, and the event handler for a new journal entry */}
             <JournalContainer journalData={journals} showCreateJournal={showCreateJournal} handleCreateJournal={handleCreateJournal} handleShowCreateJournal={handleShowCreateJournal}/> 
-
-        </div>
+        </>
     );
 }
 

@@ -9,17 +9,17 @@ const data = [
     {
         id: nanoid(),
         title: "Progress on Sentimento",
-        mood: "Fearful",
-        color: "purple",
-        text: "I am robert lupica",
+        mood: "Happy",
+        color: "orange",
+        text: "I've made so much progress today!",
         dateAndTime: "1/31/23"
     },
     {
         id: nanoid(),
-        title: "Progress",
+        title: "A Title",
         mood: "Astounded",
-        color: "orange",
-        text: "Progress is happening",
+        color: "purple",
+        text: "This is a journal entry",
         dateAndTime: "1/31/23"
     },
     {

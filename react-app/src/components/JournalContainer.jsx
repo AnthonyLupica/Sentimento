@@ -18,47 +18,48 @@ export default function JournalContainer(props) {
     const rightEntries = props.journalData.filter((_entry, index) => index % 2 !== 0);
 
     return (
-        <div className="JournalContainer">
-
-            {/* Journals for the left vertical */}
-            <div className="JournalsLeft">
-                
-                {/* For every element in the array, which is itself an object, render a Journal */}
-                {leftEntries.map((entry) => (
-                    <Journal
-                        id={entry.id}
-                        title={entry.title}
-                        mood={entry.mood}
-                        color={entry.color}
-                        text={entry.text}
-                        dateAndTime={entry.dateAndTime}
-                    />
-                ))}  
-
-            </div>
-
-            {/* Journals for the right vertical */}
-            <div className="JournalsRight">
-
-                {/* For every element in the array, which is itself an object, render a Journal */}
-                {rightEntries.map((entry) => (
-                    <Journal
-                        id={entry.id}
-                        title={entry.title}
-                        mood={entry.mood}
-                        color={entry.color}
-                        text={entry.text}
-                        dateAndTime={entry.dateAndTime}
-                    />
-                ))}  
-
-                {/* CreateJournal is conditionally rendered based on the boolean state "showCreateJournal" */}
+        /* conditionally assign a className based on boolean state prop */
+        <div className={`Container${props.showCreateJournal ? '--Blur' : ''}`}>
+            
+            {/* CreateJournal is conditionally rendered based on the boolean state "showCreateJournal" */}
+            {props.showCreateJournal && <div className="Overlay">
                 {/* pass in the event handler for a new journal entry */}
-                {props.showCreateJournal && <CreateJournal handleCreateJournal={props.handleCreateJournal} handleShowCreateJournal={props.handleShowCreateJournal}/>}
+                <CreateJournal handleCreateJournal={props.handleCreateJournal} handleShowCreateJournal={props.handleShowCreateJournal}/>
+            </div>}
 
-            </div>
+            <div className="JournalContainer">
+                {/* Journals for the left vertical */}
+                <div className="JournalsLeft">
+                    {/* For every element in the array, which is itself an object, render a Journal */}
+                    {leftEntries.map((entry) => (
+                        <Journal
+                            id={entry.id}
+                            title={entry.title}
+                            mood={entry.mood}
+                            color={entry.color}
+                            text={entry.text}
+                            dateAndTime={entry.dateAndTime}
+                        />
+                    ))}  
+                </div>
 
-        </div> 
+                {/* Journals for the right vertical */}
+                <div className="JournalsRight">
+                    {/* For every element in the array, which is itself an object, render a Journal */}
+                    {rightEntries.map((entry) => (
+                        <Journal
+                            id={entry.id}
+                            title={entry.title}
+                            mood={entry.mood}
+                            color={entry.color}
+                            text={entry.text}
+                            dateAndTime={entry.dateAndTime}
+                        />
+                    ))}  
+                </div>
+            </div> 
+            
+        </div>
     );
 }
 
