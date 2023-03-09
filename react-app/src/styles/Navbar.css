@@ -40,7 +40,7 @@ nav {
     width: 250px;
 }
 
-/* styles for the button in a CreateJournal component for submmitting the new entry */
+/* styles for the button in the Navbar component for opening/closing the CreateJournal prompt */
 .Create--Button {
     /* match background color to the background color of the parent div */
     background-color: var(--create-background-color);
