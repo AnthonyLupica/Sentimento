@@ -13,7 +13,7 @@ import JournalData from './JournalData';
 import './styles/App.css'
 
 export default function App() {
-    
+
     // define state for this component
     const [journals, setJournals] = React.useState([]);
     const [showCreateJournal, setShowCreateJournal] = React.useState(false);
