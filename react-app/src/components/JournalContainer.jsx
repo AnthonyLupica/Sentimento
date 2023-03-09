@@ -23,7 +23,7 @@ export default function JournalContainer(props) {
             
             {/* CreateJournal is conditionally rendered based on the boolean state "showCreateJournal" */}
             {props.showCreateJournal && <div className="Overlay">
-                {/* pass in the event handler for a new journal entry */}
+                {/* pass in event handlers*/}
                 <CreateJournal handleCreateJournal={props.handleCreateJournal} handleShowCreateJournal={props.handleShowCreateJournal}/>
             </div>}
 
@@ -39,6 +39,7 @@ export default function JournalContainer(props) {
                             color={entry.color}
                             text={entry.text}
                             dateAndTime={entry.dateAndTime}
+                            handleDeleteJournal={props.handleDeleteJournal}
                         />
                     ))}  
                 </div>
@@ -54,6 +55,7 @@ export default function JournalContainer(props) {
                             color={entry.color}
                             text={entry.text}
                             dateAndTime={entry.dateAndTime}
+                            handleDeleteJournal={props.handleDeleteJournal}
                         />
                     ))}  
                 </div>

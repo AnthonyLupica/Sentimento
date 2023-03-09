@@ -13,21 +13,28 @@ import JournalData from './JournalData';
 import './styles/App.css'
 
 export default function App() {
-    /* STATE */
-
-    // state for the journal entries array lives here at the top-most level
-    const [journals, setJournals] = React.useState(JournalData);
-
-    // state for determining if a CreateJournal component should render
+    
+    // define state for this component
+    const [journals, setJournals] = React.useState([]);
     const [showCreateJournal, setShowCreateJournal] = React.useState(false);
 
-    /* END STATE */
+    // set state with useEffect
+    React.useEffect(() => {
+        //fetch("http://localhost:5000/flask/hello")
+        //    .then(res => res.json())
+        //    .then(data => setJournals(data))
 
-    // handler that will be passed down to the CreateJournal component, giving it the ability to affect state in App
-    // params: title, and text from CreateJournal component (submitted when user clicks the save entry button)
-    function handleCreateJournal(title, text) {
+        // for now we use hardcoded JournalData.jsx
+        setJournals(JournalData);
+    }, [])
+
+    // createJournal
+    // pre: title, and text from CreateJournal component (submitted when user clicks the save entry button)
+    // post: a new journal entry is created. Responsible for initiating the re-rendering of the updated journal array
+    // @TODO figure out how to have this write to the database, which itiates an api call to fetch teh journals
+    function createJournal(title, text) {
         /*  A journal has the following fields 
-            id: nanoid()
+            id:
             title: 
             mood: 
             color: 
@@ -56,8 +63,8 @@ export default function App() {
         const newJournal = {
             id: nanoid(),
             title: title,
-            mood: "todo",   // TODO: get from backend
-            color: "green", // TODO: get from backend
+            mood: "todo",   
+            color: "green", 
             text: text,
             dateAndTime: dateAndTime
         };
@@ -71,17 +78,44 @@ export default function App() {
         })
     }
 
-    // toggler for the showCreateJournal state 
-    function handleShowCreateJournal() {
-        setShowCreateJournal(prevShowCreateJournal => !prevShowCreateJournal)
+    // toggleCreateJournal
+    // pre: the user initiates/cancels the creation of a journal, or saves a new journal
+    // post: state is toggled to show/hide the CreateJournal component
+    function toggleCreateJournal() {
+        setShowCreateJournal(prevShowCreateJournal => !prevShowCreateJournal);
+    }
+
+    // deleteJournal
+    // pre: id of the calling Journal 
+    // post: all Journals except the Journal for which the id property is a match are copied into a new array for state
+    // @TODO figure out how to have this write to the database, which itiates an api call to fetch teh journals
+    function deleteJournal(id) {
+        const noteDeleted = journals.filter((journal) => journal.id !== id);
+        setJournals(noteDeleted);
     }
     
     return (
         <>
-            <Navbar showCreateJournal={showCreateJournal} handleShowCreateJournal={handleShowCreateJournal}/>
+            {/*   <Navbar />
+                  1) showCreateJournal - state as prop to determine if a create or cancel button renders
+                  2) handleShowCreatejournal - handler for toggling showCreateJournal on button click
+             */}
+            <Navbar showCreateJournal={showCreateJournal} handleShowCreateJournal={toggleCreateJournal}/>
 
-            {/* pass in journal data state, and showCreateJournal as props, and the event handler for a new journal entry */}
-            <JournalContainer journalData={journals} showCreateJournal={showCreateJournal} handleCreateJournal={handleCreateJournal} handleShowCreateJournal={handleShowCreateJournal}/> 
+            {/*   <JournalContainer />
+                  1) journalData - state as prop for filtering journal entries into left or right side containers
+                  2) showCreateJournal - state as prop to conditionally render a CreateJournal component
+                  3) handleShowCreateJournal - handler to be drilled into CreateJournal
+                  4) handleCreateJournal - handler to be drilled into CreateJournal
+                  5) handleDeleteJournal - handler to be drilled into Journal
+             */}
+            <JournalContainer 
+                journalData={journals} 
+                showCreateJournal={showCreateJournal} 
+                handleCreateJournal={createJournal} 
+                handleShowCreateJournal={toggleCreateJournal}
+                handleDeleteJournal={deleteJournal}
+            /> 
         </>
     );
 }

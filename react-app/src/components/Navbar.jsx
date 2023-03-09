@@ -1,3 +1,7 @@
+/*
+    Navbar.jsx defines the navigation bar, which houses the logo, and any interactivity buttons 
+*/
+
 import React from 'react';
 import logo from '../assets/sentimento-logo.png'; 
 import {MdCreate} from 'react-icons/md'; // this is a create icon

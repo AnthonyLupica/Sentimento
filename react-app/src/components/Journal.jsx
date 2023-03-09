@@ -28,7 +28,9 @@ export default function Journal(props) {
             {/* containing div for date of submission and delete icon */}
             <div className="Footer">
                 <small className="Footer--Text"> {props.dateAndTime} </small>
-                <MdDelete /> 
+                <button className="Delete--Button" style={{ backgroundColor: props.color }} onClick={() => props.handleDeleteJournal(props.id)}>
+                    <MdDelete />
+                </button>
             </div>
 
         </div>    

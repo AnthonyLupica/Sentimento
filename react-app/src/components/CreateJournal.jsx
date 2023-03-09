@@ -1,3 +1,7 @@
+/*
+    Navbar.jsx defines the navigation bar, which houses the logo, and any interactivity buttons 
+*/
+
 /* component imports */
 import React from 'react'; 
 import {MdOutlineSave, MdSave} from 'react-icons/md'; // these are save icons
@@ -8,7 +12,7 @@ import '../styles/CreateJournal.css';
 
 export default function CreateJournal(props) {
     
-    // define state for this component
+    // define state
     const [journalTitle, setJournalTitle] = React.useState('');
     const [journalText, setJournalText] = React.useState('');
     const [randomPleasantry, setRandomPleasantry] = React.useState('');
@@ -44,7 +48,7 @@ export default function CreateJournal(props) {
         setRandomPleasantry(randomSelect);
     }, []); // this runs ONCE, when the component first mounts
 
-    // event handler called whenever the value of the textarea for jounral text changes 
+    // event handler called whenever the value of the textarea for the journal text changes 
     function handleJournalText(event) {
         // call setJournalText only if the value the character has typed does not exceed the character limit 
         if (journalTextLimit - event.target.value.length >= 0) {
@@ -52,7 +56,7 @@ export default function CreateJournal(props) {
         }
     }
 
-    // event handler called whenever the value of the textarea for jounral title changes 
+    // event handler called whenever the value of the textarea for the journal title changes 
     function handleJournalTitle(event) {
         // check for the existence of a newline character
         if (event.target.value.includes('\n')) {
@@ -67,7 +71,7 @@ export default function CreateJournal(props) {
     
     // event handler called whenever the save button is clicked. It in turn calls the handler for creating a new journal 
     // passed all the way from App.jsx
-    function handleCreateClick() {
+    function handleSaveClick() {
         // validate that both title and text have been given 
         if (journalTitle !== '' && journalText !== '') {
             // pass the valid values of state to handleCreateJournal
@@ -80,14 +84,12 @@ export default function CreateJournal(props) {
             // call handler to toggler state determining if this component should render
             props.handleShowCreateJournal();
         } else {
-            // @TODO may want to visually indicate to the user that they need to provide title and text 
+            // @TODO may want to visually indicate to the user that they need to provide title and text with an alert
         }
     }
 
     return (
-        /* the containing div has two classNames, taking all styles of a JournalBox 
-           and adding more for a NewJournalBox
-        */
+        // two classNames, taking all styles of a JournalBox and adding more for a NewJournalBox
         <div className="JournalBox NewJournalBox">
             
             {/* containing div for the title of the journal entry */}
@@ -114,7 +116,7 @@ export default function CreateJournal(props) {
             {/* containing div for character count and save button */}
             <div className="Footer">
                 <small className="Footer--Text Character--Count"> {journalTextLimit - journalText.length} characters remaining </small>
-                <button className="Save--Button" onClick={handleCreateClick}><MdSave /></button>
+                <button className="Save--Button" onClick={handleSaveClick}><MdSave /></button>
             </div>
 
         </div>

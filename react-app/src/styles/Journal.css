@@ -104,3 +104,23 @@
     /* set text color */
     color: var(--text-color);
 }
+
+/* styles for the button in a Journal component for deleting a journal */
+.Delete--Button {
+    /* scale up the size of the button */
+    font-size: 150%;
+
+    /* remove the border of the button */
+    border: none;
+}
+
+/* applies to the button when it is hovered over by the user */
+.Delete--Button:hover {
+    /* transorm it to get slightly bigger */
+    transform: scale(1.2);
+
+    /* and add a cursor pointer to indicate it is clickable */
+    cursor: pointer;
+}
+
+
