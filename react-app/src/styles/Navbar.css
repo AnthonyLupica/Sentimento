@@ -49,7 +49,7 @@ nav {
     font-size: 200%;
 
     /* color of the create button */
-    color: var(--text-color);
+    color: seashell;
     
     /* remove the border of the button */
     border: none;

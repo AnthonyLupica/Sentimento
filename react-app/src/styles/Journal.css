@@ -5,7 +5,7 @@
 /* declare any frequently reused styles here */ 
 :root {
    --font: 'Courier New', Courier, monospace;
-   --text-color: seashell;
+   --text-color: transparent;
 }
 
 /* div for a singular journal entry */
@@ -57,6 +57,7 @@
 /* the title of each journal entry */
 .Journal--Title {
     /* necessary because the title color is different from the mood color */
+
     color: var(--text-color);
 }
 

@@ -18,7 +18,7 @@ const data = [
         id: nanoid(),
         title: "A Title",
         mood: "Astounded",
-        color: "purple",
+        color: "AliceBlue",
         text: "This is a journal entry",
         dateAndTime: "1/31/23"
     },
