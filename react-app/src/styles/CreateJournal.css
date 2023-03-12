@@ -25,11 +25,23 @@ textarea {
     background-color: var(--save-background-color);
 
     /* inherit defined font and text color */
-    color: var(--text-color);
+    color: seashell;
     font-family: var(--font);
     
     /* font size is x times the default size */
     font-size: 1.1em;
+}
+
+.Create--Text {
+    /* the text is italic */
+    font-style: italic;
+   
+    /* if the text is larger than the div, break to next line */
+    word-break: break-word;
+}
+
+.Character--Count {
+    color: seashell;
 }
 
 .Header textarea {
@@ -42,7 +54,7 @@ textarea {
 
 /* selects the placeholder property of a textarea */
 textarea::placeholder {
-    color: var(--text-color);
+    color: seashell;
 }
 
 /* selects textareas that are focused by the user (selected) */

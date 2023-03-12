@@ -18,7 +18,7 @@ export default function CreateJournal(props) {
     const [randomPleasantry, setRandomPleasantry] = React.useState('');
 
     // define how many characters the user can type in each text area 
-    const journalTextLimit = 500;
+    const journalTextLimit = 850;
     const journalTitleLimit = 45;
 
     // an array of pre-defined placeholder text for a new journal entry (have fun with this)
@@ -105,7 +105,7 @@ export default function CreateJournal(props) {
             
             {/* textarea for journal text */}
             <textarea 
-                className="Journal--Text"
+                className="Create--Text"
                 rows='8'
                 cols='90'
                 placeholder={randomPleasantry}
@@ -115,7 +115,7 @@ export default function CreateJournal(props) {
 
             {/* containing div for character count and save button */}
             <div className="Footer">
-                <small className="Footer--Text Character--Count"> {journalTextLimit - journalText.length} characters remaining </small>
+                <small className="Character--Count"> {journalTextLimit - journalText.length} characters remaining </small>
                 <button className="Save--Button" onClick={handleSaveClick}><MdSave /></button>
             </div>
 
