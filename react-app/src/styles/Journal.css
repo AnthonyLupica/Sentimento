@@ -107,7 +107,7 @@
     /* set text color */
     color: var(--text-color);
 
-   font-size: 1em;
+    font-size: 1em;
 }
 
 /* styles for the button in a Journal component for deleting a journal */
@@ -127,5 +127,19 @@
     /* and add a cursor pointer to indicate it is clickable */
     cursor: pointer;
 }
+
+.DeleteConfirmation--Container {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+.Footer--Text.Delete--Confirmation {
+    margin-right: 5px;
+}
+
+
 
 
