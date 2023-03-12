@@ -27,3 +27,5 @@ To quit the pipenv shell, simply put `exit`
 [en_textcat_goemotions](https://huggingface.co/explosion/en_textcat_goemotions?text=I+like+you.+I+love+you) NOTE: This package requires around 6GB of space!
 
 SQLite (currently studying)
+
+[colour name and rgb code](https://www.kaggle.com/datasets/ravikanth/colour-name-and-rgb-codes?resource=download)
