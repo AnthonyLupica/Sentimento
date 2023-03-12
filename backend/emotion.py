@@ -182,9 +182,12 @@ print(journal)
 doc = nlp(journal)
 
 color = colorize(doc.cats)
+color[0] = int(round(color[0]))
+color[1] = int(round(color[1]))
+color[2] = int(round(color[2]))
 
 print(color)
 
-print(pd.DataFrame.from_dict(doc.cats, orient='index'))
+# print(pd.DataFrame.from_dict(doc.cats, orient='index'))
 
 
