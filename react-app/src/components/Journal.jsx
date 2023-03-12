@@ -22,9 +22,9 @@ export default function Journal(props) {
         const deleteTexts = [
             "Delete? Are you sure?",
             "Delete? One last chance.",
-            "Deleting is permanent. Confirm to proceed.",
-            "Is it time to part ways?",
-            "Deleting is irreversible. Are you sure?"
+            "Confirm to proceed.",
+            `Delete '${props.title}'?`,
+            "Deleting is irreversible."
           ];
     
         // choose a random pleasantry from deleteTexts to display as placeholder text
