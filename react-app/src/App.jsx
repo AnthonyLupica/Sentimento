@@ -17,6 +17,7 @@ export default function App() {
     // define state for this component
     const [journals, setJournals] = React.useState([]);
     const [showCreateJournal, setShowCreateJournal] = React.useState(false);
+    const [searchQuery, setSearchQuery] = React.useState('');
 
     // set state with useEffect
     React.useEffect(() => {
@@ -88,19 +89,23 @@ export default function App() {
     // deleteJournal
     // pre: id of the calling Journal 
     // post: all Journals except the Journal for which the id property is a match are copied into a new array for state
-    // @TODO figure out how to have this write to the database, which itiates an api call to fetch teh journals
+    // @TODO figure out how to have this write to the database, which initiates an api call to fetch the journals
     function deleteJournal(id) {
         const noteDeleted = journals.filter((journal) => journal.id !== id);
         setJournals(noteDeleted);
     }
+
+    // trim and convert the SearchQuery string to lowercase  
+    const preparedSearchQuery = searchQuery.trim().toLowerCase();
     
     return (
         <>
             {/*   <Navbar />
                   1) showCreateJournal - state as prop to determine if a create or cancel button renders
                   2) handleShowCreatejournal - handler for toggling showCreateJournal on button click
+                  3) setSearchQuery - state setter to be drilled down to the SearchJournal component
              */}
-            <Navbar showCreateJournal={showCreateJournal} handleShowCreateJournal={toggleCreateJournal}/>
+            <Navbar showCreateJournal={showCreateJournal} handleShowCreateJournal={toggleCreateJournal} setSearchQuery={setSearchQuery} />
 
             {/*   <JournalContainer />
                   1) journalData - state as prop for filtering journal entries into left or right side containers
@@ -110,7 +115,7 @@ export default function App() {
                   5) handleDeleteJournal - handler to be drilled into Journal
              */}
             <JournalContainer 
-                journalData={journals} 
+                journalData={journals.filter((journal) => journal.mood.toLowerCase().includes(preparedSearchQuery))} 
                 showCreateJournal={showCreateJournal} 
                 handleCreateJournal={createJournal} 
                 handleShowCreateJournal={toggleCreateJournal}

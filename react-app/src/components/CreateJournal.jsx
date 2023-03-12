@@ -18,7 +18,7 @@ export default function CreateJournal(props) {
     const [randomPleasantry, setRandomPleasantry] = React.useState('');
 
     // define how many characters the user can type in each text area 
-    const journalTextLimit = 500;
+    const journalTextLimit = 850;
     const journalTitleLimit = 45;
 
     // an array of pre-defined placeholder text for a new journal entry (have fun with this)

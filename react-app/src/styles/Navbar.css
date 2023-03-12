@@ -33,6 +33,17 @@ nav {
     background-color: rgb(20, 20, 20);
 }
 
+.Button--Container {
+    /* defines container as a flexbox container for all children */
+    display: flex;
+
+    /* children are evenly distributed */
+    justify-content: space-between;
+
+    /* flex items are centered along the horizontal */
+    align-items: center;
+}
+
 /* styles for the sentimento logo */
 .sentimento--logo {
     /* dimensioning */
@@ -53,6 +64,8 @@ nav {
     
     /* remove the border of the button */
     border: none;
+
+    margin-right: 20px;
 }
 
 /* applies to the button when it is hovered over by the user */

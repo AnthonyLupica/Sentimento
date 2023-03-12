@@ -13,7 +13,7 @@ import '../styles/Journal.css';
 export default function Journal(props) {
 
     // use tiny color library to slightly darken props.color by the value passed in .darken()
-    const shadowColor = tinycolor(props.color).darken(30).toString();
+    const shadowColor = tinycolor(props.color).darken(25).toString();
     
     return (
         <div className="JournalBox" style={{ backgroundColor: props.color }}>

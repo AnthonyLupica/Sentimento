@@ -45,7 +45,7 @@
     align-items: center; 
 
     /* font size is x times the default size */
-    font-size: 1.5em;
+    font-size: 1.6em;
     
     /* the title is bold */
     font-weight: bold;
@@ -77,6 +77,8 @@
 .Journal--Text {
     /* the text is italic */
     font-style: italic;
+
+    font-size: 1.3em;
    
     /* if the text is larger than the div, break to next line */
     word-break: break-word;
@@ -104,6 +106,8 @@
 .Footer--Text {
     /* set text color */
     color: var(--text-color);
+
+   font-size: 1em;
 }
 
 /* styles for the button in a Journal component for deleting a journal */
