@@ -29,3 +29,4 @@ To quit the pipenv shell, simply put `exit`
 SQLite (currently studying)
 
 [colour name and rgb code](https://www.kaggle.com/datasets/ravikanth/colour-name-and-rgb-codes?resource=download)
+NOTE: This is the dataset we are using to get color names for people. The init_db.py file parses this dataset's .csv to make our table
