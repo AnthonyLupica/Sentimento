@@ -4,9 +4,8 @@
     testing file for lots of spaCy-related things
 
     Run this script with a command like
-        "python test.py file.txt True"
+        "python test.py file.txt"
     Where file.txt is a journal entry you want to analyze
-    the second arg being boolean determining if you want watered down results or not
 """
 
 import spacy
@@ -75,9 +74,9 @@ def colorize(dict):
     total_color[2] += dict["desire"] * 111  # B
 
     # disappointment ( DEEP SLATE BLUE [ 65, 99, 129 ] )
-    total_color[0] += dict["confusion"] * 124  # R
-    total_color[1] += dict["confusion"] * 62   # G
-    total_color[2] += dict["confusion"] * 184  # B
+    total_color[0] += dict["disappointment"] * 124  # R
+    total_color[1] += dict["disappointment"] * 62   # G
+    total_color[2] += dict["disappointment"] * 184  # B
 
     # disapproval ( LIGHT INDIGO [ 150, 127, 192 ] )
     total_color[0] += dict["disapproval"] * 124  # R
@@ -165,7 +164,7 @@ def colorize(dict):
     total_color[1] += dict["surprise"] * 255  # G
     total_color[2] += dict["surprise"] * 144  # B
 
-    # neutral (GRAY [ 125, 125, 125 ] )
+    # neutral ( GRAY [ 125, 125, 125 ] )
     total_color[0] += dict["neutral"] * 125  # R
     total_color[1] += dict["neutral"] * 125  # G
     total_color[2] += dict["neutral"] * 125  # B
@@ -182,6 +181,13 @@ def max_mood(dict):
     max_keys = [k for k, v in dict.items() if v == max_value] 
     return max_keys
 
+def normalize(dict):
+    total = 0
+    for x in dict:
+        total += dict[x]
+    for x in dict:
+        dict[x] = dict[x] / total
+    return dict
 
 f = open(sys.argv[1], 'r')
 journal = f.read()
@@ -192,7 +198,9 @@ print(journal)
 # doc.cats is a dictionary of the form "emotive_word: normalized_score"
 doc = nlp(journal)
 
-print(pd.DataFrame.from_dict(doc.cats, orient='index'))
+journalStats = normalize(doc.cats)
+
+print(pd.DataFrame.from_dict(journalStats, orient='index'))
 
 print(colorize(doc.cats))
 
