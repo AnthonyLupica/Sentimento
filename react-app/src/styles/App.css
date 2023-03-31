@@ -6,9 +6,8 @@
 body {
     /* padding for all visible content */
     padding: 45px;
-
     /* text color for the body */
-    background-color: black;
+    background-color: #1b1b1b;
 }
 
 .Container {
