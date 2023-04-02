@@ -56,7 +56,7 @@ class HelloApiHandler(Resource):
 
     return final_ret
 
-app = Flask(__name__, static_url_path='', static_folder='templates')
+app = Flask(__name__)
 CORS(app) #comment this on deployment
 api = Api(app)
 api.add_resource(HelloApiHandler, '/flask/hello')
@@ -65,16 +65,3 @@ api.add_resource(HelloApiHandler, '/flask/hello')
 @app.route('/')
 def index():
     return "<h1>Hello World!</h1>"
-
-# So this uses api stuff that I still don't understand well yet so I'm gonna test without it for now
-# Doesn't work right now
-"""
-@app.route("/", defaults={'path':''})
-def serve(path):
-    return send_from_directory(app.static_folder,'index.html')
-"""
-
-# This route will eventually be associated with the frontend journal writing page
-@app.route('/templates/<path:name>')
-def journal_entry(name):
-    return send_from_directory(app.static_folder, name)

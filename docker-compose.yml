@@ -1,0 +1,5 @@
+services:
+  app:
+    image: sentimento
+    ports:
+      - 5000:5000
