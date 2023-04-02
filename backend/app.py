@@ -4,7 +4,6 @@
 
 from flask import Flask, send_from_directory, jsonify
 from flask_restful import Api, Resource, reqparse
-from flask_cors import CORS #comment this on deployment
 
 # More API-related stuff I'm learning about
 class HelloApiHandler(Resource):
@@ -57,7 +56,6 @@ class HelloApiHandler(Resource):
     return final_ret
 
 app = Flask(__name__)
-CORS(app) #comment this on deployment
 api = Api(app)
 api.add_resource(HelloApiHandler, '/flask/hello')
 
