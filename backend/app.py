@@ -4,6 +4,7 @@
 
 from flask import Flask, send_from_directory, jsonify
 from flask_restful import Api, Resource, reqparse
+import os
 
 # More API-related stuff I'm learning about
 class HelloApiHandler(Resource):
@@ -63,3 +64,9 @@ api.add_resource(HelloApiHandler, '/flask/hello')
 @app.route('/')
 def index():
     return "<h1>Hello World!</h1>"
+
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=True, host='0.0.0.0', port=port)
+
+print("not flasking")
