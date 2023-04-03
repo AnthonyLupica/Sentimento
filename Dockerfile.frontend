@@ -9,5 +9,3 @@ COPY react-app .
 FROM base AS dev
 ENTRYPOINT [ "npm" ]
 CMD [ "run", "dev" ]
-
-
