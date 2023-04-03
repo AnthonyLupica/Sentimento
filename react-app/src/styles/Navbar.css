@@ -2,11 +2,6 @@
     NavBar.css includes any styles specific to the Navbar component  
 */
 
-/* declare any frequently reused styles here */ 
-:root {
-    --create-background-color: rgb(20, 20, 20);
-}
-
 /* style all navs directly, as we will only have one */
 nav {
     /* 3 values: [top] [right/left] [bottom] */
@@ -30,7 +25,7 @@ nav {
     height: 30px;
 
     /* background color is lighter than body color */
-    background-color: rgb(20, 20, 20);
+    background-color: #232b2b;
 }
 
 .Button--Container {
@@ -54,7 +49,7 @@ nav {
 /* styles for the button in the Navbar component for opening/closing the CreateJournal prompt */
 .Create--Button {
     /* match background color to the background color of the parent div */
-    background-color: var(--create-background-color);
+    background-color: #232b2b;
     
     /* scale up the size of the button */
     font-size: 200%;
