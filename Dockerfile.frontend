@@ -7,5 +7,4 @@ COPY react-app .
 
 # development version run command
 FROM base AS dev
-ENTRYPOINT [ "npm" ]
-CMD [ "run", "dev" ]
+CMD [ "npm", "run", "dev" ]

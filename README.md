@@ -34,7 +34,7 @@ flags in order of appearance:
 
 If you want to see the logs for frontend or backend while running
 ```
-docker ps              # displays info about running containers including an id
-docker logs <id> -f    # Tracks the logs of the specified container (remove -f for a onetime view rather than follow)
-ctrl + c                    # Quit following logs
+$ docker ps              # displays info about running containers including an id
+$ docker logs <id> -f    # Tracks the logs of the specified container (remove -f for a onetime view rather than follow)
+ctrl + c                 # Quit following logs
 ```

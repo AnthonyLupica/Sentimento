@@ -8,5 +8,4 @@ COPY ./backend /backend
 
 # development version run command
 FROM base as dev
-ENTRYPOINT [ "python" ]
-CMD [ "app.py" ]
+CMD [ "python", "app.py" ]
