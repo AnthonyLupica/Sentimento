@@ -4,7 +4,7 @@ COPY Pipfile Pipfile.lock /backend/
 WORKDIR /backend
 RUN pip install pipenv
 RUN pipenv install --system --deploy
-COPY ./backend /backend
+COPY . .
 
 # development version run command
 FROM base as dev

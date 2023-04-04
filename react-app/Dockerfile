@@ -1,9 +1,9 @@
 # Base for frontend
 FROM node:18-alpine AS base
 WORKDIR /react-app
-COPY react-app/package-lock.json react-app/package.json ./
+COPY package-lock.json package.json ./
 RUN npm install
-COPY react-app .
+COPY . .
 
 # development version run command
 FROM base AS dev
