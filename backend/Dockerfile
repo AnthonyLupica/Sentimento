@@ -1,5 +1,5 @@
 # Base for backend
-FROM python:3.10-bullseye as base
+FROM python:3.9-bullseye as base
 COPY Pipfile Pipfile.lock /backend/
 WORKDIR /backend
 RUN pip install pipenv

@@ -3,18 +3,10 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
-[[source]]
-name = "pytorch"
-url = "https://download.pytorch.org/whl/"
-verify_ssl = true
-
 [packages]
-# Backend Requirements
-flask = "==2.2.2"
-importlib-metadata = "==6.0.0"
-itsdangerous = "==2.1.2"
-Werkzeug = "==2.2.2"
-zipp = "==3.12.1"
-flask-restful = "*"
+flask-restful = "==0.3.9"
+pandas = "==1.5.3"
+spacy = "==3.1.7"
+en-textcat-goemotions = {file = "https://huggingface.co/explosion/en_textcat_goemotions/resolve/main/en_textcat_goemotions-any-py3-none-any.whl"}
 
 [dev-packages]

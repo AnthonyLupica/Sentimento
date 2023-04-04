@@ -5,6 +5,9 @@ Our backend is projected to be flask. this will be everyone's first flask applic
 # Spacy Stuff
 
 ## Environment setup
+
+#### This all is obsolete now due to docker!
+
 Install pipenv with pip `pip install pipenv`  
 (I successfully did this with sudo apt-get install, but pipenv's website doesn't recommend it)
 

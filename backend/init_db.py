@@ -115,5 +115,3 @@ for x in cur.fetchall():
 
 connection.commit()
 connection.close()
-
-

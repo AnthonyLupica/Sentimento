@@ -12,6 +12,7 @@ starting the frontend and backend is now a 1-step process with three commands th
 
 you can now build and run both the frontend and backend with
 ```
+$ docker compose build
 $ docker compose up -d      # -d makes it so they run in the background
 ```
 safely stop the frontend and backend with
