@@ -12,16 +12,16 @@ starting the frontend and backend is now a two-step process with three commands 
 
 first build both containers with docker build
 ```
-$ sudo docker build -f Dockerfile.frontend --target dev -t frontend
-$ sudo docker build -f Dockerfile.backend --target dev -t backend
+$ docker build -f Dockerfile.frontend --target dev -t frontend
+$ docker build -f Dockerfile.backend --target dev -t backend
 ```
 then run them with docker compose
 ```
-$ sudo docker compose up -d
+$ docker compose up -d
 ```
 safely stop the frontend and backend with
 ```
-$ sudo docker compose down
+$ docker compose down
 ```
 
 flags in order of appearance:
@@ -34,7 +34,7 @@ flags in order of appearance:
 
 If you want to see the logs for frontend or backend while running
 ```
-sudo docker ps              # displays info about running containers including an id
-sudo docker logs <id> -f    # Tracks the logs of the specified container (remove -f for a onetime view rather than follow)
+docker ps              # displays info about running containers including an id
+docker logs <id> -f    # Tracks the logs of the specified container (remove -f for a onetime view rather than follow)
 ctrl + c                    # Quit following logs
 ```
