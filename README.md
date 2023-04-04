@@ -8,28 +8,15 @@ Sentimento: A reinvented journal. Entries will be scanned and highlighted for em
 
 # Docker
 
-starting the frontend and backend is now a two-step process with three commands thanks to docker.
+starting the frontend and backend is now a 1-step process with three commands thanks to docker-compose.
 
-first build both containers with docker build
+you can now build and run both the frontend and backend with
 ```
-$ docker build -f Dockerfile.frontend --target dev -t frontend
-$ docker build -f Dockerfile.backend --target dev -t backend
-```
-then run them with docker compose
-```
-$ docker compose up -d
+$ docker compose up -d      # -d makes it so they run in the background
 ```
 safely stop the frontend and backend with
 ```
 $ docker compose down
-```
-
-flags in order of appearance:
-```
--f          # Specifies the Dockerfile to be used to build
---target    # Specifies which version of the container to build (dev is the only one right now)
--t          # Tags the container we make with a name for later reference
--d          # Lets both frontend and backend run in background 
 ```
 
 If you want to see the logs for frontend or backend while running
