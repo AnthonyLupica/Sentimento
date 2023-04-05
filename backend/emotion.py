@@ -205,5 +205,3 @@ print(pd.DataFrame.from_dict(journalStats, orient='index'))
 print(colorize(doc.cats))
 
 print(max_mood(doc.cats))
-
-

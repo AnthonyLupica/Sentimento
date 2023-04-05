@@ -1,0 +1,14 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      target: dev
+    ports:
+      - 5000:5000
+  frontend:
+    build:
+      context: ./react-app
+      target: dev
+    ports:
+      - 3000:3000
+      
