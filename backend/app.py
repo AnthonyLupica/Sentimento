@@ -6,7 +6,6 @@ from flask import Flask, send_from_directory, jsonify
 from flask_restful import Api, Resource, reqparse
 import os
 
-# More API-related stuff I'm learning about
 class HelloApiHandler(Resource):
   def get(self):
     my_array = [

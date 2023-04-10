@@ -189,6 +189,10 @@ def normalize(dict):
         dict[x] = dict[x] / total
     return dict
 
+# Connect to the db!
+connection = sqlite3.connect('database.db')
+cur = connection.cursor()
+
 f = open(sys.argv[1], 'r')
 journal = f.read()
 f.close()

@@ -68,47 +68,54 @@ cur.execute('''CREATE TABLE entries (
 # cur.execute('''INSERT INTO users (userName, password)
 #             VALUES ('arl127', '123');
 #         ''')
-# cur.execute('''INSERT INTO entries(
-#     userName,
-#     created,
-#     title,
-#     content, 
-#     id,
-#     mood, 
-#     color,
-#     dateAndTime,
-#     admiration, 
-#     amusement, 
-#     anger, 
-#     annoyance, 
-#     approval, 
-#     caring, 
-#     confusion, 
-#     curiosity, 
-#     desire, 
-#     disappointment, 
-#     disapproval, 
-#     disgust, 
-#     embarrassment, 
-#     excitement, 
-#     fear, 
-#     gratitude,
-#     grief, 
-#     joy, 
-#     love, 
-#     nervousness, 
-#     optimism, 
-#     pride, 
-#     realization, 
-#     relief, 
-#     remorse, 
-#     sadness, 
-#     surprise,
-#     neutral) 
-#     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
-#     ('test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1))
-
 # cur.execute("SELECT * FROM entries")
+
+# Testing an insertion method
+
+insertQuery = '''INSERT INTO entries(
+    userName,
+    created,
+    title,
+    content, 
+    id,
+    mood, 
+    color,
+    dateAndTime,
+    admiration, 
+    amusement, 
+    anger, 
+    annoyance, 
+    approval, 
+    caring, 
+    confusion, 
+    curiosity, 
+    desire, 
+    disappointment, 
+    disapproval, 
+    disgust, 
+    embarrassment, 
+    excitement, 
+    fear, 
+    gratitude,
+    grief, 
+    joy, 
+    love, 
+    nervousness, 
+    optimism, 
+    pride, 
+    realization, 
+    relief, 
+    remorse, 
+    sadness, 
+    surprise,
+    neutral) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
+
+record = ['test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+
+cur.execute(insertQuery, record)
+
+cur.execute("SELECT * FROM entries")
 
 for x in cur.fetchall():
     print(x)
