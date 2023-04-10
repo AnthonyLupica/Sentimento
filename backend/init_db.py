@@ -21,13 +21,13 @@ cur.execute('''CREATE TABLE users (
 cur.execute('DROP TABLE IF EXISTS entries;')
 
 cur.execute('''CREATE TABLE entries (
-    userName TEXT, created TEXT, 
+    userName TEXT, 
+    created TEXT, 
     title TEXT NOT NULL, 
     content TEXT NOT NULL, 
     id TEXT NOT NULL, 
     mood TEXT NOT NULL,
     color TEXT NOT NULL,
-    dateAndTime TEXT NOT NULL,
     admiration REAL NOT NULL, 
     amusement REAL NOT NULL, 
     anger REAL NOT NULL, 
@@ -62,60 +62,16 @@ cur.execute('''CREATE TABLE entries (
 
 
 # Test Data
-# cur.execute('''INSERT INTO users (userName, password)
-#             VALUES ('adi19', '123');
-#         ''')
-# cur.execute('''INSERT INTO users (userName, password)
-#             VALUES ('arl127', '123');
-#         ''')
-# cur.execute("SELECT * FROM entries")
+cur.execute('''INSERT INTO users (userName, password)
+            VALUES ('adi19', '123');
+        ''')
+cur.execute('''INSERT INTO users (userName, password)
+            VALUES ('arl127', '123');
+        ''')
+cur.execute("SELECT * FROM users")
 
-# Testing an insertion method
-
-insertQuery = '''INSERT INTO entries(
-    userName,
-    created,
-    title,
-    content, 
-    id,
-    mood, 
-    color,
-    dateAndTime,
-    admiration, 
-    amusement, 
-    anger, 
-    annoyance, 
-    approval, 
-    caring, 
-    confusion, 
-    curiosity, 
-    desire, 
-    disappointment, 
-    disapproval, 
-    disgust, 
-    embarrassment, 
-    excitement, 
-    fear, 
-    gratitude,
-    grief, 
-    joy, 
-    love, 
-    nervousness, 
-    optimism, 
-    pride, 
-    realization, 
-    relief, 
-    remorse, 
-    sadness, 
-    surprise,
-    neutral) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
-
-record = ['test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
-
-cur.execute(insertQuery, record)
-
-cur.execute("SELECT * FROM entries")
+# entry test data
+# record = ['test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
 
 for x in cur.fetchall():
     print(x)
