@@ -6,9 +6,11 @@
 import React from 'react';
 import { MdDeleteForever, MdDelete } from 'react-icons/md'; // these are delete icons
 import tinycolor from 'tinycolor2';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 /* style imports */
 import '../styles/Journal.css';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 export default function Journal(props) {
 
@@ -67,7 +69,18 @@ export default function Journal(props) {
         </div>
     );
 
+    // the journal is in a loading state
+    if (props.mood == "" || props.color == "") {
+        return (
+            <SkeletonTheme baseColor='#252525' highlightColor='#2f2f2f' duration={3} >
+                <Skeleton count={1} height={200} borderRadius={15} />
+            </SkeletonTheme>
+        )
+    }
+
+    // the journal is fully loaded 
     return (
+        
         <div className="JournalBox" style={{ backgroundColor: props.color, boxShadow: `inset 0 0 0 2px ${shadowColor}` }}>
            
             {/* containing div for journal title and mood display */}

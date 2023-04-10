@@ -18,6 +18,7 @@ export default function App() {
     const [journals, setJournals] = React.useState([]);
     const [showCreateJournal, setShowCreateJournal] = React.useState(false);
     const [searchQuery, setSearchQuery] = React.useState('');
+    const [isLoading, setIsLoading] = React.useState(false);
 
     // set state with useEffect
     React.useEffect(() => {
@@ -32,19 +33,44 @@ export default function App() {
     // createJournal
     // pre: title, and text from CreateJournal component (submitted when user clicks the save entry button)
     // post: a new journal entry is created. Responsible for initiating the re-rendering of the updated journal array
-    // @TODO figure out how to have this write to the database, which itiates an api call to fetch teh journals
     function createJournal(title, text) {
-        /*  A journal has the following fields 
-            id:
-            title: 
-            mood: 
-            color: 
-            text: 
-            dateAndTime: 
-        */
+        setIsLoading(true); // set the loading state to true
 
         /* GET DATE AND TIME */
+        const dateAndTime = getDateTime();
 
+        fetch('https://dummyjson.com/posts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: nanoid(),
+                title: title,
+                text: text,
+                dateAndTime: dateAndTime
+            }) 
+        })
+            .then(response => response.json())
+            .then(data => {
+                // handle the response data here
+            })
+            .catch(error => {
+                // handle errors here
+            });
+        
+        
+
+        /* UPDATE STATE */
+        setJournals(prevJournals => {
+            return [
+                newJournal,
+                ...prevJournals
+            ];
+        })
+    }
+
+    function getDateTime() {
         // get raw unparsed date and time
         const date = new Date();
 
@@ -57,26 +83,8 @@ export default function App() {
         // get the time with toLocaleTimeString()
         const time = date.toLocaleTimeString('en-us');
 
-        // concatenate final string
-        const dateAndTime = dayMonthYear + ' | ' + time;
-
-        /* CONSTRUCT A NEW JOURNAL OBJECT */
-        const newJournal = {
-            id: nanoid(),
-            title: title,
-            mood: "todo",   
-            color: "green", 
-            text: text,
-            dateAndTime: dateAndTime
-        };
-
-        /* UPDATE STATE */
-        setJournals(prevJournals => {
-            return [
-                newJournal,
-                ...prevJournals
-            ];
-        })
+        // concatenate final string and return 
+        return dayMonthYear + ' | ' + time;
     }
 
     // toggleCreateJournal

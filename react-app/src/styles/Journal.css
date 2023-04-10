@@ -140,6 +140,11 @@
     margin-right: 5px;
 }
 
+.LoadingBox {
+    display: flex;
+}
+
+
 
 
 
