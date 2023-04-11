@@ -4,6 +4,7 @@
 
 from flask import Flask, send_from_directory, jsonify, request
 from flask_restful import Api, Resource, reqparse
+from flask_cors import CORS # Adding this back in for now for development
 import os
 
 class HelloApiHandler(Resource):
@@ -56,6 +57,7 @@ class HelloApiHandler(Resource):
     return final_ret
 
 app = Flask(__name__)
+CORS(app)
 api = Api(app)
 api.add_resource(HelloApiHandler, '/flask/hello')
 
@@ -67,8 +69,10 @@ def index():
 # Simple post request
 @app.route('/test', methods=['POST'])
 def post():
-   return request.data
-
+    data = request.get_json()
+    data.update({'mood': 'Excited'})
+    data.update({'color': 'ffffcc'})
+    return data
 
 if __name__ == '__main__':
     port = int(os.getenv("PORT", 5000))

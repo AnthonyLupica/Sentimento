@@ -39,7 +39,7 @@ export default function App() {
         /* GET DATE AND TIME */
         const dateAndTime = getDateTime();
 
-        fetch('localhost:5000/test', {
+        fetch('http://localhost:5000/test', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
