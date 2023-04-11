@@ -70,7 +70,7 @@ export default function Journal(props) {
     );
 
     // the journal is in a loading state
-    if (props.isLoading === true) {
+    if (props.mood === "loading" || props.color === "loading") {
         return (
             <SkeletonTheme baseColor='#252525' highlightColor='#2f2f2f' duration={3} >
                 <Skeleton count={1} height={200} borderRadius={15} />

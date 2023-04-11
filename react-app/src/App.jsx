@@ -18,8 +18,7 @@ export default function App() {
     const [journals, setJournals] = React.useState([]);
     const [showCreateJournal, setShowCreateJournal] = React.useState(false);
     const [searchQuery, setSearchQuery] = React.useState('');
-    const [isLoading, setIsLoading] = React.useState(false);
-
+    
     // set state with useEffect
     React.useEffect(() => {
         //fetch("http://localhost:5000/flask/hello")
@@ -34,12 +33,28 @@ export default function App() {
     // pre: title, and text from CreateJournal component (submitted when user clicks the save entry button)
     // post: a new journal entry is created. Responsible for initiating the re-rendering of the updated journal array
     function createJournal(title, text) {
-        setIsLoading(true); 
-
         /* GET DATE AND TIME */
         const dateAndTime = getDateTime();
 
-        fetch('localhost:5000/test', {
+        /* CONSTRUCT A NEW JOURNAL OBJECT */
+        const newJournal = {
+            id: nanoid(),
+            title: title,
+            mood: "loading",
+            color: "loading",
+            text: text,
+            dateAndTime: dateAndTime
+        };
+
+        /* UPDATE STATE */
+        setJournals(prevJournals => {
+            return [
+                newJournal,
+                ...prevJournals
+            ];
+        });
+
+        fetch('http://localhost/test', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -53,29 +68,26 @@ export default function App() {
         })
             .then(response => response.json())
             .then(data => {
-                /* CONSTRUCT A NEW JOURNAL OBJECT */
-                const newJournal = {
-                    id: nanoid(),
-                    title: title,
-                    mood: data.mood,
-                    color: data.color,
-                    text: text,
-                    dateAndTime: dateAndTime
-                };
-
-                /* UPDATE STATE */
-                setJournals(prevJournals => {
-                    return [
-                        newJournal,
-                        ...prevJournals
-                    ];
+                /* FILTER JOURNALS ARRAY AND MODIFY MOOD AND COLOR PROPERTIES */
+                const updatedJournals = journals.map(journal => {
+                    // if the journal that was just instantiated
+                    if (journal.id === data.id) {
+                        console.log("hello")
+                        return {
+                            ...journal,
+                            mood: data.mood,
+                            color: data.color
+                        };
+                    } else {
+                        return journal;
+                    }
                 });
 
-                setIsLoading(false); // set the loading state back to false
+                /* UPDATE STATE */
+                setJournals(updatedJournals);
             })
             .catch(error => {
                 console.log(error);
-                setIsLoading(false); // set the loading state back to false
             });
     }
 
@@ -120,7 +132,6 @@ export default function App() {
 
             <JournalContainer 
                 journalData={journals.filter((journal) => journal.mood.toLowerCase().includes(preparedSearchQuery))}
-                isLoading={isLoading}
                 showCreateJournal={showCreateJournal} 
                 handleCreateJournal={createJournal} 
                 handleShowCreateJournal={toggleCreateJournal}
