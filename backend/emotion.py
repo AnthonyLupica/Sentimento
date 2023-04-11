@@ -189,21 +189,64 @@ def normalize(dict):
         dict[x] = dict[x] / total
     return dict
 
+# Connect to the db!
+connection = sqlite3.connect('database.db')
+cur = connection.cursor()
+
+insertQuery = '''INSERT INTO entries(
+    userName,
+    created,
+    title,
+    content, 
+    id,
+    mood, 
+    color,
+    admiration, 
+    amusement, 
+    anger, 
+    annoyance, 
+    approval, 
+    caring, 
+    confusion, 
+    curiosity, 
+    desire, 
+    disappointment, 
+    disapproval, 
+    disgust, 
+    embarrassment, 
+    excitement, 
+    fear, 
+    gratitude,
+    grief, 
+    joy, 
+    love, 
+    nervousness, 
+    optimism, 
+    pride, 
+    realization, 
+    relief, 
+    remorse, 
+    sadness, 
+    surprise,
+    neutral) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
+
 f = open(sys.argv[1], 'r')
 journal = f.read()
 f.close()
-
-print(journal)
 
 # doc.cats is a dictionary of the form "emotive_word: normalized_score"
 doc = nlp(journal)
 
 journalStats = normalize(doc.cats)
 
-print(pd.DataFrame.from_dict(journalStats, orient='index'))
+record = ['adi19', '11/16/2001', 'The First Stored Journal', journal, 'id supplied', str(max_mood(doc.cats)), colorize(doc.cats)]
 
-print(colorize(doc.cats))
+for x in journalStats:
+    record.append(journalStats[x])
 
-print(max_mood(doc.cats))
+cur.execute(insertQuery, record)
 
+cur.execute("SELECT * FROM entries")
 
+print(cur.fetchone())
