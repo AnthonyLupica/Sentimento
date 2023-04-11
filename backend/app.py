@@ -71,7 +71,7 @@ def index():
 def post():
     data = request.get_json()
     data.update({'mood': 'Excited'})
-    data.update({'color': 'ffffcc'})
+    data.update({'color': 'red'})
     return data
 
 if __name__ == '__main__':

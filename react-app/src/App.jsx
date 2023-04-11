@@ -18,16 +18,55 @@ export default function App() {
     const [journals, setJournals] = React.useState([]);
     const [showCreateJournal, setShowCreateJournal] = React.useState(false);
     const [searchQuery, setSearchQuery] = React.useState('');
+    const [isLoading, setIsLoading] = React.useState(false);
+    const [newJournalLoading, setNewJournalLoading] = React.useState({});
     
     // set state with useEffect
     React.useEffect(() => {
-        //fetch("http://localhost:5000/flask/hello")
-        //    .then(res => res.json())
-        //    .then(data => setJournals(data))
+        if (isLoading) {
+            fetch('http://localhost:5000/test', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: newJournalLoading.id,
+                    title: newJournalLoading.title,
+                    text: newJournalLoading.text,
+                    dateAndTime: newJournalLoading.dateAndTime
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    /* FILTER JOURNALS ARRAY AND MODIFY MOOD AND COLOR PROPERTIES */
+                    const updatedJournals = journals.map(journal => {
+                        // if the journal that was just instantiated
+                        if (journal.id === data.id) {
+                            return {
+                                ...journal,
+                                mood: data.mood,
+                                color: data.color
+                            };
+                        } else {
+                            return journal;
+                        }
+                    });
 
-        // for now we use hardcoded JournalData.jsx
-        setJournals(JournalData);
-    }, [])
+                    console.log(updatedJournals);
+
+                    /* UPDATE STATE */
+                    setJournals(updatedJournals);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            setIsLoading(false);
+        }
+
+        else {
+            setJournals(JournalData);
+        }
+    }, [newJournalLoading])
 
     // createJournal
     // pre: title, and text from CreateJournal component (submitted when user clicks the save entry button)
@@ -54,41 +93,8 @@ export default function App() {
             ];
         });
 
-        fetch('http://localhost/test', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                id: nanoid(),
-                title: title,
-                text: text,
-                dateAndTime: dateAndTime
-            }) 
-        })
-            .then(response => response.json())
-            .then(data => {
-                /* FILTER JOURNALS ARRAY AND MODIFY MOOD AND COLOR PROPERTIES */
-                const updatedJournals = journals.map(journal => {
-                    // if the journal that was just instantiated
-                    if (journal.id === data.id) {
-                        console.log("hello")
-                        return {
-                            ...journal,
-                            mood: data.mood,
-                            color: data.color
-                        };
-                    } else {
-                        return journal;
-                    }
-                });
-
-                /* UPDATE STATE */
-                setJournals(updatedJournals);
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        setIsLoading(true);
+        setNewJournalLoading(newJournal);
     }
 
     function getDateTime() {
