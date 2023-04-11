@@ -6,6 +6,14 @@ from flask import Flask, send_from_directory, jsonify, request
 from flask_restful import Api, Resource, reqparse
 from flask_cors import CORS # Adding this back in for now for development
 import os
+import subprocess
+import sqlite3
+
+connection = sqlite3.connect('database.db')
+cur = connection.cursor()
+
+if len(cur.fetchall()) == 0:
+     subprocess.call(" python init_db.py", shell=True)
 
 class HelloApiHandler(Resource):
   def get(self):

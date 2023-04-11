@@ -11,7 +11,6 @@
 import spacy
 import sys
 import sqlite3
-import pandas as pd
 
 nlp = spacy.load("en_textcat_goemotions")
 

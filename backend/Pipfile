@@ -9,5 +9,6 @@ pandas = "==1.5.3"
 spacy = "==3.1.7"
 en-textcat-goemotions = {file = "https://huggingface.co/explosion/en_textcat_goemotions/resolve/main/en_textcat_goemotions-any-py3-none-any.whl"}
 flask-cors = "==3.0.10"
+nanoid = "==2.0.0"
 
 [dev-packages]
