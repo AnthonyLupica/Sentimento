@@ -19,28 +19,32 @@ export default function App() {
     const [showCreateJournal, setShowCreateJournal] = React.useState(false);
     const [searchQuery, setSearchQuery] = React.useState('');
     const [isLoading, setIsLoading] = React.useState(false);
-    const [newJournalLoading, setNewJournalLoading] = React.useState({});
+    const [newJournalRef, setnewJournalRef] = React.useState({});
     
-    // set state with useEffect
     React.useEffect(() => {
-        if (isLoading) {
+        // initialize with journals on first mount 
+        if (!isLoading) {
+            setJournals(JournalData);
+        }
+
+        // this block handles the fetch to create a new journal
+        else {
             fetch('http://localhost:5000/test', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    id: newJournalLoading.id,
-                    title: newJournalLoading.title,
-                    text: newJournalLoading.text,
-                    dateAndTime: newJournalLoading.dateAndTime
+                    id: newJournalRef.id,
+                    title: newJournalRef.title,
+                    text: newJournalRef.text,
+                    dateAndTime: newJournalRef.dateAndTime
                 })
             })
                 .then(response => response.json())
                 .then(data => {
-                    /* FILTER JOURNALS ARRAY AND MODIFY MOOD AND COLOR PROPERTIES */
+                    // map over journals and modify new journal with mood and color response 
                     const updatedJournals = journals.map(journal => {
-                        // if the journal that was just instantiated
                         if (journal.id === data.id) {
                             return {
                                 ...journal,
@@ -52,21 +56,16 @@ export default function App() {
                         }
                     });
 
-                    console.log(updatedJournals);
-
                     /* UPDATE STATE */
                     setJournals(updatedJournals);
                 })
                 .catch(error => {
                     console.log(error);
                 });
+
             setIsLoading(false);
         }
-
-        else {
-            setJournals(JournalData);
-        }
-    }, [newJournalLoading])
+    }, [newJournalRef])
 
     // createJournal
     // pre: title, and text from CreateJournal component (submitted when user clicks the save entry button)
@@ -93,8 +92,10 @@ export default function App() {
             ];
         });
 
+        // useEffect is triggered by newJournalRef changing state
+        // the path for performing a post request will be taken because isLoading is set to true here
         setIsLoading(true);
-        setNewJournalLoading(newJournal);
+        setnewJournalRef(newJournal);
     }
 
     function getDateTime() {
