@@ -244,7 +244,6 @@ cur = connection.cursor()
 
 # Users Table
 cur.execute('DROP TABLE IF EXISTS users')
-
 cur.execute('''CREATE TABLE users (
     userName TEXT PRIMARY KEY,
     password TEXT NOT NULL
@@ -252,7 +251,6 @@ cur.execute('''CREATE TABLE users (
 
 # Entries Table
 cur.execute('DROP TABLE IF EXISTS entries;')
-
 cur.execute('''CREATE TABLE entries (
     userName TEXT, 
     created TEXT, 
@@ -294,18 +292,15 @@ cur.execute('''CREATE TABLE entries (
 )''')
 
 
-# Test Data
+# User Test Data
 cur.execute('''INSERT INTO users (userName, password)
             VALUES ('adi19', '123');
         ''')
 cur.execute('''INSERT INTO users (userName, password)
             VALUES ('arl127', '123');
         ''')
-cur.execute("SELECT * FROM users")
 
-# entry test data
-# record = ['test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
-
+# Entry Test Data
 addTestData()
 
 connection.commit()
