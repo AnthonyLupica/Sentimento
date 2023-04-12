@@ -2,11 +2,11 @@
     Flask App Hello World!
 """
 
-from flask import Flask, send_from_directory, jsonify
+from flask import Flask, send_from_directory, jsonify, request
 from flask_restful import Api, Resource, reqparse
+from flask_cors import CORS # Adding this back in for now for development
 import os
 
-# More API-related stuff I'm learning about
 class HelloApiHandler(Resource):
   def get(self):
     my_array = [
@@ -57,6 +57,7 @@ class HelloApiHandler(Resource):
     return final_ret
 
 app = Flask(__name__)
+CORS(app)
 api = Api(app)
 api.add_resource(HelloApiHandler, '/flask/hello')
 
@@ -64,6 +65,14 @@ api.add_resource(HelloApiHandler, '/flask/hello')
 @app.route('/')
 def index():
     return "<h1>Hello World!</h1>"
+
+# Simple post request
+@app.route('/test', methods=['POST'])
+def post():
+    data = request.get_json()
+    data.update({'mood': 'Excited'})
+    data.update({'color': 'red'})
+    return data
 
 if __name__ == '__main__':
     port = int(os.getenv("PORT", 5000))

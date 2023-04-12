@@ -18,33 +18,87 @@ export default function App() {
     const [journals, setJournals] = React.useState([]);
     const [showCreateJournal, setShowCreateJournal] = React.useState(false);
     const [searchQuery, setSearchQuery] = React.useState('');
-
-    // set state with useEffect
+    const [isLoading, setIsLoading] = React.useState(false);
+    const [newJournalRef, setnewJournalRef] = React.useState({});
+    
     React.useEffect(() => {
-        //fetch("http://localhost:5000/flask/hello")
-        //    .then(res => res.json())
-        //    .then(data => setJournals(data))
+        // initialize with journals on first mount 
+        if (!isLoading) {
+            setJournals(JournalData);
+        }
 
-        // for now we use hardcoded JournalData.jsx
-        setJournals(JournalData);
-    }, [])
+        // this block handles the fetch to create a new journal
+        else {
+            fetch('http://localhost:5000/test', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: newJournalRef.id,
+                    title: newJournalRef.title,
+                    text: newJournalRef.text,
+                    dateAndTime: newJournalRef.dateAndTime
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // map over journals and modify new journal with mood and color response 
+                    const updatedJournals = journals.map(journal => {
+                        if (journal.id === data.id) {
+                            return {
+                                ...journal,
+                                mood: data.mood,
+                                color: data.color
+                            };
+                        } else {
+                            return journal;
+                        }
+                    });
+
+                    /* UPDATE STATE */
+                    setJournals(updatedJournals);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+
+            setIsLoading(false);
+        }
+    }, [newJournalRef])
 
     // createJournal
     // pre: title, and text from CreateJournal component (submitted when user clicks the save entry button)
     // post: a new journal entry is created. Responsible for initiating the re-rendering of the updated journal array
-    // @TODO figure out how to have this write to the database, which itiates an api call to fetch teh journals
     function createJournal(title, text) {
-        /*  A journal has the following fields 
-            id:
-            title: 
-            mood: 
-            color: 
-            text: 
-            dateAndTime: 
-        */
-
         /* GET DATE AND TIME */
+        const dateAndTime = getDateTime();
 
+        /* CONSTRUCT A NEW JOURNAL OBJECT */
+        const newJournal = {
+            id: nanoid(),
+            title: title,
+            mood: "loading",
+            color: "loading",
+            text: text,
+            dateAndTime: dateAndTime
+        };
+
+        /* UPDATE STATE */
+        setJournals(prevJournals => {
+            return [
+                newJournal,
+                ...prevJournals
+            ];
+        });
+
+        // useEffect is triggered by newJournalRef changing state
+        // the path for performing a post request will be taken because isLoading is set to true here
+        setIsLoading(true);
+        setnewJournalRef(newJournal);
+    }
+
+    function getDateTime() {
         // get raw unparsed date and time
         const date = new Date();
 
@@ -57,26 +111,8 @@ export default function App() {
         // get the time with toLocaleTimeString()
         const time = date.toLocaleTimeString('en-us');
 
-        // concatenate final string
-        const dateAndTime = dayMonthYear + ' | ' + time;
-
-        /* CONSTRUCT A NEW JOURNAL OBJECT */
-        const newJournal = {
-            id: nanoid(),
-            title: title,
-            mood: "todo",   
-            color: "green", 
-            text: text,
-            dateAndTime: dateAndTime
-        };
-
-        /* UPDATE STATE */
-        setJournals(prevJournals => {
-            return [
-                newJournal,
-                ...prevJournals
-            ];
-        })
+        // concatenate final string and return 
+        return dayMonthYear + ' | ' + time;
     }
 
     // toggleCreateJournal
@@ -89,7 +125,6 @@ export default function App() {
     // deleteJournal
     // pre: id of the calling Journal 
     // post: all Journals except the Journal for which the id property is a match are copied into a new array for state
-    // @TODO figure out how to have this write to the database, which initiates an api call to fetch the journals
     function deleteJournal(id) {
         const noteDeleted = journals.filter((journal) => journal.id !== id);
         setJournals(noteDeleted);
@@ -100,22 +135,10 @@ export default function App() {
     
     return (
         <>
-            {/*   <Navbar />
-                  1) showCreateJournal - state as prop to determine if a create or cancel button renders
-                  2) handleShowCreatejournal - handler for toggling showCreateJournal on button click
-                  3) setSearchQuery - state setter to be drilled down to the SearchJournal component
-             */}
             <Navbar showCreateJournal={showCreateJournal} handleShowCreateJournal={toggleCreateJournal} setSearchQuery={setSearchQuery} />
 
-            {/*   <JournalContainer />
-                  1) journalData - state as prop for filtering journal entries into left or right side containers
-                  2) showCreateJournal - state as prop to conditionally render a CreateJournal component
-                  3) handleShowCreateJournal - handler to be drilled into CreateJournal
-                  4) handleCreateJournal - handler to be drilled into CreateJournal
-                  5) handleDeleteJournal - handler to be drilled into Journal
-             */}
             <JournalContainer 
-                journalData={journals.filter((journal) => journal.mood.toLowerCase().includes(preparedSearchQuery))} 
+                journalData={journals.filter((journal) => journal.mood.toLowerCase().includes(preparedSearchQuery))}
                 showCreateJournal={showCreateJournal} 
                 handleCreateJournal={createJournal} 
                 handleShowCreateJournal={toggleCreateJournal}

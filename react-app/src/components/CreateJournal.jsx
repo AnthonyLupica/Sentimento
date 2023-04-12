@@ -81,7 +81,7 @@ export default function CreateJournal(props) {
             setJournalTitle('');
             setJournalText('');
 
-            // call handler to toggler state determining if this component should render
+            // call handler to toggle state determining if this component should render
             props.handleShowCreateJournal();
         } else {
             // @TODO may want to visually indicate to the user that they need to provide title and text with an alert

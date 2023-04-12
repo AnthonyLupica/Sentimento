@@ -34,6 +34,7 @@ export default function JournalContainer(props) {
                     {leftEntries.map((entry) => (
                         <Journal
                             id={entry.id}
+                            key={entry.id}
                             title={entry.title}
                             mood={entry.mood}
                             color={entry.color}
@@ -50,6 +51,7 @@ export default function JournalContainer(props) {
                     {rightEntries.map((entry) => (
                         <Journal
                             id={entry.id}
+                            key={entry.id}
                             title={entry.title}
                             mood={entry.mood}
                             color={entry.color}
