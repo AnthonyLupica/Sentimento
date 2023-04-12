@@ -7,7 +7,7 @@ from flask_restful import Api, Resource, reqparse
 from flask_cors import CORS # Adding this back in for now for development
 import os
 import sqlite3
-import spacy
+from emotion import *
 
 class HelloApiHandler(Resource):
   def get(self):
@@ -58,6 +58,46 @@ class HelloApiHandler(Resource):
 
     return final_ret
 
+
+insertQuery = '''INSERT INTO entries(
+userName,
+dateAndTime,
+title,
+content, 
+id,
+mood, 
+color,
+admiration, 
+amusement, 
+anger, 
+annoyance, 
+approval, 
+caring, 
+confusion, 
+curiosity, 
+desire, 
+disappointment, 
+disapproval, 
+disgust, 
+embarrassment, 
+excitement, 
+fear, 
+gratitude,
+grief, 
+joy, 
+love, 
+nervousness, 
+optimism, 
+pride, 
+realization, 
+relief, 
+remorse, 
+sadness, 
+surprise,
+neutral) 
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
+
+
 app = Flask(__name__)
 CORS(app)
 api = Api(app)
@@ -71,10 +111,20 @@ def index():
 # Simple post request
 @app.route('/test', methods=['POST'])
 def post():
+    # Connect to db
+    connection = sqlite3.connect('database.db')
+    cur = connection.cursor()
+
+    # Process request
     data = request.get_json()
-    data.update({'mood': 'Excited'})
-    data.update({'color': 'ffffcc'})
-    return data
+    record = processSubmission(data)
+    cur.execute(insertQuery, record)
+
+    # Disconnect from db
+    connection.commit()
+    connection.close()
+
+    return record
 
 if __name__ == '__main__':
     port = int(os.getenv("PORT", 5000))

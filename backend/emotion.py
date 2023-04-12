@@ -1,11 +1,7 @@
 """
-    test.py
+    emotion.py
 
-    testing file for lots of spaCy-related things
-
-    Run this script with a command like
-        "python test.py file.txt"
-    Where file.txt is a journal entry you want to analyze
+    function definitions for processing journal entries
 """
 
 import spacy
@@ -188,64 +184,12 @@ def normalize(dict):
         dict[x] = dict[x] / total
     return dict
 
-# Connect to the db!
-connection = sqlite3.connect('database.db')
-cur = connection.cursor()
+def processSubmission(data):
 
-insertQuery = '''INSERT INTO entries(
-    userName,
-    created,
-    title,
-    content, 
-    id,
-    mood, 
-    color,
-    admiration, 
-    amusement, 
-    anger, 
-    annoyance, 
-    approval, 
-    caring, 
-    confusion, 
-    curiosity, 
-    desire, 
-    disappointment, 
-    disapproval, 
-    disgust, 
-    embarrassment, 
-    excitement, 
-    fear, 
-    gratitude,
-    grief, 
-    joy, 
-    love, 
-    nervousness, 
-    optimism, 
-    pride, 
-    realization, 
-    relief, 
-    remorse, 
-    sadness, 
-    surprise,
-    neutral) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
-
-f = open(sys.argv[1], 'r')
-journal = f.read()
-f.close()
-
-# doc.cats is a dictionary of the form "emotive_word: normalized_score"
-doc = nlp(journal)
-
-journalStats = normalize(doc.cats)
-
-record = ['adi19', '11/16/2001', 'The First Stored Journal', journal, 'id supplied', str(max_mood(doc.cats)), colorize(doc.cats)]
-
-for x in journalStats:
-    record.append(journalStats[x])
-
-cur.execute(insertQuery, record)
-
-cur.execute("SELECT * FROM entries")
-
-print(cur.fetchone())
+    # doc.cats is a dictionary of the form "emotive_word: normalized_score"
+    doc = nlp(data("text"))
+    journalStats = normalize(doc.cats)
+    record = [data("user"), data("dateAndTime"), data("title"), data("text"), data("id"), str(max_mood(doc.cats)), colorize(doc.cats)]
+    for x in journalStats:
+        record.append(journalStats[x])
+    return record

@@ -186,7 +186,7 @@ def normalize(dict):
 
 insertQuery = '''INSERT INTO entries(
     userName,
-    created,
+    DateAndTime,
     title,
     content, 
     id,
@@ -253,7 +253,7 @@ cur.execute('''CREATE TABLE users (
 cur.execute('DROP TABLE IF EXISTS entries;')
 cur.execute('''CREATE TABLE entries (
     userName TEXT, 
-    created TEXT, 
+    dateAndTime TEXT, 
     title TEXT NOT NULL, 
     content TEXT NOT NULL, 
     id TEXT NOT NULL, 
