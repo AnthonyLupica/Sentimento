@@ -117,6 +117,7 @@ def post():
 
     # Process request
     data = request.get_json()
+<<<<<<< HEAD
     record = processSubmission(data)
     cur.execute(insertQuery, record)
 
@@ -125,6 +126,11 @@ def post():
     connection.close()
 
     return record
+=======
+    data.update({'mood': 'Excited'})
+    data.update({'color': 'red'})
+    return data
+>>>>>>> main
 
 if __name__ == '__main__':
     port = int(os.getenv("PORT", 5000))
