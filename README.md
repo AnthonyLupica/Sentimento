@@ -17,6 +17,8 @@ $ docker compose up -d      # -d makes it so they run in the background
 ```
 
 There is also now an option to either use preexisting database data, or initialize a fresh DB of sample data. note that you will want to run this command below before trying to use preexisting data (As there will be no tables the first time)
+
+This command below is actually temporarily the default option until we get persistent storage set up with volumes or whatever
 ```
 $ RESET_DB=true docker compose up
 ```
