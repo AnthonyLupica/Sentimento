@@ -73,7 +73,7 @@ export default function Journal(props) {
     if (props.mood === "loading" || props.color === "loading") {
         return (
             <SkeletonTheme baseColor='#252525' highlightColor='#2f2f2f' duration={3} >
-                <Skeleton count={1} height={200} borderRadius={15} />
+                <Skeleton count={1} height={180} borderRadius={15} />
             </SkeletonTheme>
         )
     }

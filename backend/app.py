@@ -107,7 +107,7 @@ def colorize(dict):
     total_color[1] += dict["grief"] * 45   # G
     total_color[2] += dict["grief"] * 43   # B
 
-    # joy ( AMY POLLOCK YELLOW [ 255, 247, 62 ])
+    # joy ( AMY POLLOCK YELLOW [ 255, 247, 62 ] )
     total_color[0] += dict["joy"] * 255  # R
     total_color[1] += dict["joy"] * 247  # G
     total_color[2] += dict["joy"] * 62   # B
