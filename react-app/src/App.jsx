@@ -14,8 +14,6 @@ import EmotionProperties from './EmotionProperties';
 import './styles/App.css'
 
 export default function App() {
-    console.log(EmotionProperties);
-
     // define state for this component
     const [journals, setJournals] = React.useState([]);
     const [showCreateJournal, setShowCreateJournal] = React.useState(false);
@@ -26,9 +24,10 @@ export default function App() {
     React.useEffect(() => {
         // initialize with journals on first mount 
         if (!isLoading) {
-            fetch("http://localhost:5000/dbRecords")
-                .then(res => res.json())
-                .then(data => setJournals(data))
+            //fetch("http://localhost:5000/dbRecords")
+            //    .then(res => res.json())
+            //    .then(data => setJournals(data))
+            setJournals(JournalData);
         }
 
         // this block handles the fetch to create a new journal

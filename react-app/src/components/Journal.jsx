@@ -21,10 +21,10 @@ export default function Journal(props) {
     let shadowColor;
     if (tinycolor(props.color).isLight()) {
         // shadow color is darker
-        shadowColor = tinycolor(props.color).darken(10).toString();
+        shadowColor = tinycolor(props.color).darken(5).toString();
     } else {
         // shadow color is lighter
-        shadowColor = tinycolor(props.color).lighten(10).toString();
+        shadowColor = tinycolor(props.color).lighten(5).toString();
     }
 
     // set text color to darker shade of card color
@@ -89,7 +89,7 @@ export default function Journal(props) {
             {/* containing div for journal title and mood display */}
             <div className="Header">
                 <small className="Journal--Title" style={{ textShadow: `1px 1px 0px ${textColor}`}}> {props.title} </small>
-                <div className="Emotion--Display" style={{ color: props.color }}>
+                <div className="Emotion--Display" style={{ color: props.color, boxShadow: `inset 0 0 0 2px ${shadowColor}` }}>
                     <small> {props.mood} </small>
                 </div>
             </div>
