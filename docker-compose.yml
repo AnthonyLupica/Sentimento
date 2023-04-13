@@ -4,11 +4,11 @@ services:
       context: ./backend
       target: dev
       args:
-        - RESET_DB=${RESET_DB:-false}
+        - RESET_DB=${RESET_DB:-true}
     ports:
       - 5000:5000
     environment:
-      RESET_DB: ${RESET_DB:-false}
+      RESET_DB: ${RESET_DB:-true}
   frontend:
     build:
       context: ./react-app
