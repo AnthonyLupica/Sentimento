@@ -68,25 +68,24 @@ def colorize(dict):
     total_color[2] += dict["desire"] * 111  # B
 
     # disappointment ( DEEP SLATE BLUE [ 65, 99, 129 ] )
-    total_color[0] += dict["disappointment"] * 124  # R
-    total_color[1] += dict["disappointment"] * 62   # G
-    total_color[2] += dict["disappointment"] * 184  # B
+    total_color[0] += dict["disappointment"] * 65   # R
+    total_color[1] += dict["disappointment"] * 99   # G
+    total_color[2] += dict["disappointment"] * 129  # B
 
     # disapproval ( LIGHT INDIGO [ 150, 127, 192 ] )
-    total_color[0] += dict["disapproval"] * 124  # R
-    total_color[1] += dict["disapproval"] * 62   # G
-    total_color[2] += dict["disapproval"] * 184  # B
+    total_color[0] += dict["disapproval"] * 150  # R
+    total_color[1] += dict["disapproval"] * 127  # G
+    total_color[2] += dict["disapproval"] * 192  # B
 
     # disgust ( DIARRHEA [ 137, 152, 40 ] )
     total_color[0] += dict["disgust"] * 137  # R
     total_color[1] += dict["disgust"] * 152  # G
     total_color[2] += dict["disgust"] * 40   # B
 
-
     # embarrassment ( BLUSH [ 255, 132, 132 ] )
-    total_color[0] += dict["embarrassment"] * 137  # R
-    total_color[1] += dict["embarrassment"] * 152  # G
-    total_color[2] += dict["embarrassment"] * 40   # B
+    total_color[0] += dict["embarrassment"] * 255  # R
+    total_color[1] += dict["embarrassment"] * 132  # G
+    total_color[2] += dict["embarrassment"] * 132  # B
 
     # excitement ( ORANGE [ 247, 126, 0 ] )
     total_color[0] += dict["excitement"] * 247  # R

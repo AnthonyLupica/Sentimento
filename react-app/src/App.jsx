@@ -8,11 +8,13 @@ import { nanoid } from 'nanoid'; // nanoid is a library that generates random un
 import JournalContainer from './components/JournalContainer';
 import Navbar from './components/Navbar';
 import JournalData from './JournalData';
+import EmotionProperties from './EmotionProperties';
 
 /* style imports */
 import './styles/App.css'
 
 export default function App() {
+    console.log(EmotionProperties);
 
     // define state for this component
     const [journals, setJournals] = React.useState([]);
@@ -20,7 +22,7 @@ export default function App() {
     const [searchQuery, setSearchQuery] = React.useState('');
     const [isLoading, setIsLoading] = React.useState(false);
     const [newJournalRef, setnewJournalRef] = React.useState({});
-    
+
     React.useEffect(() => {
         // initialize with journals on first mount 
         if (!isLoading) {
