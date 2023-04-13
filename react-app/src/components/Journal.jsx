@@ -17,16 +17,19 @@ export default function Journal(props) {
     const [showDeleteConfirmation, setShowDeleteConfirmation] = React.useState(false);
     const [randomDeletePleasantry, setRandomDeletePleasantry] = React.useState('');
 
-    // logic to determine accent colors
+    // logic to determine shadow colors
     let shadowColor;
-    let textColor;
     if (tinycolor(props.color).isLight()) {
-        shadowColor = tinycolor(props.color).lighten(20).toString();
-        textColor = tinycolor(props.color).darken(40).toString();
+        // shadow color is darker
+        shadowColor = tinycolor(props.color).darken(10).toString();
     } else {
+        // shadow color is lighter
         shadowColor = tinycolor(props.color).lighten(10).toString();
-        textColor = tinycolor(props.color).darken(50).toString();
     }
+
+    // set text color to darker shade of card color
+    let textColor;
+    textColor = tinycolor(props.color).darken(40).toString();
 
     // an array of pre-defined placeholder text for delete confirmation messages
     const deleteTexts = [
