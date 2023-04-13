@@ -15,6 +15,12 @@ you can now build and run both the frontend and backend with
 $ docker compose build
 $ docker compose up -d      # -d makes it so they run in the background
 ```
+
+There is also now an option to either use preexisting database data, or initialize a fresh DB of sample data. note that you will want to run this command below before trying to use preexisting data (As there will be no tables the first time)
+```
+$ RESET_DB=true docker compose up
+```
+
 safely stop the frontend and backend with
 ```
 $ docker compose down

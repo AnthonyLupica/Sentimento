@@ -8,4 +8,4 @@ COPY . .
 
 # development version run command
 FROM base as dev
-CMD [ "python", "app.py" ]
+CMD if $RESET_DB = true; then python startup.py True; else python startup.py False; fi

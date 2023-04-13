@@ -251,6 +251,19 @@ def post():
 
     return data
 
+@app.route('/dbRecords')
+def selAll():
+    # Connect to db
+    connection = sqlite3.connect('database.db')
+    cur = connection.cursor()
+
+    res = []
+    cur.execute("SELECT * FROM entries")
+    for x in cur.fetchall():
+        res.append(x)
+
+    return res
+
 if __name__ == '__main__':
     port = int(os.getenv("PORT", 5000))
     app.run(debug=True, host='0.0.0.0', port=port)

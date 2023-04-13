@@ -168,13 +168,13 @@ def colorize(dict):
     total_color[0] = int(round(total_color[0]))
     total_color[1] = int(round(total_color[1]))
     total_color[2] = int(round(total_color[2]))
-    hex_color = hex(total_color[0])[2:] + hex(total_color[1])[2:] + hex(total_color[2])[2:]
+    hex_color = "#" + hex(total_color[0])[2:] + hex(total_color[1])[2:] + hex(total_color[2])[2:]
     return hex_color
 
 def max_mood(dict):
     max_value = max(dict.values())  # maximum value
     max_keys = [k for k, v in dict.items() if v == max_value] 
-    return max_keys
+    return max_keys[0]
 
 def normalize(dict):
     total = 0
@@ -225,6 +225,8 @@ insertQuery = '''INSERT INTO entries(
 def addTestData():
     print("Processing Sample journals and adding them to the database...")
     files = ['journals/Band Practice.txt', 'journals/Graduating.txt', 'journals/Leaving Home.txt', 'journals/Mad At My Boss.txt', 'journals/Studying.txt']
+    count = 0
+    dates = ["4/4/2023 | 12:32:11 AM", "4/6/2023 | 3:32:19", "4/9/2023 | 5:56:02", "4/11/2023 | 9:19:19", "4/12/2023 | 3:03:03"]
     for x in files:
         f = open(x, 'r')
         journal = f.read()
@@ -232,12 +234,14 @@ def addTestData():
 
         doc = nlp(journal)
         journalStats = normalize(doc.cats)
-        record = ['adi19', '11/16/2001', x[:-4], journal, generate(), str(max_mood(doc.cats)), colorize(doc.cats)]
+        record = ['adi19', dates[count], x[len("journals/"):len(x)-len(".txt")], journal, generate(), str(max_mood(doc.cats)), colorize(doc.cats)]
         for x in journalStats:
             record.append(journalStats[x])
         cur.execute(insertQuery, record)
-        print ("    Added {x[:-4]}")
+        count += 1
     print("All done!")
+
+print("Initializing The Database...")
 
 connection = sqlite3.connect('database.db')
 cur = connection.cursor()
@@ -287,7 +291,7 @@ cur.execute('''CREATE TABLE entries (
     sadness REAL NOT NULL, 
     surprise REAL NOT NULL, 
     neutral REAL NOT NULL, 
-    PRIMARY KEY (userName, created),
+    PRIMARY KEY (userName, dateAndTime),
     FOREIGN KEY(userName) REFERENCES users(userName)
 )''')
 
@@ -301,7 +305,9 @@ cur.execute('''INSERT INTO users (userName, password)
         ''')
 
 # Entry Test Data
+print("Populating with sample data")
 addTestData()
+print("done")
 
 connection.commit()
 connection.close()
