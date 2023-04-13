@@ -257,11 +257,46 @@ def selAll():
     connection = sqlite3.connect('database.db')
     cur = connection.cursor()
 
-    res = []
+    res = [{}, {}, {}, {}, {}]
+    count = 0
     cur.execute("SELECT * FROM entries")
-    for x in cur.fetchall():
-        res.append(x)
-
+    for row in cur.fetchall():
+        res[count].update({"userName": row[0]})
+        res[count].update({"dateAndTime": row[1]})
+        res[count].update({"title": row[2]})
+        res[count].update({"content": row[3]})
+        res[count].update({"id": row[4]})
+        res[count].update({"mood" : row[5]})
+        res[count].update({"color": row[6]})
+        res[count].update({"admiration" : row[7]})
+        res[count].update({"amusement": row[8]})
+        res[count].update({"anger": row[9]})
+        res[count].update({"annoyance": row[10]})
+        res[count].update({"approval": row[11]})
+        res[count].update({"caring": row[12]})
+        res[count].update({"confusion": row[13]})
+        res[count].update({"curiosity": row[14]})
+        res[count].update({"desire": row[15]})
+        res[count].update({"disappointment": row[16]})
+        res[count].update({"disapproval": row[17]})
+        res[count].update({"disgust": row[18]})
+        res[count].update({"embarrassment": row[19]})
+        res[count].update({"excitement": row[20]})
+        res[count].update({"fear": row[21]})
+        res[count].update({"gratitude": row[22]})
+        res[count].update({"grief": row[23]})
+        res[count].update({"joy": row[24]})
+        res[count].update({"love": row[25]})
+        res[count].update({"nervousness": row[26]})
+        res[count].update({"optimism": row[27]})
+        res[count].update({"pride": row[28]})
+        res[count].update({"realization": row[29]})
+        res[count].update({"relief": row[30]})
+        res[count].update({"remorse": row[31]})
+        res[count].update({"sadness": row[32]})
+        res[count].update({"surprise": row[33]})
+        res[count].update({"neutral": row[34]})
+        count += 1
     return res
 
 if __name__ == '__main__':
