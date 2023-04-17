@@ -4,7 +4,7 @@
     NOTE: flask_restful can be removed from the pipfile, but I dont wanna do it yet because it takes forever
 """
 
-from flask import Flask, send_from_directory, jsonify, request
+from flask import Flask, jsonify, request, session, redirect
 from flask_cors import CORS # Adding this back in for now for development
 import os
 import sqlite3
@@ -310,7 +310,7 @@ def login():
     cur = conn.cursor()
 
     # Query the database for a user with the provided email
-    cur.execute('SELECT id, email, password FROM users WHERE email=?', (email,))
+    cur.execute('SELECT userName, email, password FROM users WHERE email=?', (email,))
     user = cur.fetchone()
 
     if user is not None:
