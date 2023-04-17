@@ -251,7 +251,7 @@ def post():
 
     return data
 
-@app.route('/dbRecords')
+@app.route('/myNotes')
 def selAll():
     # Connect to db
     connection = sqlite3.connect('database.db')
