@@ -299,6 +299,42 @@ def selAll():
         count += 1
     return res
 
+@app.route('/login', methods=['POST'])
+def login():
+    # Get the user's email and password from the login form
+    email = request.form['email']
+    password = request.form['password']
+
+    # Connect to the SQLite database
+    conn = sqlite3.connect('database.db')
+    cur = conn.cursor()
+
+    # Query the database for a user with the provided email
+    cur.execute('SELECT id, email, password FROM users WHERE email=?', (email,))
+    user = cur.fetchone()
+
+    if user is not None:
+        # Verify the user's password
+        if password == user[2]:
+            # Set the session ID for the user
+            session['user_id'] = user[0]
+
+            # Redirect the user to their account page
+            return redirect('/account')
+        else:
+            # Handle incorrect password
+            error = 'Incorrect password'
+    else:
+        # Handle unknown email address
+        error = 'Email address not found'
+
+    # Close the database connection
+    conn.close()
+
+    # Return an error message to the user
+    return error
+
+
 if __name__ == '__main__':
     port = int(os.getenv("PORT", 5000))
     app.run(debug=True, host='0.0.0.0', port=port)
