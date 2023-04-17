@@ -9,15 +9,16 @@ services:
         - RESET_DB=${RESET_DB:-false}
     ports:
       - 5000:5000
+    depends_on:
+      - db
     environment:
       RESET_DB: ${RESET_DB:-false}
-    volumes:
-      - db-data:/path/to/db
+      DATABASE_URL: sqlite:///db/data.db
   db: 
     image: keinos/sqlite3:latest
     volumes:
       - db-data:/var/lib/sqlite/data
-    command: ["sqlite3", "/var/lib/sqlite/data/mydb.sqlite3"]
+    command: ["sqlite3", "/var/lib/sqlite/data/database.db"]
   frontend:
     build:
       context: ./react-app

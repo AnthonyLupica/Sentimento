@@ -8,11 +8,10 @@
 import subprocess
 import sys
 
-print(sys.argv[1])
 
 if sys.argv[1] == "True":
-    print("Resetting the database...")
+    print("Using Sample Data...", flush=True)
     subprocess.run(["python", "init_db.py"])
 else:
-    print("Using the old data...")
+    print("Using Existing Data...", flush=True)
 subprocess.run(["python", "app.py"])

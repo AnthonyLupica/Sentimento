@@ -8,8 +8,6 @@ import sqlite3
 import spacy
 from nanoid import generate
 
-nlp = spacy.load("en_textcat_goemotions")
-
 """
 This function colorize() serves the dubious purpose of converting the information provided by GoEmotions into a single color
 
@@ -223,7 +221,6 @@ insertQuery = '''INSERT INTO entries(
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
 
 def addTestData():
-    print("Processing Sample journals and adding them to the database...")
     files = ['journals/Band Practice.txt', 'journals/Graduating.txt', 'journals/Leaving Home.txt', 'journals/Mad At My Boss.txt', 'journals/Studying.txt']
     count = 0
     dates = ["4/4/2023 | 12:32:11 AM", "4/6/2023 | 3:32:19", "4/9/2023 | 5:56:02", "4/11/2023 | 9:19:19", "4/12/2023 | 3:03:03"]
@@ -239,9 +236,11 @@ def addTestData():
             record.append(journalStats[x])
         cur.execute(insertQuery, record)
         count += 1
-    print("All done!")
+    print("All done!", flush=True)
 
-print("Initializing The Database...")
+
+print("loading our NLP model...", flush=True)
+nlp = spacy.load("en_textcat_goemotions")
 
 connection = sqlite3.connect('database.db')
 cur = connection.cursor()
@@ -305,9 +304,8 @@ cur.execute('''INSERT INTO users (userName, password)
         ''')
 
 # Entry Test Data
-print("Populating with sample data")
+print("Populating the database with sample data", flush=True)
 addTestData()
-print("done")
 
 connection.commit()
 connection.close()
