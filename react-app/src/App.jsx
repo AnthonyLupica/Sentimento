@@ -1,8 +1,7 @@
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./components/Login.jsx";
 /* component imports */
 import React from "react";
-import { nanoid } from "nanoid"; // nanoid is a library that generates random unique ids
 import JournalContainer from "./components/JournalContainer";
 import Navbar from "./components/Navbar";
 import JournalData from "./JournalData";
@@ -10,41 +9,41 @@ import JournalData from "./JournalData";
 /* style imports */
 import "./styles/App.css";
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: (
+      //TODO
+      //Extract the below into its own component
+      <>
+        <div className="wrapper">
+          <h1>Login Page</h1>
+          <Login handleLogin={() => {}} />
+        </div>
+      </>
+    ),
+  },
+  {
+    path: "/journal",
+    element: (
+      <>
+        <Navbar />
+        <JournalContainer
+          journalData={JournalData}
+          //TODO
+          // None of the below should be props. All of these should live inside the JournalContainer component or deeper
+          handleCreateJournal={() => {}}
+          handleShowCreateJournal={() => {}}
+          handleDeleteJournal={() => {}}
+        />
+      </>
+    ),
+  },
+]);
+
 export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-
-  function handleLogin() {
-    setIsLoggedIn(true);
-  }
-
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/">
-          <Redirect to="/login" />
-        </Route>
-        <Route path="/login">
-          <div className="wrapper">
-            <h1>Login Page</h1>
-            <Login handleLogin={handleLogin} />
-          </div>
-        </Route>
-        <Route path="/journal">
-          {isLoggedIn ? (
-            <>
-              <Navbar />
-              <JournalContainer
-                journalData={JournalData}
-                handleCreateJournal={() => {}}
-                handleShowCreateJournal={() => {}}
-                handleDeleteJournal={() => {}}
-              />
-            </>
-          ) : (
-            <Redirect to="/login" />
-          )}
-        </Route>
-      </Switch>
-    </BrowserRouter>
-  );
+  //TODO
+  // make a context to store user auth. USE CONTEXT NOT STATE
+  // https://stackoverflow.com/questions/62366578/how-to-use-context-with-hooks-for-authentication
+  return <RouterProvider router={router}></RouterProvider>;
 }
