@@ -1,18 +1,28 @@
+volumes:
+  db-data:
 services:
   backend:
     build:
       context: ./backend
       target: dev
       args:
-        - RESET_DB=${RESET_DB:-true}
+        - RESET_DB=${RESET_DB:-false}
     ports:
       - 5000:5000
     environment:
-      RESET_DB: ${RESET_DB:-true}
+      RESET_DB: ${RESET_DB:-false}
+    volumes:
+      - db-data:/path/to/db
+  db: 
+    image: keinos/sqlite3:latest
+    volumes:
+      - db-data:/var/lib/sqlite/data
+    command: ["sqlite3", "/var/lib/sqlite/data/mydb.sqlite3"]
   frontend:
     build:
       context: ./react-app
       target: dev
     ports:
       - 3000:3000
+
       
