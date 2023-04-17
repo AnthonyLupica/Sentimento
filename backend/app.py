@@ -223,6 +223,7 @@ neutral)
 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
 
 app = Flask(__name__)
+app.secret_key = 'secret-key'
 CORS(app)
 
 # Simple post request
@@ -334,6 +335,42 @@ def login():
     # Return an error message to the user
     return error
 
+@app.route('/create_account', methods=['POST'])
+def create_account():
+    # Get the user's email and password from the registration form
+    email = request.form['email']
+    password = request.form['password']
+    userid = request.form['userName']
+
+    # Connect to the SQLite database
+    conn = sqlite3.connect('database.db')
+    c = conn.cursor()
+
+    # Check if the user already exists in the database
+    c.execute('SELECT id FROM users WHERE email=?', (email,))
+    user = c.fetchone()
+
+    if user is not None:
+        # Handle user already exists error
+        error = 'A user with that email already exists'
+    else:
+        # Insert the new user into the database
+        c.execute('INSERT INTO users (email, password, id) VALUES (?, ?)', (email, password, userid))
+        conn.commit()
+
+        # Set the session ID for the new user
+        c.execute('SELECT id FROM users WHERE email=?', (email,))
+        user_id = c.fetchone()[0]
+        session['user_id'] = user_id
+
+        # Redirect the user to their account page
+        return redirect('/account')
+
+    # Close the database connection
+    conn.close()
+
+    # Return an error message to the user
+    return error
 
 if __name__ == '__main__':
     port = int(os.getenv("PORT", 5000))
