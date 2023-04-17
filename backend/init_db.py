@@ -301,12 +301,12 @@ cur.execute('''CREATE TABLE entries (
 # User Test Data
 newid = generate()
 cur.execute('''INSERT INTO users (userName, password, email)
-            VALUES ('adi19', '123', adi19@uakron.edu);
+            VALUES ('adi19', '123', 'adi19@@uakron.edu');
         ''')
 
 newid = generate()
 cur.execute('''INSERT INTO users (userName, password, email)
-            VALUES ('arl127', '123', arl127@uakron.edu);
+            VALUES ('arl127', '123', 'arl127@@uakron.edu');
         ''')
 
 # Entry Test Data
