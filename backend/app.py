@@ -226,7 +226,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Simple post request
-@app.route('/test', methods=['POST'])
+@app.route('/process', methods=['POST'])
 def post():
     # Connect to db
     connection = sqlite3.connect('database.db')
