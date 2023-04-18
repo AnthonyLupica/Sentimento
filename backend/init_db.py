@@ -4,7 +4,7 @@
     Setting up the database!
 """
 
-import sqlite3
+import psycopg2
 import spacy
 from nanoid import generate
 import os
@@ -245,7 +245,7 @@ nlp = spacy.load("en_textcat_goemotions")
 
 db_path = os.environ.get("DATABASE_URL")
 print(db_path, flush=True)
-connection = sqlite3.connect(db_path)
+connection = psycopg2.connect(db_path)
 cur = connection.cursor()
 
 # Users Table

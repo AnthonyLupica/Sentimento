@@ -13,12 +13,16 @@ services:
       RESET_DB: ${RESET_DB:-false}
       DATABASE_URL: sqlite:////var/lib/sqlite/data/database.db
     volumes:
-      - db-data:/var/lib/sqlite/data
-  db: 
-    image: keinos/sqlite3:latest
+      - db-data:/var/lib/postgresql/data
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: database
     volumes:
-      - db-data:/var/lib/sqlite/data
-    command: ["sqlite3", "/var/lib/sqlite/data/database.db"]
+      - db-data:/var/lib/postgresql/data
   frontend:
     build:
       context: ./react-app

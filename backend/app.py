@@ -7,7 +7,7 @@
 from flask import Flask, send_from_directory, jsonify, request
 from flask_cors import CORS # Adding this back in for now for development
 import os
-import sqlite3
+import psycopg2
 import spacy
 
 """
@@ -230,7 +230,7 @@ db_path = os.environ.get("DATABASE_URL")
 @app.route('/test', methods=['POST'])
 def post():
     # Connect to db
-    connection = sqlite3.connect(db_path)
+    connection = psycopg2.connect(db_path)
     cur = connection.cursor()
 
     # Process request
@@ -255,7 +255,7 @@ def post():
 @app.route('/dbRecords')
 def selAll():
     # Connect to db
-    connection = sqlite3.connect(db_path)
+    connection = psycopg2.connect(db_path)
     cur = connection.cursor()
 
     res = [{}, {}, {}, {}, {}]
@@ -303,7 +303,7 @@ def selAll():
 @app.route('/count')
 def countEm():
     # Connect to db
-    connection = sqlite3.connect(db_path)
+    connection = psycopg2.connect(db_path)
     cur = connection.cursor()
 
     cur.execute("SELECT COUNT(*) FROM entries")
