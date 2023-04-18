@@ -224,12 +224,13 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
 
 app = Flask(__name__)
 CORS(app)
+db_path = os.environ.get("DATABASE_URL")
 
 # Simple post request
 @app.route('/test', methods=['POST'])
 def post():
     # Connect to db
-    connection = sqlite3.connect('database.db')
+    connection = sqlite3.connect(db_path)
     cur = connection.cursor()
 
     # Process request
@@ -245,7 +246,7 @@ def post():
     data.update({'mood': max_mood(journalStats)})
 
     # db-ing
-    # cur.execute(insertQuery, record)
+    cur.execute(insertQuery, record)
     connection.commit()
     connection.close()
 
@@ -254,7 +255,7 @@ def post():
 @app.route('/dbRecords')
 def selAll():
     # Connect to db
-    connection = sqlite3.connect('database.db')
+    connection = sqlite3.connect(db_path)
     cur = connection.cursor()
 
     res = [{}, {}, {}, {}, {}]
@@ -298,6 +299,20 @@ def selAll():
         res[count].update({"neutral": row[34]})
         count += 1
     return res
+
+@app.route('/count')
+def countEm():
+    # Connect to db
+    connection = sqlite3.connect(db_path)
+    cur = connection.cursor()
+
+    cur.execute("SELECT COUNT(*) FROM entries")
+    numEntries = cur.fetchone()[0]
+
+    connection.commit()
+    connection.close()
+
+    return str(numEntries)
 
 if __name__ == '__main__':
     port = int(os.getenv("PORT", 5000))

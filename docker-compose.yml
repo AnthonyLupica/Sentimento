@@ -1,5 +1,3 @@
-volumes:
-  db-data:
 services:
   backend:
     build:
@@ -13,7 +11,9 @@ services:
       - db
     environment:
       RESET_DB: ${RESET_DB:-false}
-      DATABASE_URL: sqlite:///db/data.db
+      DATABASE_URL: sqlite:////var/lib/sqlite/data/database.db
+    volumes:
+      - db-data:/var/lib/sqlite/data
   db: 
     image: keinos/sqlite3:latest
     volumes:
@@ -25,5 +25,5 @@ services:
       target: dev
     ports:
       - 3000:3000
-
-      
+volumes:
+  db-data:

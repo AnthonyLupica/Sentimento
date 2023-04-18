@@ -7,6 +7,7 @@
 import sqlite3
 import spacy
 from nanoid import generate
+import os
 
 """
 This function colorize() serves the dubious purpose of converting the information provided by GoEmotions into a single color
@@ -242,7 +243,9 @@ def addTestData():
 print("loading our NLP model...", flush=True)
 nlp = spacy.load("en_textcat_goemotions")
 
-connection = sqlite3.connect('database.db')
+db_path = os.environ.get("DATABASE_URL")
+print(db_path, flush=True)
+connection = sqlite3.connect(db_path)
 cur = connection.cursor()
 
 # Users Table
