@@ -265,7 +265,7 @@ def selAll():
         res[count].update({"userName": row[0]})
         res[count].update({"dateAndTime": row[1]})
         res[count].update({"title": row[2]})
-        res[count].update({"content": row[3]})
+        res[count].update({"text": row[3]})
         res[count].update({"id": row[4]})
         res[count].update({"mood" : row[5]})
         res[count].update({"color": row[6]})
