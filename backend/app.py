@@ -224,13 +224,17 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
 
 app = Flask(__name__)
 CORS(app)
-db_path = os.environ.get("DATABASE_URL")
 
 # Simple post request
 @app.route('/test', methods=['POST'])
 def post():
     # Connect to db
-    connection = psycopg2.connect(db_path)
+    host = os.environ.get("HOST")
+    user = os.environ.get("USER")
+    password = os.environ.get("PASSWORD")
+    port = os.environ.get("PORT")
+    database = os.environ.get("DATABASE")
+    connection = psycopg2.connect(database=database, user=user, password=password, host=host, port=port)
     cur = connection.cursor()
 
     # Process request
@@ -255,7 +259,12 @@ def post():
 @app.route('/dbRecords')
 def selAll():
     # Connect to db
-    connection = psycopg2.connect(db_path)
+    host = os.environ.get("HOST")
+    user = os.environ.get("USER")
+    password = os.environ.get("PASSWORD")
+    port = os.environ.get("PORT")
+    database = os.environ.get("DATABASE")
+    connection = psycopg2.connect(database=database, user=user, password=password, host=host, port=port)
     cur = connection.cursor()
 
     res = [{}, {}, {}, {}, {}]
@@ -303,7 +312,12 @@ def selAll():
 @app.route('/count')
 def countEm():
     # Connect to db
-    connection = psycopg2.connect(db_path)
+    host = os.environ.get("HOST")
+    user = os.environ.get("USER")
+    password = os.environ.get("PASSWORD")
+    port = os.environ.get("PORT")
+    database = os.environ.get("DATABASE")
+    connection = psycopg2.connect(database=database, user=user, password=password, host=host, port=port)
     cur = connection.cursor()
 
     cur.execute("SELECT COUNT(*) FROM entries")

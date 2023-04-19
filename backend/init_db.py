@@ -243,9 +243,13 @@ def addTestData():
 print("loading our NLP model...", flush=True)
 nlp = spacy.load("en_textcat_goemotions")
 
-db_path = os.environ.get("DATABASE_URL")
-print(db_path, flush=True)
-connection = psycopg2.connect(db_path)
+# Connect to database
+host = os.environ.get("HOST")
+user = os.environ.get("USER")
+password = os.environ.get("PASSWORD")
+port = os.environ.get("PORT")
+database = os.environ.get("DATABASE")
+connection = psycopg2.connect(database=database, user=user, password=password, host=host, port=port)
 cur = connection.cursor()
 
 # Users Table

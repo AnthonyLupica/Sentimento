@@ -7,22 +7,8 @@ services:
         - RESET_DB=${RESET_DB:-false}
     ports:
       - 5000:5000
-    depends_on:
-      - db
     environment:
       RESET_DB: ${RESET_DB:-false}
-      DATABASE_URL: sqlite:////var/lib/sqlite/data/database.db
-    volumes:
-      - db-data:/var/lib/postgresql/data
-  db:
-    image: postgres
-    restart: always
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: database
-    volumes:
-      - db-data:/var/lib/postgresql/data
   frontend:
     build:
       context: ./react-app
