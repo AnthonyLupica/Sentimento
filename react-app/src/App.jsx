@@ -29,7 +29,7 @@ export default function App() {
 
         // this block handles the fetch to create a new journal
         else {
-            fetch('http://localhost:5000/test', {
+            fetch('http://localhost:5000/process', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
