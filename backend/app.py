@@ -222,28 +222,43 @@ surprise,
 neutral) 
 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''
 
+uri = os.environ.get("URI")
 app = Flask(__name__)
 app.secret_key = 'secret-key'
 CORS(app)
 
 def get_db():
-    uri = os.environ.get("URI")
-    g.db = psycopg2.connect(uri)
+    if 'db' not in g:
+        g.db = psycopg2.connect(uri)
     return g.db
 
 def close_db(e=None):
     db = g.pop('db', None)
-
     if db is not None:
         db.close()
+
+def get_nlp():
+    if 'nlp' not in g:
+        g.nlp = spacy.load("en_textcat_goemotions")
+    return g.nlp
+
 
 @app.before_first_request
 def setup():
     # Connect to db
+    app.logger.info("Connecting to the database..")
     db = get_db()
+    app.logger.info("Connected!")
 
     # Check if db needs initialized
         #initialize
+    
+    # Setup pipeline
+    app.logger.info("Setting up nlp pipeline...")
+    get_nlp()
+    app.logger.info("Set up!")
+
+
 
 # Accept an incoming journal and perform nlp emotion detection on it.
 @app.route('/process', methods=['POST'])
@@ -251,7 +266,7 @@ def post():
 
     # Process request
     data = request.get_json()
-    nlp = spacy.load("en_textcat_goemotions")
+    nlp = get_nlp()
     doc = nlp(data["text"])
     journalStats = normalize(doc.cats)
     record = ["adi19", data["dateAndTime"], data["title"], data["text"], data["id"], str(max_mood(journalStats)), colorize(journalStats)]
