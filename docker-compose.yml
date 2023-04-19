@@ -6,7 +6,9 @@ services:
       args:
         - RESET_DB=${RESET_DB:-false}
     ports:
-      - 5000:5000
+      - 5000:5432
+    env_file:
+      - .env
     environment:
       RESET_DB: ${RESET_DB:-false}
   frontend:

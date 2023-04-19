@@ -220,7 +220,7 @@ remorse,
 sadness, 
 surprise,
 neutral) 
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
+VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''
 
 app = Flask(__name__)
 CORS(app)
@@ -229,12 +229,8 @@ CORS(app)
 @app.route('/test', methods=['POST'])
 def post():
     # Connect to db
-    host = os.environ.get("HOST")
-    user = os.environ.get("USER")
-    password = os.environ.get("PASSWORD")
-    port = os.environ.get("PORT")
-    database = os.environ.get("DATABASE")
-    connection = psycopg2.connect(database=database, user=user, password=password, host=host, port=port)
+    uri = os.environ.get("URI")
+    connection = psycopg2.connect(uri)
     cur = connection.cursor()
 
     # Process request
@@ -259,12 +255,8 @@ def post():
 @app.route('/dbRecords')
 def selAll():
     # Connect to db
-    host = os.environ.get("HOST")
-    user = os.environ.get("USER")
-    password = os.environ.get("PASSWORD")
-    port = os.environ.get("PORT")
-    database = os.environ.get("DATABASE")
-    connection = psycopg2.connect(database=database, user=user, password=password, host=host, port=port)
+    uri = os.environ.get("URI")
+    connection = psycopg2.connect(uri)
     cur = connection.cursor()
 
     res = [{}, {}, {}, {}, {}]
@@ -312,12 +304,8 @@ def selAll():
 @app.route('/count')
 def countEm():
     # Connect to db
-    host = os.environ.get("HOST")
-    user = os.environ.get("USER")
-    password = os.environ.get("PASSWORD")
-    port = os.environ.get("PORT")
-    database = os.environ.get("DATABASE")
-    connection = psycopg2.connect(database=database, user=user, password=password, host=host, port=port)
+    uri = os.environ.get("URI")
+    connection = psycopg2.connect(uri)
     cur = connection.cursor()
 
     cur.execute("SELECT COUNT(*) FROM entries")

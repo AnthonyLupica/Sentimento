@@ -219,7 +219,7 @@ insertQuery = '''INSERT INTO entries(
     sadness, 
     surprise,
     neutral) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''
 
 def addTestData():
     files = ['journals/Band Practice.txt', 'journals/Graduating.txt', 'journals/Leaving Home.txt', 'journals/Mad At My Boss.txt', 'journals/Studying.txt']
@@ -244,12 +244,8 @@ print("loading our NLP model...", flush=True)
 nlp = spacy.load("en_textcat_goemotions")
 
 # Connect to database
-host = os.environ.get("HOST")
-user = os.environ.get("USER")
-password = os.environ.get("PASSWORD")
-port = os.environ.get("PORT")
-database = os.environ.get("DATABASE")
-connection = psycopg2.connect(database=database, user=user, password=password, host=host, port=port)
+uri = os.environ.get("URI")
+connection = psycopg2.connect(uri)
 cur = connection.cursor()
 
 # Users Table
