@@ -251,9 +251,7 @@ def setup():
         #initialize
     
     # Setup pipeline
-    print("nlping", flush=True)
     get_nlp()
-    print("done", flush=True)
 # Accept an incoming journal and perform nlp emotion detection on it.
 @app.route('/process', methods=['POST'])
 def post():
@@ -414,7 +412,6 @@ def create_account():
     return error
 
 with app.app_context():
-    print("called again", flush=True)
     setup()
 
 if __name__ == '__main__':
