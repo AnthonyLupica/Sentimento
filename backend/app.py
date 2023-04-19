@@ -242,24 +242,18 @@ def get_nlp():
         g.nlp = spacy.load("en_textcat_goemotions")
     return g.nlp
 
-
-@app.before_first_request
+# This ensures that a request is made when the app launches so that all the setup stuff runs immediately
 def setup():
     # Connect to db
-    app.logger.info("Connecting to the database..")
     db = get_db()
-    app.logger.info("Connected!")
 
     # Check if db needs initialized
         #initialize
     
     # Setup pipeline
-    app.logger.info("Setting up nlp pipeline...")
+    print("nlping", flush=True)
     get_nlp()
-    app.logger.info("Set up!")
-
-
-
+    print("done", flush=True)
 # Accept an incoming journal and perform nlp emotion detection on it.
 @app.route('/process', methods=['POST'])
 def post():
@@ -419,6 +413,11 @@ def create_account():
     # Return an error message to the user
     return error
 
+with app.app_context():
+    print("called again", flush=True)
+    setup()
+
 if __name__ == '__main__':
     port = int(os.getenv("PORT", 5000))
     app.run(debug=True, host='0.0.0.0', port=port)
+
