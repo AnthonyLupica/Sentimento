@@ -4,7 +4,7 @@
     NOTE: flask_restful can be removed from the pipfile, but I dont wanna do it yet because it takes forever
 """
 
-from flask import Flask, jsonify, request, session, redirect
+from flask import Flask, jsonify, request, session, redirect, g
 from flask_cors import CORS # Adding this back in for now for development
 import os
 import psycopg2
@@ -226,13 +226,28 @@ app = Flask(__name__)
 app.secret_key = 'secret-key'
 CORS(app)
 
-# Simple post request
+def get_db():
+    uri = os.environ.get("URI")
+    g.db = psycopg2.connect(uri)
+    return g.db
+
+def close_db(e=None):
+    db = g.pop('db', None)
+
+    if db is not None:
+        db.close()
+
+@app.before_first_request
+def setup():
+    # Connect to db
+    db = get_db()
+
+    # Check if db needs initialized
+        #initialize
+
+# Accept an incoming journal and perform nlp emotion detection on it.
 @app.route('/process', methods=['POST'])
 def post():
-    # Connect to db
-    uri = os.environ.get("URI")
-    connection = psycopg2.connect(uri)
-    cur = connection.cursor()
 
     # Process request
     data = request.get_json()
@@ -246,20 +261,23 @@ def post():
     data.update({'color': colorize(journalStats)})
     data.update({'mood': max_mood(journalStats)})
 
-    # db-ing
+    # Connect to db
+    connection = get_db()
+    cur = connection.cursor()
     cur.execute(insertQuery, record)
     connection.commit()
     connection.close()
 
     return data
 
+# Select all journal entries from the table
 @app.route('/myNotes')
 def selAll():
     # Connect to db
-    uri = os.environ.get("URI")
-    connection = psycopg2.connect(uri)
+    connection = get_db()
     cur = connection.cursor()
 
+    # @TODO: Just realize the count of entries is static here. It'll need changed later
     res = [{}, {}, {}, {}, {}]
     count = 0
     cur.execute("SELECT * FROM entries")
@@ -302,18 +320,15 @@ def selAll():
         count += 1
     return res
 
+# Count how many journals are in the entries table
 @app.route('/count')
 def countEm():
     # Connect to db
-    uri = os.environ.get("URI")
-    connection = psycopg2.connect(uri)
+    connection = get_db()
     cur = connection.cursor()
 
     cur.execute("SELECT COUNT(*) FROM entries")
     numEntries = cur.fetchone()[0]
-
-    connection.commit()
-    connection.close()
 
     return str(numEntries)
 
@@ -323,9 +338,9 @@ def login():
     email = request.form['email']
     password = request.form['password']
 
-    # Connect to the SQLite database
-    conn = sqlite3.connect('database.db')
-    cur = conn.cursor()
+    # Connect to db
+    connection = get_db()
+    cur = connection.cursor()
 
     # Query the database for a user with the provided email
     cur.execute('SELECT userName, email, password FROM users WHERE email=?', (email,))
@@ -359,9 +374,9 @@ def create_account():
     password = request.form['password']
     userid = request.form['userName']
 
-    # Connect to the SQLite database
-    conn = sqlite3.connect('database.db')
-    c = conn.cursor()
+    # Connect to db
+    connection = get_db()
+    cur = connection.cursor()
 
     # Check if the user already exists in the database
     c.execute('SELECT id FROM users WHERE email=?', (email,))
