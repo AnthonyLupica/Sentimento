@@ -51,7 +51,35 @@ export default function App() {
                             return {
                                 ...journal,
                                 mood: data.mood,
-                                color: data.color
+                                color: data.color,
+                                admiration: data.admiration,
+                                amusement: data.amusement,
+                                anger: data.anger,
+                                annoyance: data.annoyance,
+                                approval: data.approval,
+                                caring: data.caring,
+                                confusion: data.confusion,
+                                curiosity: data.curiosity,
+                                desire: data.desire,
+                                disappointment: data.disappointment,
+                                disapproval: data.disapproval,
+                                disgust: data.disgust,
+                                embarrassment: data.embarrassment,
+                                excitement: data.excitement,
+                                fear: data.fear,
+                                gratitude: data.gratitude,
+                                grief: data.grief,
+                                joy: data.joy,
+                                love: data.love,
+                                nervousness: data.nervousness,
+                                neutral: data.neutral,
+                                optimism: data.optimism,
+                                pride: data.pride,
+                                realization: data.realization,
+                                relief: data.relief,
+                                remorse: data.remorse,
+                                sadness: data.sadness,
+                                surprise: data.surprise
                             };
                         } else {
                             return journal;

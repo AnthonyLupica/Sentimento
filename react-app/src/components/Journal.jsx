@@ -4,15 +4,18 @@
 
 /* component imports */
 import React from 'react';
-import { MdDeleteForever, MdDelete } from 'react-icons/md'; // these are delete icons
+import { MdDeleteForever, MdDelete } from 'react-icons/md'; 
 import tinycolor from 'tinycolor2';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import EmotionProperties from '../EmotionProperties'; 
 
 /* style imports */
 import '../styles/Journal.css';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 export default function Journal(props) {
+
+    console.log(props.topThreeEmotions);
 
     const [showDeleteConfirmation, setShowDeleteConfirmation] = React.useState(false);
     const [randomDeletePleasantry, setRandomDeletePleasantry] = React.useState('');
