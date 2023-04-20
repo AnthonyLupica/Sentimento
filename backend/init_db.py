@@ -248,8 +248,10 @@ cur = connection.cursor()
 # Users Table
 cur.execute('DROP TABLE IF EXISTS users')
 cur.execute('''CREATE TABLE users (
-    userName TEXT PRIMARY KEY,
-    password TEXT NOT NULL
+    userName TEXT,
+    password TEXT NOT NULL,
+    email TEXT,
+    PRIMARY KEY(userName, email)
 )''')
 
 # Entries Table
@@ -296,11 +298,14 @@ cur.execute('''CREATE TABLE entries (
 
 
 # User Test Data
-cur.execute('''INSERT INTO users (userName, password)
-            VALUES ('adi19', '123');
+newid = generate()
+cur.execute('''INSERT INTO users (userName, password, email)
+            VALUES ('adi19', '123', 'adi19@@uakron.edu');
         ''')
-cur.execute('''INSERT INTO users (userName, password)
-            VALUES ('arl127', '123');
+
+newid = generate()
+cur.execute('''INSERT INTO users (userName, password, email)
+            VALUES ('arl127', '123', 'arl127@@uakron.edu');
         ''')
 
 # Entry Test Data

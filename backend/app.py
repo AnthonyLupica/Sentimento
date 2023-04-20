@@ -4,7 +4,7 @@
     NOTE: flask_restful can be removed from the pipfile, but I dont wanna do it yet because it takes forever
 """
 
-from flask import Flask, send_from_directory, jsonify, request
+from flask import Flask, jsonify, request, session, redirect
 from flask_cors import CORS # Adding this back in for now for development
 import os
 import sqlite3
@@ -222,10 +222,11 @@ neutral)
 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
 
 app = Flask(__name__)
+app.secret_key = 'secret-key'
 CORS(app)
 
 # Simple post request
-@app.route('/test', methods=['POST'])
+@app.route('/process', methods=['POST'])
 def post():
     # Connect to db
     connection = sqlite3.connect('database.db')
@@ -250,7 +251,7 @@ def post():
 
     return data
 
-@app.route('/dbRecords')
+@app.route('/myNotes')
 def selAll():
     # Connect to db
     connection = sqlite3.connect('database.db')
@@ -297,6 +298,78 @@ def selAll():
         res[count].update({"neutral": row[34]})
         count += 1
     return res
+
+@app.route('/login', methods=['POST'])
+def login():
+    # Get the user's email and password from the login form
+    email = request.form['email']
+    password = request.form['password']
+
+    # Connect to the SQLite database
+    conn = sqlite3.connect('database.db')
+    cur = conn.cursor()
+
+    # Query the database for a user with the provided email
+    cur.execute('SELECT userName, email, password FROM users WHERE email=?', (email,))
+    user = cur.fetchone()
+
+    if user is not None:
+        # Verify the user's password
+        if password == user[2]:
+            # Set the session ID for the user
+            session['user_id'] = user[0]
+
+            # Redirect the user to their account page
+            return redirect('/account')
+        else:
+            # Handle incorrect password
+            error = 'Incorrect password'
+    else:
+        # Handle unknown email address
+        error = 'Email address not found'
+
+    # Close the database connection
+    conn.close()
+
+    # Return an error message to the user
+    return error
+
+@app.route('/create_account', methods=['POST'])
+def create_account():
+    # Get the user's email and password from the registration form
+    email = request.form['email']
+    password = request.form['password']
+    userid = request.form['userName']
+
+    # Connect to the SQLite database
+    conn = sqlite3.connect('database.db')
+    c = conn.cursor()
+
+    # Check if the user already exists in the database
+    c.execute('SELECT id FROM users WHERE email=?', (email,))
+    user = c.fetchone()
+
+    if user is not None:
+        # Handle user already exists error
+        error = 'A user with that email already exists'
+    else:
+        # Insert the new user into the database
+        c.execute('INSERT INTO users (email, password, id) VALUES (?, ?)', (email, password, userid))
+        conn.commit()
+
+        # Set the session ID for the new user
+        c.execute('SELECT id FROM users WHERE email=?', (email,))
+        user_id = c.fetchone()[0]
+        session['user_id'] = user_id
+
+        # Redirect the user to their account page
+        return redirect('/account')
+
+    # Close the database connection
+    conn.close()
+
+    # Return an error message to the user
+    return error
 
 if __name__ == '__main__':
     port = int(os.getenv("PORT", 5000))
