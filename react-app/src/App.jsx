@@ -24,15 +24,14 @@ export default function App() {
     React.useEffect(() => {
         // initialize with journals on first mount 
         if (!isLoading) {
-            //fetch("http://localhost:5000/dbRecords")
-            //    .then(res => res.json())
-            //    .then(data => setJournals(data))
-            setJournals(JournalData);
+            fetch("http://localhost:5000/myNotes")
+                .then(res => res.json())
+                .then(data => setJournals(data))
         }
 
         // this block handles the fetch to create a new journal
         else {
-            fetch('http://localhost:5000/test', {
+            fetch('http://localhost:5000/process', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

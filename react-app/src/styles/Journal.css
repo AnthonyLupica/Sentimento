@@ -67,7 +67,7 @@
     border-radius: 10px;
     
     /* padding between div and contained text */
-    padding: 5px;
+    padding: 8px;
    
     /* default background color */
     background-color: #1b1b1b;
@@ -143,8 +143,3 @@
 .LoadingBox {
     display: flex;
 }
-
-
-
-
-
