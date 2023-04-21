@@ -5,8 +5,11 @@
 /* component imports */
 import React from 'react';
 import { MdDeleteForever, MdDelete } from 'react-icons/md'; 
+import { FaQuestionCircle } from 'react-icons/fa'; 
+import { IoMdMore } from 'react-icons/io';
 import tinycolor from 'tinycolor2';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import Popup from 'reactjs-popup';
 import EmotionProperties from '../EmotionProperties'; 
 
 /* style imports */
@@ -14,8 +17,6 @@ import '../styles/Journal.css';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 export default function Journal(props) {
-
-    console.log(props.topThreeEmotions);
 
     const [showDeleteConfirmation, setShowDeleteConfirmation] = React.useState(false);
     const [randomDeletePleasantry, setRandomDeletePleasantry] = React.useState('');
@@ -32,7 +33,7 @@ export default function Journal(props) {
 
     // set text color to darker shade of card color
     let textColor;
-    textColor = tinycolor(props.color).darken(40).toString();
+    textColor = tinycolor(props.color).darken(45).toString();
 
     // an array of pre-defined placeholder text for delete confirmation messages
     const deleteTexts = [
@@ -75,7 +76,7 @@ export default function Journal(props) {
         </div>
     );
 
-    // the journal is in a loading state
+    // the journal is in a loading state, render a loading skeleton
     if (props.mood === "loading" || props.color === "loading") {
         return (
             <SkeletonTheme baseColor='#252525' highlightColor='#2f2f2f' duration={3} >
@@ -84,7 +85,24 @@ export default function Journal(props) {
         )
     }
 
-    // the journal is fully loaded 
+    // store top three emotions, their percentages, and their hex codes
+    // props.topThreeEmotions comes in as [ ["1st emotion", percentage], ["2nd emotion", percentage], ["3rd emotion", percentage] ]
+    const topEmotion = {
+        "emotion": props.topThreeEmotions[0][0],
+        "percentage": Math.round(props.topThreeEmotions[0][1] * 100),
+        "hexcode": EmotionProperties[props.topThreeEmotions[0][0]]
+    };
+    const secondEmotion = {
+        "emotion": props.topThreeEmotions[1][0],
+        "percentage": Math.round(props.topThreeEmotions[1][1] * 100),
+        "hexcode": EmotionProperties[props.topThreeEmotions[1][0]]
+    };
+    const thirdEmotion = {
+        "emotion": props.topThreeEmotions[2][0],
+        "percentage": Math.round(props.topThreeEmotions[2][1] * 100),
+        "hexcode": EmotionProperties[props.topThreeEmotions[2][0]]
+    };
+ 
     return (
         
         <div className="JournalBox" style={{ backgroundColor: props.color, boxShadow: `inset 0 0 0 2px ${shadowColor}` }}>
@@ -94,6 +112,40 @@ export default function Journal(props) {
                 <small className="Journal--Title" style={{ textShadow: `1px 1px 0px ${textColor}`}}> {props.title} </small>
                 <div className="Emotion--Display" style={{ color: props.color, boxShadow: `inset 0 0 0 2px ${shadowColor}` }}>
                     <small> {props.mood} </small>
+
+                    <Popup
+                        trigger={
+                            <button type="button" className="Emotion--BreakdownHover">
+                                <FaQuestionCircle style={{ color: props.color }} />
+                            </button>
+                        }
+                        position='bottom center'
+                        on={['hover', 'focus']}
+                    >
+                        <div className="Emotion--Breakdown">
+                            {topEmotion.percentage}% {topEmotion.emotion}
+                            <div
+                                className="Emotion--One"
+                                style={{ backgroundColor: topEmotion.hexcode, width: topEmotion.percentage + "%" }}
+                            ></div><hr />
+
+                            {secondEmotion.percentage}% {secondEmotion.emotion}
+                            <div
+                                className="Emotion--Two"
+                                style={{ backgroundColor: secondEmotion.hexcode, width: secondEmotion.percentage + "%" }}
+                            ></div><hr />
+
+                            {thirdEmotion.percentage}% {thirdEmotion.emotion}
+                            <div
+                                className="Emotion--Three"
+                                style={{ backgroundColor: thirdEmotion.hexcode, width: thirdEmotion.percentage + "%" }}
+                            ></div><hr />
+
+                            <div className="Ellipsis">
+                                <IoMdMore />
+                            </div>
+                        </div>
+                    </Popup>
                 </div>
             </div>
 

@@ -1,4 +1,4 @@
-// a static list of all the emotions we are measuring for
+// a static list of all 28 emotions we are assessing for
 const emotionProperties = {
     "admiration": "#FFC0CB",     // PINK [ 255, 192, 203 ]
     "amusement": "#F9CB9C",      // ORANGE SHERBERT [ 249, 203, 156 ]
