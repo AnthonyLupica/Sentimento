@@ -102,6 +102,8 @@
     width: auto;
 
     font-family: var(--font);
+
+    white-space: nowrap;
 }
 
 .Emotion--One {
