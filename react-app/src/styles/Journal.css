@@ -67,10 +67,10 @@
     border-radius: 10px;
     
     /* padding between div and contained text */
-    padding: 5px;
+    padding: 8px;
    
     /* default background color */
-    background-color: black;
+    background-color: #1b1b1b;
 }
 
 /* the body text of each journal entry */
@@ -143,8 +143,3 @@
 .LoadingBox {
     display: flex;
 }
-
-
-
-
-

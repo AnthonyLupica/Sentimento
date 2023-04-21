@@ -4,9 +4,10 @@
 
 /* component imports */
 import React from 'react';
-import { MdDeleteForever, MdDelete } from 'react-icons/md'; // these are delete icons
+import { MdDeleteForever, MdDelete } from 'react-icons/md'; 
 import tinycolor from 'tinycolor2';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import EmotionProperties from '../EmotionProperties'; 
 
 /* style imports */
 import '../styles/Journal.css';
@@ -14,19 +15,24 @@ import 'react-loading-skeleton/dist/skeleton.css';
 
 export default function Journal(props) {
 
+    console.log(props.topThreeEmotions);
+
     const [showDeleteConfirmation, setShowDeleteConfirmation] = React.useState(false);
     const [randomDeletePleasantry, setRandomDeletePleasantry] = React.useState('');
 
-    // logic to determine accent colors
+    // logic to determine shadow colors
     let shadowColor;
-    let textColor;
     if (tinycolor(props.color).isLight()) {
-        shadowColor = tinycolor(props.color).lighten(20).toString();
-        textColor = tinycolor(props.color).darken(40).toString();
+        // shadow color is darker
+        shadowColor = tinycolor(props.color).darken(5).toString();
     } else {
-        shadowColor = tinycolor(props.color).lighten(10).toString();
-        textColor = tinycolor(props.color).darken(50).toString();
+        // shadow color is lighter
+        shadowColor = tinycolor(props.color).lighten(5).toString();
     }
+
+    // set text color to darker shade of card color
+    let textColor;
+    textColor = tinycolor(props.color).darken(40).toString();
 
     // an array of pre-defined placeholder text for delete confirmation messages
     const deleteTexts = [
@@ -73,7 +79,7 @@ export default function Journal(props) {
     if (props.mood === "loading" || props.color === "loading") {
         return (
             <SkeletonTheme baseColor='#252525' highlightColor='#2f2f2f' duration={3} >
-                <Skeleton count={1} height={200} borderRadius={15} />
+                <Skeleton count={1} height={180} borderRadius={15} />
             </SkeletonTheme>
         )
     }
@@ -86,7 +92,7 @@ export default function Journal(props) {
             {/* containing div for journal title and mood display */}
             <div className="Header">
                 <small className="Journal--Title" style={{ textShadow: `1px 1px 0px ${textColor}`}}> {props.title} </small>
-                <div className="Emotion--Display" style={{ color: props.color }}>
+                <div className="Emotion--Display" style={{ color: props.color, boxShadow: `inset 0 0 0 2px ${shadowColor}` }}>
                     <small> {props.mood} </small>
                 </div>
             </div>

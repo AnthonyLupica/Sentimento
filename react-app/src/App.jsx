@@ -8,28 +8,30 @@ import { nanoid } from 'nanoid'; // nanoid is a library that generates random un
 import JournalContainer from './components/JournalContainer';
 import Navbar from './components/Navbar';
 import JournalData from './JournalData';
+import EmotionProperties from './EmotionProperties';
 
 /* style imports */
 import './styles/App.css'
 
 export default function App() {
-
     // define state for this component
     const [journals, setJournals] = React.useState([]);
     const [showCreateJournal, setShowCreateJournal] = React.useState(false);
     const [searchQuery, setSearchQuery] = React.useState('');
     const [isLoading, setIsLoading] = React.useState(false);
     const [newJournalRef, setnewJournalRef] = React.useState({});
-    
+
     React.useEffect(() => {
         // initialize with journals on first mount 
         if (!isLoading) {
-            setJournals(JournalData);
+            fetch("http://localhost:5000/myNotes")
+                .then(res => res.json())
+                .then(data => setJournals(data))
         }
 
         // this block handles the fetch to create a new journal
         else {
-            fetch('http://localhost:5000/test', {
+            fetch('http://localhost:5000/process', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -49,7 +51,35 @@ export default function App() {
                             return {
                                 ...journal,
                                 mood: data.mood,
-                                color: data.color
+                                color: data.color,
+                                admiration: data.admiration,
+                                amusement: data.amusement,
+                                anger: data.anger,
+                                annoyance: data.annoyance,
+                                approval: data.approval,
+                                caring: data.caring,
+                                confusion: data.confusion,
+                                curiosity: data.curiosity,
+                                desire: data.desire,
+                                disappointment: data.disappointment,
+                                disapproval: data.disapproval,
+                                disgust: data.disgust,
+                                embarrassment: data.embarrassment,
+                                excitement: data.excitement,
+                                fear: data.fear,
+                                gratitude: data.gratitude,
+                                grief: data.grief,
+                                joy: data.joy,
+                                love: data.love,
+                                nervousness: data.nervousness,
+                                neutral: data.neutral,
+                                optimism: data.optimism,
+                                pride: data.pride,
+                                realization: data.realization,
+                                relief: data.relief,
+                                remorse: data.remorse,
+                                sadness: data.sadness,
+                                surprise: data.surprise
                             };
                         } else {
                             return journal;
