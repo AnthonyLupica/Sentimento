@@ -11,3 +11,4 @@
 /frontend/package.json
 /frontend/.vs
 /node_modules
+.env

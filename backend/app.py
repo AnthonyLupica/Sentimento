@@ -4,10 +4,10 @@
     NOTE: flask_restful can be removed from the pipfile, but I dont wanna do it yet because it takes forever
 """
 
-from flask import Flask, jsonify, request, session, redirect
+from flask import Flask, jsonify, request, session, redirect, g
 from flask_cors import CORS # Adding this back in for now for development
 import os
-import sqlite3
+import psycopg2
 import spacy
 
 """
@@ -219,22 +219,45 @@ remorse,
 sadness, 
 surprise,
 neutral) 
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
+VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''
 
+uri = os.environ.get("URI")
 app = Flask(__name__)
 app.secret_key = 'secret-key'
 CORS(app)
 
-# Simple post request
+def get_db():
+    if 'db' not in g:
+        g.db = psycopg2.connect(uri)
+    return g.db
+
+def close_db(e=None):
+    db = g.pop('db', None)
+    if db is not None:
+        db.close()
+
+def get_nlp():
+    if 'nlp' not in g:
+        g.nlp = spacy.load("en_textcat_goemotions")
+    return g.nlp
+
+# This ensures that a request is made when the app launches so that all the setup stuff runs immediately
+def setup():
+    # Connect to db
+    db = get_db()
+
+    # Check if db needs initialized
+        #initialize
+    
+    # Setup pipeline
+    get_nlp()
+# Accept an incoming journal and perform nlp emotion detection on it.
 @app.route('/process', methods=['POST'])
 def post():
-    # Connect to db
-    connection = sqlite3.connect('database.db')
-    cur = connection.cursor()
 
     # Process request
     data = request.get_json()
-    nlp = spacy.load("en_textcat_goemotions")
+    nlp = get_nlp()
     doc = nlp(data["text"])
     journalStats = normalize(doc.cats)
     record = ["adi19", data["dateAndTime"], data["title"], data["text"], data["id"], str(max_mood(journalStats)), colorize(journalStats)]
@@ -244,19 +267,23 @@ def post():
     data.update({'color': colorize(journalStats)})
     data.update({'mood': max_mood(journalStats)})
 
-    # db-ing
-    # cur.execute(insertQuery, record)
+    # Connect to db
+    connection = get_db()
+    cur = connection.cursor()
+    cur.execute(insertQuery, record)
     connection.commit()
     connection.close()
 
     return data
 
+# Select all journal entries from the table
 @app.route('/myNotes')
 def selAll():
     # Connect to db
-    connection = sqlite3.connect('database.db')
+    connection = get_db()
     cur = connection.cursor()
 
+    # @TODO: Just realize the count of entries is static here. It'll need changed later
     res = [{}, {}, {}, {}, {}]
     count = 0
     cur.execute("SELECT * FROM entries")
@@ -299,15 +326,27 @@ def selAll():
         count += 1
     return res
 
+# Count how many journals are in the entries table
+@app.route('/count')
+def countEm():
+    # Connect to db
+    connection = get_db()
+    cur = connection.cursor()
+
+    cur.execute("SELECT COUNT(*) FROM entries")
+    numEntries = cur.fetchone()[0]
+
+    return str(numEntries)
+
 @app.route('/login', methods=['POST'])
 def login():
     # Get the user's email and password from the login form
     email = request.form['email']
     password = request.form['password']
 
-    # Connect to the SQLite database
-    conn = sqlite3.connect('database.db')
-    cur = conn.cursor()
+    # Connect to db
+    connection = get_db()
+    cur = connection.cursor()
 
     # Query the database for a user with the provided email
     cur.execute('SELECT userName, email, password FROM users WHERE email=?', (email,))
@@ -341,9 +380,9 @@ def create_account():
     password = request.form['password']
     userid = request.form['userName']
 
-    # Connect to the SQLite database
-    conn = sqlite3.connect('database.db')
-    c = conn.cursor()
+    # Connect to db
+    connection = get_db()
+    cur = connection.cursor()
 
     # Check if the user already exists in the database
     c.execute('SELECT id FROM users WHERE email=?', (email,))
@@ -371,6 +410,10 @@ def create_account():
     # Return an error message to the user
     return error
 
+with app.app_context():
+    setup()
+
 if __name__ == '__main__':
     port = int(os.getenv("PORT", 5000))
     app.run(debug=True, host='0.0.0.0', port=port)
+

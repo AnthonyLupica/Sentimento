@@ -4,11 +4,10 @@
     Setting up the database!
 """
 
-import sqlite3
+import psycopg2
 import spacy
 from nanoid import generate
-
-nlp = spacy.load("en_textcat_goemotions")
+import os
 
 """
 This function colorize() serves the dubious purpose of converting the information provided by GoEmotions into a single color
@@ -219,10 +218,9 @@ insertQuery = '''INSERT INTO entries(
     sadness, 
     surprise,
     neutral) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''
 
 def addTestData():
-    print("Processing Sample journals and adding them to the database...")
     files = ['journals/Band Practice.txt', 'journals/Graduating.txt', 'journals/Leaving Home.txt', 'journals/Mad At My Boss.txt', 'journals/Studying.txt']
     count = 0
     dates = ["4/4/2023 | 12:32:11 AM", "4/6/2023 | 3:32:19", "4/9/2023 | 5:56:02", "4/11/2023 | 9:19:19", "4/12/2023 | 3:03:03"]
@@ -238,63 +236,16 @@ def addTestData():
             record.append(journalStats[x])
         cur.execute(insertQuery, record)
         count += 1
-    print("All done!")
+    print("All done!", flush=True)
 
-print("Initializing The Database...")
 
-connection = sqlite3.connect('database.db')
+print("loading our NLP model...", flush=True)
+nlp = spacy.load("en_textcat_goemotions")
+
+# Connect to database
+uri = os.environ.get("URI")
+connection = psycopg2.connect(uri)
 cur = connection.cursor()
-
-# Users Table
-cur.execute('DROP TABLE IF EXISTS users')
-cur.execute('''CREATE TABLE users (
-    userName TEXT,
-    password TEXT NOT NULL,
-    email TEXT,
-    PRIMARY KEY(userName, email)
-)''')
-
-# Entries Table
-cur.execute('DROP TABLE IF EXISTS entries;')
-cur.execute('''CREATE TABLE entries (
-    userName TEXT, 
-    dateAndTime TEXT, 
-    title TEXT NOT NULL, 
-    content TEXT NOT NULL, 
-    id TEXT NOT NULL, 
-    mood TEXT NOT NULL,
-    color TEXT NOT NULL,
-    admiration REAL NOT NULL, 
-    amusement REAL NOT NULL, 
-    anger REAL NOT NULL, 
-    annoyance REAL NOT NULL, 
-    approval REAL NOT NULL, 
-    caring REAL NOT NULL, 
-    confusion REAL NOT NULL, 
-    curiosity REAL NOT NULL, 
-    desire REAL NOT NULL, 
-    disappointment REAL NOT NULL, 
-    disapproval REAL NOT NULL, 
-    disgust REAL NOT NULL, 
-    embarrassment REAL NOT NULL, 
-    excitement REAL NOT NULL, 
-    fear REAL NOT NULL, 
-    gratitude REAL NOT NULL, 
-    grief REAL NOT NULL, 
-    joy REAL NOT NULL, 
-    love REAL NOT NULL, 
-    nervousness REAL NOT NULL, 
-    optimism REAL NOT NULL, 
-    pride REAL NOT NULL, 
-    realization REAL NOT NULL, 
-    relief REAL NOT NULL, 
-    remorse REAL NOT NULL, 
-    sadness REAL NOT NULL, 
-    surprise REAL NOT NULL, 
-    neutral REAL NOT NULL, 
-    PRIMARY KEY (userName, dateAndTime),
-    FOREIGN KEY(userName) REFERENCES users(userName)
-)''')
 
 
 # User Test Data
@@ -309,9 +260,8 @@ cur.execute('''INSERT INTO users (userName, password, email)
         ''')
 
 # Entry Test Data
-print("Populating with sample data")
+print("Populating the database with sample data", flush=True)
 addTestData()
-print("done")
 
 connection.commit()
 connection.close()
