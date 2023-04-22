@@ -73,6 +73,81 @@
     background-color: #1b1b1b;
 }
 
+.Emotion--BreakdownHover {
+    background-color: #1b1b1b;
+
+    border: none;
+
+    margin: 0px;
+
+    padding: 0px;
+
+    width: auto;
+}
+
+.Emotion--Breakdown {
+    display: flex;
+
+    flex-direction: column;
+
+    border-radius: 5px;
+
+    background-color: white;
+
+    padding: 5px;
+
+    text-transform: capitalize;
+
+    height: auto;
+    width: auto;
+
+    font-family: var(--font);
+
+    white-space: nowrap;
+}
+
+.Emotion--One {
+    border-radius: 5px;
+
+    overflow: visible;
+
+    font-weight: bold;
+
+    white-space: nowrap; 
+
+    padding: 3px;
+}
+
+.Emotion--Two {
+    border-radius: 5px;
+
+    overflow: visible;
+
+    font-weight: bold;
+
+    white-space: nowrap; 
+
+    padding: 3px;
+}
+
+.Emotion--Three {
+    border-radius: 5px;
+
+    overflow: visible;
+
+    font-weight: bold;
+
+    white-space: nowrap; 
+
+    padding: 3px;
+}
+
+.Ellipsis {
+    display: flex;
+
+    justify-content: center;
+}
+
 /* the body text of each journal entry */
 .Journal--Text {
     /* the text is italic */

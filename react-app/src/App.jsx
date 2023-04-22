@@ -7,8 +7,6 @@ import React from 'react';
 import { nanoid } from 'nanoid'; // nanoid is a library that generates random unique ids
 import JournalContainer from './components/JournalContainer';
 import Navbar from './components/Navbar';
-import JournalData from './JournalData';
-import EmotionProperties from './EmotionProperties';
 
 /* style imports */
 import './styles/App.css'
