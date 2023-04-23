@@ -93,25 +93,36 @@ export default function Dashboard() {
         }
     }, [newJournalRef])
 
-    function journalsInitFetch() {
+    function journalsInitFetch(count = 0) {
+        // counter for number of attempts to fetch;
+        ++count;
+
+        // retry limit
+        if (count == 10) {
+            console.log("Server Error: reached fetch retry limit");
+            return;
+        }
+
+        // try fetch
         fetch("http://localhost:5000/myNotes")
             .then(res => res.json())
             .then(data => {
-                // if the data is truthy, set to state
-                // and try again otherwise
+                // if the data is "truthy", set to state. If not, retry.
                 if (data) {
                     setJournals(data);
+                    return;
                 } else {
                     setTimeout(() => {
-                        journalsInitFetch();
-                    }, 3000);
+                        journalsInitFetch(count);
+                    }, 3000); // retry delay
                 }
             })
+
             // if server error, try again 
             .catch(error => {
                 console.log(error);
                 setTimeout(() => {
-                    journalsInitFetch();
+                    journalsInitFetch(count);
                 }, 3000); 
             });
     }
