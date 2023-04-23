@@ -22,9 +22,10 @@ export default function App() {
     React.useEffect(() => {
         // initialize with journals on first mount 
         if (!isLoading) {
-            fetch("http://localhost:5000/myNotes")
-                .then(res => res.json())
-                .then(data => setJournals(data))
+            //fetch("http://localhost:5000/myNotes")
+            //    .then(res => res.json())
+            //    .then(data => setJournals(data))
+            journalsInitFetch();
         }
 
         // this block handles the fetch to create a new journal
@@ -94,6 +95,26 @@ export default function App() {
             setIsLoading(false);
         }
     }, [newJournalRef])
+
+    function journalsInitFetch() {
+        fetch("http://localhost:5000/myNotes")
+            .then(res => res.json())
+            .then(data => {
+                if (data) {
+                    setJournals(data);
+                } else {
+                    setTimeout(() => {
+                        journalsInitFetch();
+                    }, 3000); // Wait for 1 second before retrying
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                setTimeout(() => {
+                    journalsInitFetch();
+                }, 3000); // Wait for 1 second before retrying
+            });
+    }
 
     // createJournal
     // pre: title, and text from CreateJournal component (submitted when user clicks the save entry button)
