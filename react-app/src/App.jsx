@@ -22,9 +22,6 @@ export default function App() {
     React.useEffect(() => {
         // initialize with journals on first mount 
         if (!isLoading) {
-            //fetch("http://localhost:5000/myNotes")
-            //    .then(res => res.json())
-            //    .then(data => setJournals(data))
             journalsInitFetch();
         }
 
@@ -100,19 +97,22 @@ export default function App() {
         fetch("http://localhost:5000/myNotes")
             .then(res => res.json())
             .then(data => {
+                // if the data is truthy, set to state
+                // and try again otherwise
                 if (data) {
                     setJournals(data);
                 } else {
                     setTimeout(() => {
                         journalsInitFetch();
-                    }, 3000); // Wait for 1 second before retrying
+                    }, 3000);
                 }
             })
+            // if server error, try again 
             .catch(error => {
                 console.log(error);
                 setTimeout(() => {
                     journalsInitFetch();
-                }, 3000); // Wait for 1 second before retrying
+                }, 3000); 
             });
     }
 
