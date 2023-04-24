@@ -242,6 +242,7 @@ def get_nlp():
     return g.nlp
 
 # This ensures that a request is made when the app launches so that all the setup stuff runs immediately
+@app.before_first_request
 def setup():
     # Connect to db
     db = get_db()
@@ -251,6 +252,7 @@ def setup():
     
     # Setup pipeline
     get_nlp()
+
 # Accept an incoming journal and perform nlp emotion detection on it.
 @app.route('/process', methods=['POST'])
 def post():
@@ -410,10 +412,8 @@ def create_account():
     # Return an error message to the user
     return error
 
-with app.app_context():
-    setup()
-
 if __name__ == '__main__':
+    print("App starting...", flush=True)
     port = int(os.getenv("PORT", 5000))
     app.run(debug=True, host='0.0.0.0', port=port)
 
