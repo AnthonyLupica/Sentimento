@@ -7,6 +7,7 @@
 import React from 'react'; 
 import Journal from './Journal';
 import CreateJournal from './CreateJournal';
+import EmotionProperties from '../EmotionProperties'; 
 
 /* style imports */
 import '../styles/JournalContainer.css';
@@ -31,41 +32,70 @@ export default function JournalContainer(props) {
                 {/* Journals for the left vertical */}
                 <div className="JournalsLeft">
                     {/* For every element in the array, which is itself an object, render a Journal */}
-                    {leftEntries.map((entry) => (
-                        <Journal
-                            id={entry.id}
-                            key={entry.id}
-                            title={entry.title}
-                            mood={entry.mood}
-                            color={entry.color}
-                            text={entry.text}
-                            dateAndTime={entry.dateAndTime}
-                            handleDeleteJournal={props.handleDeleteJournal}
-                        />
-                    ))}  
+                    {leftEntries.map((entry) => {
+
+                        // Object.entries(entry) gets us an array of the form [ [key, value] ...]
+                        // we then filter this array to include only those key-value pairs where the key is contained within
+                        // EmotionProperties
+                        const allEmotions = Object.entries(entry)
+                            .filter(key => Object.keys(EmotionProperties).includes(key[0]));
+
+                        // sort the key-value pairs in descending order by their values
+                        const sortedEmotions = allEmotions.sort((a, b) => b[1] - a[1]);
+
+                        // finally get the top three emotions
+                        const topThreeEmotions = sortedEmotions.slice(0, 3);
+
+                        return (
+                            <Journal
+                                id={entry.id}
+                                key={entry.id}
+                                title={entry.title}
+                                mood={entry.mood}
+                                color={entry.color}
+                                text={entry.text}
+                                dateAndTime={entry.dateAndTime}
+                                handleDeleteJournal={props.handleDeleteJournal}
+                                topThreeEmotions={topThreeEmotions}
+                            />
+                        );
+                    })}  
                 </div>
 
                 {/* Journals for the right vertical */}
                 <div className="JournalsRight">
                     {/* For every element in the array, which is itself an object, render a Journal */}
-                    {rightEntries.map((entry) => (
-                        <Journal
-                            id={entry.id}
-                            key={entry.id}
-                            title={entry.title}
-                            mood={entry.mood}
-                            color={entry.color}
-                            text={entry.text}
-                            dateAndTime={entry.dateAndTime}
-                            handleDeleteJournal={props.handleDeleteJournal}
-                        />
-                    ))}  
+                    {rightEntries.map((entry) => {
+
+                        // Object.entries(entry) gets us an array of the form [ [key, value] ...]
+                        // we then filter this array to include only those key-value pairs where the key is contained within
+                        // EmotionProperties
+                        const allEmotions = Object.entries(entry)
+                            .filter(key => Object.keys(EmotionProperties).includes(key[0]));
+
+                        // sort the key-value pairs in descending order by their values
+                        const sortedEmotions = allEmotions.sort((a, b) => b[1] - a[1]);
+
+                        // finally get the top three emotions
+                        const topThreeEmotions = sortedEmotions.slice(0, 3);
+                        
+                        return (
+                            <Journal
+                                id={entry.id}
+                                key={entry.id}
+                                title={entry.title}
+                                mood={entry.mood}
+                                color={entry.color}
+                                text={entry.text}
+                                dateAndTime={entry.dateAndTime}
+                                handleDeleteJournal={props.handleDeleteJournal}
+                                topThreeEmotions={topThreeEmotions}
+                            />
+                        );
+                    })}  
                 </div>
             </div> 
             
         </div>
     );
 }
-
-
-          

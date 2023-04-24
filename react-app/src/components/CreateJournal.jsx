@@ -4,7 +4,7 @@
 
 /* component imports */
 import React from 'react'; 
-import {MdOutlineSave, MdSave} from 'react-icons/md'; // these are save icons
+import {MdSave} from 'react-icons/md'; // these are save icons
 
 /* style imports */
 import '../styles/Journal.css';
