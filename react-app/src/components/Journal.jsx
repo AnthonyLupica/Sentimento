@@ -127,19 +127,19 @@ export default function Journal(props) {
                             <div
                                 className="Emotion--One"
                                 style={{ backgroundColor: topEmotion.hexcode, width: topEmotion.percentage + "%" }}
-                            ></div><hr />
+                            ></div><br />
 
                             {secondEmotion.percentage}% {secondEmotion.emotion}
                             <div
                                 className="Emotion--Two"
                                 style={{ backgroundColor: secondEmotion.hexcode, width: secondEmotion.percentage + "%" }}
-                            ></div><hr />
+                            ></div><br />
 
                             {thirdEmotion.percentage}% {thirdEmotion.emotion}
                             <div
                                 className="Emotion--Three"
                                 style={{ backgroundColor: thirdEmotion.hexcode, width: thirdEmotion.percentage + "%" }}
-                            ></div><hr />
+                            ></div><br />
 
                             <div className="Ellipsis">
                                 <IoMdMore />
