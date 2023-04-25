@@ -3,7 +3,7 @@
 */
 
 /* styles for the body content of the page */
-body {
+.Dashboard--Body {
     /* padding for all visible content */
     padding: 45px;
     /* text color for the body */

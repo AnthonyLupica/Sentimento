@@ -1,0 +1,91 @@
+/*
+    Login.css
+*/
+
+.Login--Body {
+    /* gradient and animation */
+    background: linear-gradient(-45deg, #AB001A, #FFF36E, #B5E61D, #99D9EA, #C8BFE7);
+    background-size: 300% 300%;
+    animation: gradient 35s ease infinite;
+    
+    /* set display property to flex */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.Login--Wrapper {
+    /* center the login form */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+   
+    /* this div acts as a blurring filter over the gradient */
+    background-color: rgba(grey, 0.1);
+    backdrop-filter: blur(20px);
+}
+
+.Login--Greeting {
+    font-size: 60px;
+    align-self: center;
+    color: #232b2b;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.Login--Form {
+    display: flex;
+    flex-direction: column;
+
+    height: auto;
+    width: auto;
+}
+
+.Login--Input {
+    outline: none;
+    border-radius: 5px;
+    padding: 5px;
+
+    background-color: rgba(35, 43, 43, 0.8);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px; 
+    color: seashell;
+}
+
+.Login--Input::placeholder {
+    font-family: 'Courier New', Courier, monospace;
+    color: seashell;
+}
+
+.Login--Submit {
+    background-color: rgba(35, 43, 43, 0.6);
+    font-family: 'Courier New', Courier, monospace;
+    color: seashell;
+
+    border-radius: 15px;
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+

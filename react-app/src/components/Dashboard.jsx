@@ -12,6 +12,7 @@ import Navbar from './Navbar';
 import '../styles/Dashboard.css'
 
 export default function Dashboard() {
+    
     // define state for this component
     const [journals, setJournals] = React.useState([]);
     const [showCreateJournal, setShowCreateJournal] = React.useState(false);
@@ -192,7 +193,11 @@ export default function Dashboard() {
 
     // trim and convert the SearchQuery string to lowercase  
     const preparedSearchQuery = searchQuery.trim().toLowerCase();
-    
+
+    // adjust class names for Dashboard styles (super hacky way to style the body differently based on the route)
+    document.body.classList.remove("Login--Body");
+    document.body.classList.add("Dashboard--Body");
+
     return (
         <>
             <Navbar showCreateJournal={showCreateJournal} handleShowCreateJournal={toggleCreateJournal} setSearchQuery={setSearchQuery} />
